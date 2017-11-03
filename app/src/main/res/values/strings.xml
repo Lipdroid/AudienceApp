@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">AudienceApp</string>
     <string name="common_loading">Lodaing</string>
+    <string name="common_ok_label">OK</string>
 
+    <string name="dialog_error_title">Error</string>
+    <string name="dialog_no_internet_connection">No internet connecton.</string>
 </resources>

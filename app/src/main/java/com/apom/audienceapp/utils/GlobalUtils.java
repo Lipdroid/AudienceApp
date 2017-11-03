@@ -4,15 +4,25 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
+import com.apom.audienceapp.AudienceApplication;
 import com.apom.audienceapp.R;
+import com.apom.audienceapp.customViews.CustomDialog;
 import com.apom.audienceapp.customViews.CustomProgressDialog;
+import com.apom.audienceapp.interfaces.DialogCallback;
+import com.apom.audienceapp.interfaces.DialogForValueCallback;
 import com.apom.audienceapp.objects.UserObject;
 
 import java.security.MessageDigest;
@@ -24,6 +34,9 @@ import java.security.MessageDigest;
 public class GlobalUtils {
     private static UserObject userObject = null;
     private static CustomProgressDialog sPdLoading = null;
+    public static Boolean addAditionalHeader = false;
+    public static String additionalHeaderTag = null;
+    public static String additionalHeaderValue = null;
 
     public static void computePakageHash(Context mContext) {
         try {
@@ -39,6 +52,21 @@ public class GlobalUtils {
             Log.e("TAG", e.getMessage());
         }
     }
+
+    public static boolean isNetworkConnected() {
+        try {
+            ConnectivityManager cm = (ConnectivityManager) AudienceApplication.AudienceApplication()
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     public static UserObject getCurrentUserObj() {
 
@@ -80,5 +108,97 @@ public class GlobalUtils {
         } else {
             CustomProgressDialog.sPdCount--;
         }
+    }
+
+
+    public static void chooseUserPopup(final Context context, final DialogCallback dialogCallback) {
+        final CustomDialog infoDialog = new CustomDialog(context, R.style.CustomDialogTheme);
+        LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.dialog_user_type_picker, null);
+
+        new MultipleScreen(context);
+        MultipleScreen.resizeAllView((ViewGroup) v);
+
+        infoDialog.setContentView(v);
+
+        LinearLayout btnExpert = (LinearLayout) infoDialog.findViewById(R.id.expert);
+        LinearLayout btnClient = (LinearLayout) infoDialog.findViewById(R.id.client);
+
+
+        btnExpert.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //your business logic
+                if (dialogCallback != null) {
+                    dialogCallback.onAction1();
+                }
+
+
+                infoDialog.dismiss();
+            }
+        });
+
+
+        btnClient.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //your business logic
+                if (dialogCallback != null) {
+                    dialogCallback.onAction2();
+                }
+
+                infoDialog.dismiss();
+
+            }
+        });
+
+
+        infoDialog.show();
+    }
+
+    public static void showInfoDialog(Context context, String title, String body, String action, final DialogCallback dialogCallback) {
+        final CustomDialog infoDialog = new CustomDialog(context, R.style.CustomDialogTheme);
+        LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.layout_show_info_dialog, null);
+
+        new MultipleScreen(context);
+        MultipleScreen.resizeAllView((ViewGroup) v);
+
+        infoDialog.setContentView(v);
+
+        Button btnOK = (Button) infoDialog.findViewById(R.id.dialog_btn_positive);
+        TextView tvTitle = (TextView) infoDialog.findViewById(R.id.dialog_tv_title);
+        TextView tvBody = (TextView) infoDialog.findViewById(R.id.dialog_tv_body);
+
+        if (title == null) {
+            tvTitle.setVisibility(View.GONE);
+        } else {
+            tvTitle.setText(title);
+        }
+
+        if (body == null) {
+            tvBody.setVisibility(View.GONE);
+        } else {
+            tvBody.setText(body);
+        }
+
+        if (action != null) {
+            btnOK.setText(action);
+        }
+        btnOK.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //your business logic
+                if (dialogCallback != null) {
+                    dialogCallback.onAction1();
+                }
+                infoDialog.dismiss();
+            }
+        });
+
+        infoDialog.show();
     }
 }

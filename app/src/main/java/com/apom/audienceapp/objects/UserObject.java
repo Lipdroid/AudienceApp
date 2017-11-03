@@ -14,6 +14,15 @@ public class UserObject {
     private String profile_image_url = null;
     private String industry = null;
     private String mobile = null;
+    private String category = null;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     private List<JobObject> jobsList = null;
 

@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
                 public void run() {
 
                     if (SharedPreferencesUtils.getBoolean(SplashActivity.this, Constants.ALREADY_LOGGED_IN)) {
-                        startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                        startActivity(new Intent(SplashActivity.this,ClientHomeActivity.class));
                     } else {
                         startActivity(new Intent(SplashActivity.this,LoginActivity.class));
                     }
