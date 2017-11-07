@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.apom.audienceapp.utils.Constants;
+import com.apom.audienceapp.utils.UrlConstants;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
@@ -46,63 +49,51 @@ public class RequestData {
 
         switch (typeOfRequest) {
 
-//            case Constants.REQUEST_GET_USER_BY_MAIL:
-//                mRestType = Constants.REST_POST;
-//                REQUEST_DATA_URL = ConstantURLS.LOGIN_URL;
-//
-//                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_EMAIL,
-//                        (String) parameters.get(Constants.PARAM_EMAIL)));
-//                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_PASSWORD,
-//                        (String) parameters.get(Constants.PARAM_PASSWORD)));
-//
-//                break;
-//
-//            case Constants.REQUEST_REGISTER_BY_MAIL:
-//                mRestType = Constants.REST_POST;
-//                REQUEST_DATA_URL = ConstantURLS.SIGNUP_URL;
-//
-//                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_EMAIL,
-//                        (String) parameters.get(Constants.PARAM_EMAIL)));
-//                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_PASSWORD,
-//                        (String) parameters.get(Constants.PARAM_PASSWORD)));
-//                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_NAME,
-//                        (String) parameters.get(Constants.PARAM_NAME)));
-//                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_CATEGORY,
-//                        (String) parameters.get(Constants.PARAM_CATEGORY)));
-//                String user_type = (String) parameters.get(Constants.PARAM_CATEGORY);
-//                if (user_type.equals(Constants.TYPE_USER)) {
-//                    nameValueParams.add(new BasicNameValuePair(Constants.PARAM_GENDER,
-//                            (String) parameters.get(Constants.PARAM_GENDER)));
-//                    nameValueParams.add(new BasicNameValuePair(Constants.PARAM_BIRTHDATE,
-//                            (String) parameters.get(Constants.PARAM_BIRTHDATE)));
-//                }
-//                if (parameters.containsKey(Constants.PARAM_POST_IMAGE)) {
-//                    // create hash map to save avatar bitmap
-//                    Map.Entry<String, Bitmap> hashIcon = new Map.Entry<String, Bitmap>() {
-//
-//                        @Override
-//                        public String getKey() {
-//                            // TODO Auto-generated method stub
-//                            return Constants.PARAM_POST_IMAGE;
-//                        }
-//
-//                        @Override
-//                        public Bitmap getValue() {
-//                            // TODO Auto-generated method stub
-//                            return (Bitmap) parameters.get(Constants.PARAM_POST_IMAGE);
-//                        }
-//
-//                        @Override
-//                        public Bitmap setValue(Bitmap object) {
-//                            // TODO Auto-generated method stub
-//                            return (Bitmap) parameters.get(Constants.PARAM_POST_IMAGE);
-//                        }
-//                    };
-//
-//                    bitmapParams.add(hashIcon);
-//                }
-//
-//                break;
+            case Constants.REQUEST_REGISTER_USER:
+                mRestType = Constants.REST_POST;
+                REQUEST_DATA_URL = UrlConstants.BASE_URL;
+
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TAG,
+                        (String) parameters.get(Constants.PARAM_TAG)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_ID,
+                        (String) parameters.get(Constants.PARAM_ID)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_EMAIL,
+                        (String) parameters.get(Constants.PARAM_EMAIL)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_NAME,
+                        (String) parameters.get(Constants.PARAM_NAME)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_EMAIL,
+                        (String) parameters.get(Constants.PARAM_EMAIL)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_IMAGE_URL,
+                        (String) parameters.get(Constants.PARAM_IMAGE_URL)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_MOBILE,
+                        (String) parameters.get(Constants.PARAM_MOBILE)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TYPE,
+                        (String) parameters.get(Constants.PARAM_TYPE)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_INDUSTRY,
+                        (String) parameters.get(Constants.PARAM_INDUSTRY)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_COMPANY,
+                        (String) parameters.get(Constants.PARAM_COMPANY)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_JOB_TITLE,
+                        (String) parameters.get(Constants.PARAM_JOB_TITLE)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_JOB_SUMMARY,
+                        (String) parameters.get(Constants.PARAM_JOB_SUMMARY)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_LOCATION,
+                        (String) parameters.get(Constants.PARAM_LOCATION)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_STATUS,
+                        (String) parameters.get(Constants.PARAM_STATUS)));
+
+                break;
+
+            case Constants.REQUEST_GET_USER_BY_ID:
+                mRestType = Constants.REST_POST;
+                REQUEST_DATA_URL = UrlConstants.BASE_URL;
+
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TAG,
+                        (String) parameters.get(Constants.PARAM_TAG)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_ID,
+                        (String) parameters.get(Constants.PARAM_ID)));
+
+                break;
 //
 //            case Constants.REQUEST_UPDATE_PROFILE:
 //                mRestType = Constants.REST_POST;

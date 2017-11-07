@@ -1,5 +1,6 @@
 package com.apom.audienceapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,10 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.apom.audienceapp.apis.RequestAsyncTask;
+import com.apom.audienceapp.interfaces.AsyncCallback;
 import com.apom.audienceapp.objects.JobObject;
 import com.apom.audienceapp.objects.UserObject;
+import com.apom.audienceapp.utils.Constants;
 import com.apom.audienceapp.utils.CorrectSizeUtil;
 import com.apom.audienceapp.utils.GlobalUtils;
+import com.apom.audienceapp.utils.SharedPreferencesUtils;
 import com.apom.audienceapp.utils.UrlConstants;
 import com.linkedin.platform.APIHelper;
 import com.linkedin.platform.LISessionManager;
@@ -26,16 +31,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btn_linkedin = null;
     CorrectSizeUtil mCorrectSize = null;
+    private RequestAsyncTask mRequestAsync = null;
+    private Context mContext = null;
+    private static final String TAG_LOG = "LoginActivity";
+    private UserObject mUserObj = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mContext = this;
         btn_linkedin = (Button) findViewById(R.id.btn_linkedin);
         btn_linkedin.setOnClickListener(this);
         mCorrectSize = CorrectSizeUtil.getInstance(this);
@@ -127,7 +138,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     GlobalUtils.setCurrentUserObj(mUserObject);
 
-                    goToPhonePage();
+                    getUserByUserId(mUserObject.getLinked_in_id());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -146,5 +157,54 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(new Intent(LoginActivity.this, PhoneActivity.class));
         overridePendingTransition(R.anim.anim_slide_in_right,
                 R.anim.anim_slide_out_left);
+    }
+
+
+    private void getUserByUserId(String user_id) {
+        //request to server
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put(Constants.PARAM_TAG, Constants.TAG_GET_USER);
+        params.put(Constants.PARAM_ID, user_id);
+
+        mRequestAsync = new RequestAsyncTask(mContext, Constants.REQUEST_GET_USER_BY_ID, params, new AsyncCallback() {
+            @Override
+            public void done(String result) {
+                Log.e(TAG_LOG, result);
+                GlobalUtils.dismissLoadingProgress();
+                JSONObject mainJsonObj = null;
+                try {
+                    mainJsonObj = new JSONObject(result);
+                    if (mainJsonObj.getString("success").equals("1")) {
+                        SharedPreferencesUtils.putString(mContext, Constants.ID, mUserObj.getLinked_in_id());
+                        SharedPreferencesUtils.putBoolean(mContext, Constants.ALREADY_LOGGED_IN, true);
+                        //parse the user
+                    } else {
+                        goToPhonePage();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void progress() {
+                GlobalUtils.showLoadingProgress(mContext);
+            }
+
+            @Override
+            public void onInterrupted(Exception e) {
+                GlobalUtils.dismissLoadingProgress();
+            }
+
+            @Override
+            public void onException(Exception e) {
+                GlobalUtils.dismissLoadingProgress();
+            }
+        });
+
+        mRequestAsync.execute();
+
     }
 }

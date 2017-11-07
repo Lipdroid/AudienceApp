@@ -1,13 +1,23 @@
 package com.apom.audienceapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.apom.audienceapp.apis.RequestAsyncTask;
+import com.apom.audienceapp.interfaces.AsyncCallback;
 import com.apom.audienceapp.utils.Constants;
 import com.apom.audienceapp.utils.CorrectSizeUtil;
+import com.apom.audienceapp.utils.GlobalUtils;
 import com.apom.audienceapp.utils.SharedPreferencesUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class SplashActivity extends AppCompatActivity {
     //    Views:
@@ -15,6 +25,10 @@ public class SplashActivity extends AppCompatActivity {
     CorrectSizeUtil mCorrectSize = null;
     Handler handler = null;
     private long SPLASH_SCREEN_TIME = 2000;
+    private Context mContext = null;
+    private static final String TAG_LOG = "SplashActivity";
+    private RequestAsyncTask mRequestAsync = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +45,10 @@ public class SplashActivity extends AppCompatActivity {
                 public void run() {
 
                     if (SharedPreferencesUtils.getBoolean(SplashActivity.this, Constants.ALREADY_LOGGED_IN)) {
-                        startActivity(new Intent(SplashActivity.this,ClientHomeActivity.class));
+                        String linked_in_id = SharedPreferencesUtils.getString(SplashActivity.this, Constants.ID);
+                        if(linked_in_id != null){
+                            getUserByUserId(linked_in_id);
+                        }
                     } else {
                         startActivity(new Intent(SplashActivity.this,LoginActivity.class));
                     }
@@ -40,5 +57,58 @@ public class SplashActivity extends AppCompatActivity {
             };
             handler.postDelayed(run, SPLASH_SCREEN_TIME);
         }
+    }
+
+
+    private void getUserByUserId(String user_id) {
+        //request to server
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put(Constants.PARAM_TAG, Constants.TAG_GET_USER);
+        params.put(Constants.PARAM_ID, user_id);
+
+        mRequestAsync = new RequestAsyncTask(mContext, Constants.REQUEST_GET_USER_BY_ID, params, new AsyncCallback() {
+            @Override
+            public void done(String result) {
+                Log.e(TAG_LOG, result);
+                GlobalUtils.dismissLoadingProgress();
+                JSONObject mainJsonObj = null;
+                try {
+                    mainJsonObj = new JSONObject(result);
+                    if (mainJsonObj.getString("success").equals("1")) {
+                        //parse the user
+                    } else {
+                        goToLoginPage();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void progress() {
+                GlobalUtils.showLoadingProgress(mContext);
+            }
+
+            @Override
+            public void onInterrupted(Exception e) {
+                GlobalUtils.dismissLoadingProgress();
+            }
+
+            @Override
+            public void onException(Exception e) {
+                GlobalUtils.dismissLoadingProgress();
+            }
+        });
+
+        mRequestAsync.execute();
+
+    }
+
+    private void goToLoginPage() {
+        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
     }
 }

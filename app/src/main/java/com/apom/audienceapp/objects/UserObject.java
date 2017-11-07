@@ -15,6 +15,15 @@ public class UserObject {
     private String industry = null;
     private String mobile = null;
     private String category = null;
+    private String status = null;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getCategory() {
         return category;
