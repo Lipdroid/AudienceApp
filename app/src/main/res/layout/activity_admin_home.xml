@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:tag="70"
-        android:text="Expert Home"
+        android:text="Admin Home"
         android:textColor="@android:color/darker_gray"
         android:textSize="70px" />
 

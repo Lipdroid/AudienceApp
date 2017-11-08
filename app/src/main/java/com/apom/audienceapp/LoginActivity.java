@@ -175,9 +175,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 try {
                     mainJsonObj = new JSONObject(result);
                     if (mainJsonObj.getString("success").equals("1")) {
+                        //parse the user
+                        mUserObj = GlobalUtils.parseUser(mainJsonObj.getJSONObject(Constants.TAG_USER));
+
+                        GlobalUtils.setCurrentUserObj(mUserObj);
+
                         SharedPreferencesUtils.putString(mContext, Constants.ID, mUserObj.getLinked_in_id());
                         SharedPreferencesUtils.putBoolean(mContext, Constants.ALREADY_LOGGED_IN, true);
-                        //parse the user
+
+                        switch (mUserObj.getCategory()) {
+                            case Constants.USER_TYPE_EXPERT:
+                                switch (mUserObj.getStatus()) {
+                                    case Constants.USER_STATUS_ACTIVE:
+                                        goToExpertMainPagePage();
+                                        break;
+                                    case Constants.USER_STATUS_DEACTIVE:
+                                        goToVerificationPage();
+                                        break;
+                                }
+                                break;
+                            case Constants.USER_TYPE_CLIENT:
+                                goToClientMainPagePage();
+                                break;
+                            case Constants.USER_TYPE_ADMIN:
+                                //go to admin page
+                                goToAdminMainPage();
+                                break;
+                        }
                     } else {
                         goToPhonePage();
                     }
@@ -206,5 +230,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mRequestAsync.execute();
 
+    }
+
+
+    private void goToVerificationPage() {
+        startActivity(new Intent(LoginActivity.this, VerificationActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
+    }
+
+    private void goToAdminMainPage() {
+        startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
+    }
+
+    private void goToClientMainPagePage() {
+        startActivity(new Intent(LoginActivity.this, ClientHomeActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
+        finish();
+    }
+
+    private void goToExpertMainPagePage() {
+        startActivity(new Intent(LoginActivity.this, ExpertHomeActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
+        finish();
     }
 }

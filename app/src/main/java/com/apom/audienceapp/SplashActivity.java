@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.apom.audienceapp.apis.RequestAsyncTask;
 import com.apom.audienceapp.interfaces.AsyncCallback;
+import com.apom.audienceapp.objects.UserObject;
 import com.apom.audienceapp.utils.Constants;
 import com.apom.audienceapp.utils.CorrectSizeUtil;
 import com.apom.audienceapp.utils.GlobalUtils;
@@ -33,10 +34,12 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        mContext = this;
         runSplash();
         mCorrectSize = CorrectSizeUtil.getInstance(this);
         mCorrectSize.correctSize();
     }
+
     private void runSplash() {
         {
             handler = new Handler();
@@ -46,13 +49,14 @@ public class SplashActivity extends AppCompatActivity {
 
                     if (SharedPreferencesUtils.getBoolean(SplashActivity.this, Constants.ALREADY_LOGGED_IN)) {
                         String linked_in_id = SharedPreferencesUtils.getString(SplashActivity.this, Constants.ID);
-                        if(linked_in_id != null){
+                        if (linked_in_id != null) {
                             getUserByUserId(linked_in_id);
                         }
                     } else {
-                        startActivity(new Intent(SplashActivity.this,LoginActivity.class));
+                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                        finish();
+
                     }
-                    finish();
                 }
             };
             handler.postDelayed(run, SPLASH_SCREEN_TIME);
@@ -76,6 +80,31 @@ public class SplashActivity extends AppCompatActivity {
                     mainJsonObj = new JSONObject(result);
                     if (mainJsonObj.getString("success").equals("1")) {
                         //parse the user
+                        UserObject mUserObj = GlobalUtils.parseUser(mainJsonObj.getJSONObject(Constants.TAG_USER));
+                        GlobalUtils.setCurrentUserObj(mUserObj);
+
+                        SharedPreferencesUtils.putString(mContext, Constants.ID, mUserObj.getLinked_in_id());
+                        SharedPreferencesUtils.putBoolean(mContext, Constants.ALREADY_LOGGED_IN, true);
+
+                        switch (mUserObj.getCategory()) {
+                            case Constants.USER_TYPE_EXPERT:
+                                switch (mUserObj.getStatus()) {
+                                    case Constants.USER_STATUS_ACTIVE:
+                                        goToExpertMainPagePage();
+                                        break;
+                                    case Constants.USER_STATUS_DEACTIVE:
+                                        goToVerificationPage();
+                                        break;
+                                }
+                                break;
+                            case Constants.USER_TYPE_CLIENT:
+                                goToClientMainPagePage();
+                                break;
+                            case Constants.USER_TYPE_ADMIN:
+                                //go to admin page
+                                goToAdminMainPage();
+                                break;
+                        }
                     } else {
                         goToLoginPage();
                     }
@@ -106,9 +135,36 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+
+    private void goToVerificationPage() {
+        startActivity(new Intent(SplashActivity.this, VerificationActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
+    }
+
+    private void goToAdminMainPage() {
+        startActivity(new Intent(SplashActivity.this, AdminHomeActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
+    }
+
     private void goToLoginPage() {
         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
         overridePendingTransition(R.anim.anim_slide_in_right,
                 R.anim.anim_slide_out_left);
+    }
+
+    private void goToClientMainPagePage() {
+        startActivity(new Intent(SplashActivity.this, ClientHomeActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
+        finish();
+    }
+
+    private void goToExpertMainPagePage() {
+        startActivity(new Intent(SplashActivity.this, ExpertHomeActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
+        finish();
     }
 }

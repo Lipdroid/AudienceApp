@@ -31,15 +31,38 @@ public class Constants {
     public static final String PARAM_LOCATION = "user_location";
     public static final String PARAM_STATUS = "status";
 
+
+
+    public static final String TAG_ID = "id";
+    public static final String TAG_NAME = "user_name";
+    public static final String TAG_EMAIL = "user_email";
+    public static final String TAG_IMAGE_URL = "user_image_url";
+    public static final String TAG_MOBILE = "user_mobile";
+    public static final String TAG_TYPE = "user_type";
+    public static final String TAG_INDUSTRY = "user_industry";
+    public static final String TAG_COMPANY = "user_company";
+    public static final String TAG_JOB_TITLE = "user_job_title";
+    public static final String TAG_JOB_SUMMARY = "user_job_summary";
+    public static final String TAG_LOCATION = "user_location";
+    public static final String TAG_STATUS = "status";
+
     public static final String USER_STATUS_ACTIVE = "1";
     public static final String USER_STATUS_DEACTIVE = "0";
 
     public static final String USER_TYPE_CLIENT = "client";
     public static final String USER_TYPE_EXPERT = "expert";
+    public static final String USER_TYPE_ADMIN = "admin";
+
 
     public static final String ID = "preference_id";
     public static final Object TAG_GET_USER = "get_user_by_id";
 
     public static final int REQUEST_REGISTER_USER = 1;
     public static final int REQUEST_GET_USER_BY_ID = 2;
+
+
+    public static final String TAG_USER = "user";
+    public static final String TAG_ERROR = "error";
+    public static final String TAG_ERROR_MSG = "error_msg" ;
+
 }

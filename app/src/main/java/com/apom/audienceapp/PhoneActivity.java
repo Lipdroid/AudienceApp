@@ -26,8 +26,10 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import static android.R.attr.cacheColorHint;
 import static android.R.attr.name;
 import static android.R.attr.password;
+import static android.R.attr.switchMinWidth;
 
 public class PhoneActivity extends AppCompatActivity {
     CorrectSizeUtil mCorrectSize = null;
@@ -153,8 +155,28 @@ public class PhoneActivity extends AppCompatActivity {
                     if (mainJsonObj.getString("success").equals("1")) {
                         SharedPreferencesUtils.putString(mContext, Constants.ID, mUserObj.getLinked_in_id());
                         SharedPreferencesUtils.putBoolean(mContext, Constants.ALREADY_LOGGED_IN, true);
+                        GlobalUtils.setCurrentUserObj(mUserObj);
+                        switch (mUserObj.getCategory()) {
+                            case Constants.USER_TYPE_EXPERT:
+                                switch (mUserObj.getStatus()) {
+                                    case Constants.USER_STATUS_ACTIVE:
+                                        goToExpertMainPagePage();
+                                        break;
+                                    case Constants.USER_STATUS_DEACTIVE:
+                                        goToVerificationPage();
+                                        break;
+                                }
 
-                    }  else {
+                                break;
+                            case Constants.USER_TYPE_CLIENT:
+                                goToClientMainPagePage();
+                                break;
+                            case Constants.USER_TYPE_ADMIN:
+                                //go to admin page
+                                goToAdminMainPage();
+                                break;
+                        }
+                    } else {
                         GlobalUtils.showInfoDialog(mContext, null, "Sorry,Not registered yet", null, null);
                     }
                 } catch (JSONException e) {
@@ -182,6 +204,18 @@ public class PhoneActivity extends AppCompatActivity {
 
         mRequestAsync.execute();
 
+    }
+
+    private void goToVerificationPage() {
+        startActivity(new Intent(PhoneActivity.this, VerificationActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
+    }
+
+    private void goToAdminMainPage() {
+        startActivity(new Intent(PhoneActivity.this, AdminHomeActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
     }
 
 }
