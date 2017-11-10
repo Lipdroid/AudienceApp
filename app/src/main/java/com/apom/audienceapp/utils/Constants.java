@@ -55,14 +55,21 @@ public class Constants {
 
 
     public static final String ID = "preference_id";
-    public static final Object TAG_GET_USER = "get_user_by_id";
 
     public static final int REQUEST_REGISTER_USER = 1;
     public static final int REQUEST_GET_USER_BY_ID = 2;
+    public static final int REQUEST_GET_ALL_USERS = 3;
+    public static final int REQUEST_UPDATE_USER_BY_ID = 4;
+
 
 
     public static final String TAG_USER = "user";
     public static final String TAG_ERROR = "error";
     public static final String TAG_ERROR_MSG = "error_msg" ;
+
+    public static final Object TAG_GET_USER = "get_user_by_id";
+    public static final Object GET_ALL_USER_TAG = "get_all_users";
+    public static final Object TAG_UPDATE_USER_STATUS = "verify_user";
+    public static final Object TAG_GET_USER_EXPERT = "get_all_experts";
 
 }

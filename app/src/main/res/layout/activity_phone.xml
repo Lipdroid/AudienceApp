@@ -13,6 +13,7 @@
         android:layout_height="250px"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100px"
+        android:src="@drawable/dummy_pic"
         android:layout_marginTop="200px" />
 
     <com.apom.audienceapp.customViews.CustomFontTextView

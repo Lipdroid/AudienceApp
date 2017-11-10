@@ -91,22 +91,27 @@ public class SplashActivity extends AppCompatActivity {
                                 switch (mUserObj.getStatus()) {
                                     case Constants.USER_STATUS_ACTIVE:
                                         goToExpertMainPagePage();
+                                        finish();
                                         break;
                                     case Constants.USER_STATUS_DEACTIVE:
                                         goToVerificationPage();
+                                        finish();
                                         break;
                                 }
                                 break;
                             case Constants.USER_TYPE_CLIENT:
                                 goToClientMainPagePage();
+                                finish();
                                 break;
                             case Constants.USER_TYPE_ADMIN:
                                 //go to admin page
                                 goToAdminMainPage();
+                                finish();
                                 break;
                         }
                     } else {
                         goToLoginPage();
+                        finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

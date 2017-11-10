@@ -182,14 +182,24 @@ public class RequestData {
 ////                }
 //                break;
 //
-//            case Constants.REQUEST_GET_USER:
-//                mRestType = Constants.REST_POST;
-//                REQUEST_DATA_URL = ConstantURLS.GET_USER_URL;
-//
-//                GlobalUtils.addAditionalHeader = true;
-//                GlobalUtils.additionalHeaderTag = "Authorization";
-//                GlobalUtils.additionalHeaderValue = "bearer " + SharedPreferencesUtils.getString(mContex, Constants.TOKEN, null);
-//                break;
+            case Constants.REQUEST_GET_ALL_USERS:
+                mRestType = Constants.REST_POST;
+                REQUEST_DATA_URL = UrlConstants.BASE_URL;
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TAG,
+                        (String) parameters.get(Constants.PARAM_TAG)));
+                break;
+
+            case Constants.REQUEST_UPDATE_USER_BY_ID:
+                mRestType = Constants.REST_POST;
+                REQUEST_DATA_URL = UrlConstants.BASE_URL;
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TAG,
+                        (String) parameters.get(Constants.PARAM_TAG)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_ID,
+                        (String) parameters.get(Constants.PARAM_ID)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_STATUS,
+                        (String) parameters.get(Constants.PARAM_STATUS)));
+                break;
+
 //
 //
 //            case Constants.REQUEST_GET_USER_TYPE:

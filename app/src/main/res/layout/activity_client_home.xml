@@ -4,6 +4,7 @@
     android:id="@+id/activity_splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".SplashActivity">
 
     <include
@@ -12,17 +13,68 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <FrameLayout
+        android:id="@+id/search_bar"
+        android:layout_below="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="60px">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120px"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/divider"
+                    android:background="@null"
+                    android:hint="Search Experts"
+                    android:paddingLeft="30px"
+                    android:tag="50"
+                    android:textColorHint="@color/common_gray"
+                    android:textSize="50px" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="5px"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/btn_search"
+                    android:background="@color/common_gray" />
+
+                <ImageView
+                    android:id="@+id/btn_search"
+                    android:layout_width="128px"
+                    android:layout_height="128px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0px"
+                    android:layout_marginRight="0px"
+                    android:padding="10px"
+                    android:src="@drawable/search_icon" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
+
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/btn_logout"
-        android:layout_below="@+id/header"
+        android:layout_below="@+id/search_bar"
         android:gravity="center"
         android:horizontalSpacing="0px"
         android:numColumns="2"
+        android:scrollbars="none"
         android:stretchMode="columnWidth"
         android:verticalSpacing="0px" />
+
 
     <LinearLayout
         android:id="@+id/user_info"

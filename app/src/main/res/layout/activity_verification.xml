@@ -16,4 +16,17 @@
         android:textColor="@android:color/darker_gray"
         android:textSize="70px" />
 
+    <Button
+        android:id="@+id/check_verification"
+        android:layout_width="744px"
+        android:layout_height="136px"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100px"
+        android:text="Check Verification"
+        android:textColor="@color/white"
+        android:textSize="39px"
+        android:tag="39"
+        android:background="@drawable/selector_btn_rounded"/>
+
 </RelativeLayout>
