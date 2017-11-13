@@ -23,6 +23,7 @@ import com.apom.audienceapp.utils.CorrectSizeUtil;
 import com.apom.audienceapp.utils.GlobalUtils;
 import com.apom.audienceapp.utils.SharedPreferencesUtils;
 import com.squareup.picasso.Picasso;
+import com.yalantis.phoenix.PullToRefreshView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,7 +58,8 @@ public class AdminHomeActivity extends AppCompatActivity {
     private long entry_timeInterval = 2000;
     private long exit_timeInterval = 5000;
     private UserObject mUserObj = null;
-
+    private PullToRefreshView mPullToRefreshView = null;
+    private boolean is_pulled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,20 @@ public class AdminHomeActivity extends AppCompatActivity {
         profile_image = (CircleImageView) findViewById(R.id.profile_image);
         welcome_text = (CustomFontTextViewLight) findViewById(R.id.welcome_text);
         btn_slide_hide = (Button) findViewById(R.id.btn_slide_hide);
+        mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // mPullToRefreshView.setRefreshing(false);
+                        is_pulled = true;
+                        getAllUsersExpert();
+                    }
+                }, 1000);
+            }
+        });
         mContext = this;
         mUserObj = GlobalUtils.getCurrentUserObj();
         setUserInfo();
@@ -174,7 +190,12 @@ public class AdminHomeActivity extends AppCompatActivity {
             public void done(String result) {
                 Log.e(TAG, result);
 
-                GlobalUtils.dismissLoadingProgress();
+                if (is_pulled) {
+                    mPullToRefreshView.setRefreshing(false);
+                    is_pulled = !is_pulled;
+                } else {
+                    GlobalUtils.dismissLoadingProgress();
+                }
                 mListUser = new ArrayList<UserObject>();
 
                 try {
@@ -200,18 +221,28 @@ public class AdminHomeActivity extends AppCompatActivity {
 
             @Override
             public void progress() {
-                GlobalUtils.showLoadingProgress(mContext);
+                if (!is_pulled)
+                    GlobalUtils.showLoadingProgress(mContext);
             }
 
             @Override
             public void onInterrupted(Exception e) {
-                GlobalUtils.dismissLoadingProgress();
-
+                if (is_pulled) {
+                    mPullToRefreshView.setRefreshing(false);
+                    is_pulled = !is_pulled;
+                } else {
+                    GlobalUtils.dismissLoadingProgress();
+                }
             }
 
             @Override
             public void onException(Exception e) {
-                GlobalUtils.dismissLoadingProgress();
+                if (is_pulled) {
+                    mPullToRefreshView.setRefreshing(false);
+                    is_pulled = !is_pulled;
+                } else {
+                    GlobalUtils.dismissLoadingProgress();
+                }
             }
         });
 
@@ -227,7 +258,7 @@ public class AdminHomeActivity extends AppCompatActivity {
     public void updateList(UserObject user) {
 
         for (UserObject userObj : mListUser) {
-            if(userObj.getLinked_in_id() == user.getLinked_in_id()){
+            if (userObj.getLinked_in_id() == user.getLinked_in_id()) {
                 userObj.setStatus(user.getStatus());
             }
 

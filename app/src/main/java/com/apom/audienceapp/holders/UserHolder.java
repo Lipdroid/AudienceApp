@@ -2,6 +2,7 @@ package com.apom.audienceapp.holders;
 
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.apom.audienceapp.customViews.CircleImageView;
 import com.apom.audienceapp.customViews.CustomFontTextView;
@@ -18,4 +19,5 @@ public class UserHolder {
     public CircleImageView profile_image;
     public Button btn_action;
     public ImageView verified_mark = null;
+    public LinearLayout root = null;
 }

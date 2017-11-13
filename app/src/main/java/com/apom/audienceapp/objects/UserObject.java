@@ -1,12 +1,16 @@
 package com.apom.audienceapp.objects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by mdmunirhossain on 11/2/17.
  */
 
-public class UserObject {
+public class UserObject implements Parcelable {
     private String linked_in_id = null;
     private String firstName = null;
     private String lastName = null;
@@ -33,7 +37,7 @@ public class UserObject {
         this.category = category;
     }
 
-    private List<JobObject> jobsList = null;
+    private List<JobObject> jobsList = new ArrayList<>();
 
     public List<JobObject> getJobsList() {
         return jobsList;
@@ -103,4 +107,56 @@ public class UserObject {
         this.mobile = mobile;
     }
 
+    public void readFromParcel(Parcel in) {
+        this.linked_in_id = in.readString();
+        this.firstName = in.readString();
+        this.lastName = in.readString();
+        this.email = in.readString();
+        this.profile_image_url = in.readString();
+        this.category = in.readString();
+        this.industry = in.readString();
+        this.mobile = in.readString();
+        this.status = in.readString();
+        in.readTypedList(jobsList,JobObject.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(linked_in_id);
+        parcel.writeString(firstName);
+        parcel.writeString(lastName);
+        parcel.writeString(email);
+        parcel.writeString(profile_image_url);
+        parcel.writeString(category);
+        parcel.writeString(industry);
+        parcel.writeString(mobile);
+        parcel.writeString(status);
+        parcel.writeTypedList(jobsList);
+    }
+
+    public UserObject() {
+        super();
+    }
+
+    private UserObject(Parcel in) {
+        this();
+        readFromParcel(in);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<UserObject> CREATOR = new Creator<UserObject>() {
+        @Override
+        public UserObject createFromParcel(Parcel parcel) {
+            return new UserObject(parcel);
+        }
+
+        @Override
+        public UserObject[] newArray(int i) {
+            return new UserObject[i];
+        }
+    };
 }

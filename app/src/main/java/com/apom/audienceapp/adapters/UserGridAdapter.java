@@ -2,6 +2,7 @@ package com.apom.audienceapp.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.apom.audienceapp.AdminHomeActivity;
 import com.apom.audienceapp.R;
+import com.apom.audienceapp.UserDetailsActivity;
 import com.apom.audienceapp.apis.RequestAsyncTask;
 import com.apom.audienceapp.customViews.CircleImageView;
 import com.apom.audienceapp.customViews.CustomFontTextView;
@@ -43,6 +45,8 @@ public class UserGridAdapter extends BaseAdapter {
     private UserHolder mHolder = null;
     private RequestAsyncTask mRequestAsync = null;
 
+    private UserObject mUserObj = null;
+
     @Override
     public int getCount() {
         return mListData.size();
@@ -52,6 +56,7 @@ public class UserGridAdapter extends BaseAdapter {
         this.mContext = mContext;
         mActivity = (Activity) mContext;
         this.mListData = mListData;
+        mUserObj = GlobalUtils.getCurrentUserObj();
 
     }
 
@@ -77,6 +82,7 @@ public class UserGridAdapter extends BaseAdapter {
             mHolder.profile_image = (CircleImageView) convertView.findViewById(R.id.profile_image);
             mHolder.btn_action = (Button) convertView.findViewById(R.id.btn_action);
             mHolder.verified_mark = (ImageView) convertView.findViewById(R.id.verified_mark);
+            mHolder.root = (LinearLayout) convertView.findViewById(R.id.root);
             new MultipleScreen(mActivity);
             MultipleScreen.resizeAllView((ViewGroup) convertView);
 
@@ -92,14 +98,27 @@ public class UserGridAdapter extends BaseAdapter {
                 after_click_action(position);
             }
         });
+        mHolder.root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                afterClickMain(position);
+            }
+        });
 
         showUser(user);
         return convertView;
     }
 
+    private void afterClickMain(int position) {
+        UserObject user = mListData.get(position);
+        Intent intent = new Intent(mActivity, UserDetailsActivity.class);
+        intent.putExtra(UserObject.class.toString(), user);
+        mActivity.startActivity(intent);
+    }
+
     private void after_click_action(int position) {
         UserObject user = mListData.get(position);
-        if(user.getCategory().equals(Constants.USER_TYPE_EXPERT) && user.getStatus().equals(Constants.USER_STATUS_DEACTIVE)){
+        if (user.getCategory().equals(Constants.USER_TYPE_EXPERT) && user.getStatus().equals(Constants.USER_STATUS_DEACTIVE)) {
             requestStatusChange(user);
         }
 
@@ -122,8 +141,8 @@ public class UserGridAdapter extends BaseAdapter {
                     mainJsonObj = new JSONObject(result);
                     if (mainJsonObj.getString("success").equals("1")) {
                         user.setStatus(Constants.USER_STATUS_ACTIVE);
-                        if(mActivity instanceof AdminHomeActivity){
-                            AdminHomeActivity activity = (AdminHomeActivity)mActivity;
+                        if (mActivity instanceof AdminHomeActivity) {
+                            AdminHomeActivity activity = (AdminHomeActivity) mActivity;
                             activity.updateList(user);
                         }
                     } else {
@@ -164,25 +183,37 @@ public class UserGridAdapter extends BaseAdapter {
                 .load(user.getProfile_image_url())
                 .into(mHolder.profile_image);
 
-        switch (user.getCategory()) {
+        switch (mUserObj.getCategory()) {
             case Constants.USER_TYPE_EXPERT:
-                switch (user.getStatus()) {
-                    case Constants.USER_STATUS_ACTIVE:
-                        mHolder.btn_action.setText("VERIFIED");
-                        mHolder.verified_mark.setVisibility(View.VISIBLE);
-                        break;
-                    case Constants.USER_STATUS_DEACTIVE:
-                        mHolder.verified_mark.setVisibility(View.GONE);
-                        break;
-                }
+
                 break;
             case Constants.USER_TYPE_CLIENT:
-                mHolder.btn_action.setText("CLIENT");
+                mHolder.btn_action.setText("GET APPOINTMENT");
                 break;
             case Constants.USER_TYPE_ADMIN:
                 //go to admin page
-                mHolder.btn_action.setText("ADMIN");
+                switch (user.getCategory()) {
+                    case Constants.USER_TYPE_EXPERT:
+                        switch (user.getStatus()) {
+                            case Constants.USER_STATUS_ACTIVE:
+                                mHolder.btn_action.setText("VERIFIED");
+                                mHolder.verified_mark.setVisibility(View.VISIBLE);
+                                break;
+                            case Constants.USER_STATUS_DEACTIVE:
+                                mHolder.verified_mark.setVisibility(View.GONE);
+                                break;
+                        }
+                        break;
+                    case Constants.USER_TYPE_CLIENT:
+                        mHolder.btn_action.setText("CLIENT");
+                        break;
+                    case Constants.USER_TYPE_ADMIN:
+                        //go to admin page
+                        mHolder.btn_action.setText("ADMIN");
+                        break;
+                }
                 break;
         }
+
     }
 }

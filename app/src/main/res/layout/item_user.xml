@@ -1,93 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <!--before it was 500px-->
-    <LinearLayout
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_margin="10px"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="610px"
-        android:layout_margin="10px"
-        android:background="@drawable/elevationeffect"
-        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <com.apom.audienceapp.customViews.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="200px"
-            android:layout_height="200px"
-            android:layout_marginTop="20px"
-            android:src="@drawable/dummy_pic" />
-
-        <com.apom.audienceapp.customViews.CustomFontTextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20px"
-            android:text="Lipu Hossain"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            android:textStyle="bold" />
-
-        <com.apom.audienceapp.customViews.CustomFontTextViewLight
-            android:id="@+id/designation"
-            android:layout_width="wrap_content"
-            android:layout_height="100px"
-            android:layout_marginLeft="10px"
-            android:layout_marginRight="10px"
-            android:layout_marginTop="10px"
-            android:gravity="center"
-            android:maxLines="2"
-            android:text="Senior Android Ios developer at Oceanize"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            android:textStyle="bold" />
-
+        <!--before it was 500px-->
         <LinearLayout
+            android:id="@+id/root"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
+            android:layout_height="610px"
+            android:layout_margin="10px"
             android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="50px"
-                android:layout_height="50px"
-                android:scaleType="fitXY"
-                android:src="@drawable/location_icon" />
+            <com.apom.audienceapp.customViews.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="200px"
+                android:layout_height="200px"
+                android:layout_marginTop="20px"
+                android:src="@drawable/dummy_pic" />
 
-            <com.apom.audienceapp.customViews.CustomFontTextViewLight
-                android:id="@+id/location"
+            <com.apom.audienceapp.customViews.CustomFontTextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="Bangladesh"
+                android:layout_marginTop="20px"
+                android:text="Lipu Hossain"
                 android:textColor="@color/black"
-                android:textSize="50px" />
+                android:textSize="50px"
+                android:textStyle="bold" />
+
+            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                android:id="@+id/designation"
+                android:layout_width="wrap_content"
+                android:layout_height="100px"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:layout_marginTop="10px"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="Senior Android Ios developer at Oceanize"
+                android:textColor="@color/black"
+                android:textSize="50px"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/location_icon" />
+
+                <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                    android:id="@+id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Bangladesh"
+                    android:textColor="@color/black"
+                    android:textSize="50px" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_action"
+                android:layout_width="420px"
+                android:layout_height="95px"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="20px"
+                android:layout_marginTop="10px"
+                android:background="@drawable/selector_btn_rounded"
+                android:tag="39"
+                android:text="Verify USER"
+                android:textColor="@color/white"
+                android:textSize="39px" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_action"
-            android:layout_width="420px"
-            android:layout_height="95px"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20px"
-            android:layout_gravity="bottom|center_horizontal"
+        <ImageView
+            android:id="@+id/verified_mark"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_marginLeft="10px"
             android:layout_marginTop="10px"
-            android:background="@drawable/selector_btn_rounded"
-            android:tag="39"
-            android:text="Verify USER"
-            android:textColor="@color/white"
-            android:textSize="39px" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/verified_mark"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:layout_marginLeft="10px"
-        android:layout_marginTop="10px"
-        android:src="@drawable/verified_icon" />
-</RelativeLayout>
+            android:src="@drawable/verified_icon" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

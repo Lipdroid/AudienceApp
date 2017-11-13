@@ -45,7 +45,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".VerificationActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".UserDetailsActivity"></activity>
     </application>
 
 </manifest>

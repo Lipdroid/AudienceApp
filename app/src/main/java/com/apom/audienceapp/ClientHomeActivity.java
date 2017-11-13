@@ -22,6 +22,7 @@ import com.apom.audienceapp.utils.CorrectSizeUtil;
 import com.apom.audienceapp.utils.GlobalUtils;
 import com.apom.audienceapp.utils.SharedPreferencesUtils;
 import com.squareup.picasso.Picasso;
+import com.yalantis.phoenix.PullToRefreshView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +37,8 @@ import java.util.TimerTask;
 public class ClientHomeActivity extends AppCompatActivity {
     CorrectSizeUtil mCorrectSize = null;
     private ImageView btn_logout = null;
-    private View header = null;    private Context mContext = null;
+    private View header = null;
+    private Context mContext = null;
     private LinearLayout user_info = null;
 
 
@@ -54,6 +56,8 @@ public class ClientHomeActivity extends AppCompatActivity {
     private RequestAsyncTask mRequestAsync = null;
     private List<UserObject> mListUser = null;
     private UserGridAdapter adapter = null;
+    private PullToRefreshView mPullToRefreshView = null;
+    private boolean is_pulled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +70,20 @@ public class ClientHomeActivity extends AppCompatActivity {
         welcome_text = (CustomFontTextViewLight) findViewById(R.id.welcome_text);
         btn_slide_hide = (Button) findViewById(R.id.btn_slide_hide);
         gridview = (GridView) findViewById(R.id.gridview);
-
+        mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // mPullToRefreshView.setRefreshing(false);
+                        is_pulled = true;
+                        getAllUsersExpert();
+                    }
+                }, 1000);
+            }
+        });
         mUserObj = GlobalUtils.getCurrentUserObj();
 
         mContext = this;
@@ -173,8 +190,12 @@ public class ClientHomeActivity extends AppCompatActivity {
             @Override
             public void done(String result) {
                 Log.e(TAG, result);
-
-                GlobalUtils.dismissLoadingProgress();
+                if (is_pulled) {
+                    mPullToRefreshView.setRefreshing(false);
+                    is_pulled = !is_pulled;
+                } else {
+                    GlobalUtils.dismissLoadingProgress();
+                }
                 mListUser = new ArrayList<UserObject>();
 
                 try {
@@ -200,18 +221,29 @@ public class ClientHomeActivity extends AppCompatActivity {
 
             @Override
             public void progress() {
-                GlobalUtils.showLoadingProgress(mContext);
+                if (!is_pulled)
+                    GlobalUtils.showLoadingProgress(mContext);
             }
 
             @Override
             public void onInterrupted(Exception e) {
-                GlobalUtils.dismissLoadingProgress();
+                if (is_pulled) {
+                    mPullToRefreshView.setRefreshing(false);
+                    is_pulled = !is_pulled;
+                } else {
+                    GlobalUtils.dismissLoadingProgress();
+                }
 
             }
 
             @Override
             public void onException(Exception e) {
-                GlobalUtils.dismissLoadingProgress();
+                if (is_pulled) {
+                    mPullToRefreshView.setRefreshing(false);
+                    is_pulled = !is_pulled;
+                } else {
+                    GlobalUtils.dismissLoadingProgress();
+                }
             }
         });
 
