@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context="com.apom.audienceapp.PhoneActivity">
 
 
@@ -52,6 +53,7 @@
         android:layout_marginRight="60px"
         android:gravity="center"
         android:inputType="phone"
+        android:textColorHint="@color/white"
         android:hint="Phone Number" />
 
     <ImageView

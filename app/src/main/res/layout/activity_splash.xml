@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_splash"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg"
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
 
@@ -14,7 +14,7 @@
         android:layout_centerVertical="true"
         android:tag="70"
         android:text="@string/app_name"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@android:color/white"
         android:textSize="70px" />
 
 </RelativeLayout>

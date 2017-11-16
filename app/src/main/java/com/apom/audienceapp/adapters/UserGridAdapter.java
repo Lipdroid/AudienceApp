@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.apom.audienceapp.AdminHomeActivity;
+import com.apom.audienceapp.MeetingFormActivity;
 import com.apom.audienceapp.R;
 import com.apom.audienceapp.UserDetailsActivity;
 import com.apom.audienceapp.apis.RequestAsyncTask;
@@ -118,8 +119,12 @@ public class UserGridAdapter extends BaseAdapter {
 
     private void after_click_action(int position) {
         UserObject user = mListData.get(position);
-        if (user.getCategory().equals(Constants.USER_TYPE_EXPERT) && user.getStatus().equals(Constants.USER_STATUS_DEACTIVE)) {
+        if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_ADMIN) && user.getStatus().equals(Constants.USER_STATUS_DEACTIVE)) {
             requestStatusChange(user);
+        } else if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT) && GlobalUtils.getCurrentUserObj().getStatus().equals(Constants.USER_STATUS_ACTIVE)) {
+            Intent intent = new Intent(mContext, MeetingFormActivity.class);
+            intent.putExtra(UserObject.class.toString(), user);
+            mContext.startActivity(intent);
         }
 
     }

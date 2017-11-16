@@ -39,6 +39,7 @@
                     android:hint="Search Experts"
                     android:paddingLeft="30px"
                     android:tag="50"
+                    android:gravity="center"
                     android:textColorHint="@color/black"
                     android:textSize="50px" />
 
@@ -55,6 +56,7 @@
                     android:layout_height="128px"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="0px"
                     android:layout_marginRight="0px"
                     android:padding="10px"
@@ -69,8 +71,8 @@
             android:layout_marginBottom="20px"
             android:gravity="center"
             android:tag="40"
-            android:text="Expert you can fix a meeting with"
-            android:textColor="@color/white"
+            android:text="Experts you can fix a meeting with"
+            android:textColor="@color/orange"
             android:textSize="40px" />
     </FrameLayout>
 
@@ -84,7 +86,7 @@
             android:id="@+id/gridview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_above="@+id/btn_logout"
+            android:layout_above="@+id/btn_profile"
             android:layout_below="@+id/search_bar"
             android:gravity="center"
             android:horizontalSpacing="10px"

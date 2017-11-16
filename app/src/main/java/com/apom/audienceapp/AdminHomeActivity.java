@@ -37,7 +37,7 @@ import java.util.TimerTask;
 
 public class AdminHomeActivity extends AppCompatActivity {
     CorrectSizeUtil mCorrectSize = null;
-    private ImageView btn_logout = null;
+    private CircleImageView btn_profile = null;
     private View header = null;
     private Context mContext = null;
     private GridView gridview = null;
@@ -66,7 +66,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
         header = (View) findViewById(R.id.header);
-        btn_logout = (ImageView) header.findViewById(R.id.btn_logout);
+        btn_profile = (CircleImageView) header.findViewById(R.id.btn_profile);
 
         gridview = (GridView) findViewById(R.id.gridview);
         user_info = (LinearLayout) findViewById(R.id.user_info);
@@ -94,10 +94,10 @@ public class AdminHomeActivity extends AppCompatActivity {
         mCorrectSize = CorrectSizeUtil.getInstance(this);
         mCorrectSize.correctSize();
         getAllUsersExpert();
-        btn_logout.setOnClickListener(new View.OnClickListener() {
+        btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                afterClickLogout();
+                afterClickProfile();
             }
         });
         btn_slide_hide.setOnClickListener(new View.OnClickListener() {
@@ -163,19 +163,25 @@ public class AdminHomeActivity extends AppCompatActivity {
         Picasso.with(mContext)
                 .load(mUserObj.getProfile_image_url())
                 .into(profile_image);
+        Picasso.with(mContext)
+                .load(mUserObj.getProfile_image_url())
+                .into(btn_profile);
     }
 
-    private void afterClickLogout() {
-        SharedPreferencesUtils.removeComponent(mContext, Constants.ALREADY_LOGGED_IN);
-        SharedPreferencesUtils.removeComponent(mContext, Constants.ID);
-        goToLoginPage();
-        finish();
+    private void afterClickProfile() {
+        goToProfile();
     }
 
     private void goToLoginPage() {
         startActivity(new Intent(AdminHomeActivity.this, LoginActivity.class));
         overridePendingTransition(R.anim.anim_slide_in_left,
                 R.anim.anim_slide_out_right);
+    }
+
+    private void goToProfile() {
+        startActivity(new Intent(AdminHomeActivity.this, AdminProfileActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
     }
 
 

@@ -46,7 +46,22 @@
         <activity
             android:name=".VerificationActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".UserDetailsActivity"></activity>
+        <activity
+            android:name=".UserDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdminProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ClientProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ExpertProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MeetingFormActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitleDialog"></activity>
     </application>
 
 </manifest>

@@ -32,6 +32,7 @@
                 android:text="Lipu Hossain"
                 android:textColor="@color/black"
                 android:textSize="50px"
+                android:tag="50"
                 android:textStyle="bold" />
 
             <com.apom.audienceapp.customViews.CustomFontTextViewLight
@@ -45,12 +46,13 @@
                 android:maxLines="2"
                 android:text="Senior Android Ios developer at Oceanize"
                 android:textColor="@color/black"
-                android:textSize="50px"
+                android:textSize="40px"
+                android:tag="40"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="70px"
                 android:layout_marginTop="10px"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
@@ -58,6 +60,7 @@
                 <ImageView
                     android:layout_width="50px"
                     android:layout_height="50px"
+                    android:layout_marginTop="5px"
                     android:scaleType="fitXY"
                     android:src="@drawable/location_icon" />
 
@@ -69,7 +72,8 @@
                     android:maxLines="1"
                     android:text="Bangladesh"
                     android:textColor="@color/black"
-                    android:textSize="50px" />
+                    android:textSize="40px"
+                    android:tag="40"/>
             </LinearLayout>
 
             <Button

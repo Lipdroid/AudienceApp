@@ -22,7 +22,7 @@
             android:id="@+id/gridview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_above="@+id/btn_logout"
+            android:layout_above="@+id/btn_profile"
             android:layout_below="@+id/header"
             android:gravity="center"
             android:horizontalSpacing="0px"

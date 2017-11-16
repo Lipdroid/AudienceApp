@@ -36,7 +36,7 @@ import java.util.TimerTask;
 
 public class ClientHomeActivity extends AppCompatActivity {
     CorrectSizeUtil mCorrectSize = null;
-    private ImageView btn_logout = null;
+    private CircleImageView btn_profile = null;
     private View header = null;
     private Context mContext = null;
     private LinearLayout user_info = null;
@@ -64,7 +64,7 @@ public class ClientHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_home);
         header = (View) findViewById(R.id.header);
-        btn_logout = (ImageView) header.findViewById(R.id.btn_logout);
+        btn_profile = (CircleImageView) header.findViewById(R.id.btn_profile);
         user_info = (LinearLayout) findViewById(R.id.user_info);
         profile_image = (CircleImageView) findViewById(R.id.profile_image);
         welcome_text = (CustomFontTextViewLight) findViewById(R.id.welcome_text);
@@ -92,10 +92,10 @@ public class ClientHomeActivity extends AppCompatActivity {
         mCorrectSize.correctSize();
 
         setUserInfo();
-        btn_logout.setOnClickListener(new View.OnClickListener() {
+        btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                afterClickLogout();
+                afterClickProfile();
             }
 
         });
@@ -146,6 +146,9 @@ public class ClientHomeActivity extends AppCompatActivity {
         Picasso.with(mContext)
                 .load(mUserObj.getProfile_image_url())
                 .into(profile_image);
+        Picasso.with(mContext)
+                .load(mUserObj.getProfile_image_url())
+                .into(btn_profile);
     }
 
     private void toggle_slide() {
@@ -167,11 +170,8 @@ public class ClientHomeActivity extends AppCompatActivity {
         GlobalUtils.slideUp(user_info);
     }
 
-    private void afterClickLogout() {
-        SharedPreferencesUtils.removeComponent(mContext, Constants.ALREADY_LOGGED_IN);
-        SharedPreferencesUtils.removeComponent(mContext, Constants.ID);
-        goToLoginPage();
-        finish();
+    private void afterClickProfile() {
+        goToProfile();
     }
 
     private void goToLoginPage() {
@@ -179,7 +179,11 @@ public class ClientHomeActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.anim_slide_in_left,
                 R.anim.anim_slide_out_right);
     }
-
+    private void goToProfile() {
+        startActivity(new Intent(ClientHomeActivity.this, ClientProfileActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_left);
+    }
     public void getAllUsersExpert() {
 
         HashMap<String, Object> params = new HashMap<String, Object>();

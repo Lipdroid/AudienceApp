@@ -6,12 +6,52 @@
     android:layout_height="match_parent"
     tools:context="com.apom.audienceapp.LoginActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg" />
+    <com.apom.audienceapp.customViews.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="250px"
+        android:layout_height="250px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100px"
+        android:src="@drawable/caution_icon"
+        android:layout_marginTop="200px" />
+
+    <com.apom.audienceapp.customViews.CustomFontTextView
+        android:id="@+id/welcome_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_image"
+        android:layout_marginBottom="50px"
+        android:gravity="center"
+        android:lineSpacingExtra="20px"
+        android:tag="100"
+        android:text="Welcome \nAudience App"
+        android:textSize="100px" />
+
+    <com.apom.audienceapp.customViews.CustomFontTextView
+        android:id="@+id/info_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/welcome_text"
+        android:layout_marginBottom="50px"
+        android:layout_marginLeft="60px"
+        android:layout_marginRight="60px"
+        android:gravity="center"
+        android:tag="40"
+        android:text="Meet with people and make a difference"
+        android:textColor="@android:color/white"
+        android:textSize="40px" />
     <Button
         android:id="@+id/btn_linkedin"
         android:layout_width="730px"
         android:layout_height="135px"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/linkedin_btn_selector"/>
+        android:layout_marginBottom="200px"
+        android:background="@drawable/linkedin_btn_selector" />
 
 </RelativeLayout>

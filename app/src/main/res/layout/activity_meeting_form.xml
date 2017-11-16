@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_dialog_bg"
+    tools:context="com.apom.audienceapp.MeetingFormActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="40px">
+
+        <ImageView
+            android:layout_width="96px"
+            android:layout_height="96px"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="0px"
+            android:layout_marginTop="25px"
+            android:onClick="afterClickCancel"
+            android:padding="25px"
+            android:src="@drawable/icon_cross" />
+
+        <com.apom.audienceapp.customViews.CustomFontTextViewLight
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20px"
+            android:maxLines="1"
+            android:tag="70"
+            android:text="Schedule Meeting"
+            android:textColor="@color/black"
+            android:textSize="70px"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:orientation="vertical">
+
+            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20px"
+                android:maxLines="1"
+                android:tag="40"
+                android:text="Purpose"
+                android:textColor="@color/text_dark"
+                android:textSize="40px"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_purpose"
+                android:layout_width="match_parent"
+                android:layout_height="120px"
+                android:background="@null"
+                android:hint="Write down the purpose"
+                android:paddingLeft="0px"
+                android:tag="40"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="40px" />
+
+            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0px"
+                android:maxLines="1"
+                android:tag="40"
+                android:text="Venue"
+                android:textColor="@color/text_dark"
+                android:textSize="40px"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_venue"
+                android:layout_width="match_parent"
+                android:layout_height="120px"
+                android:background="@null"
+                android:hint="Write down the venue you want to meet"
+                android:paddingLeft="0px"
+                android:tag="40"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="40px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10px"
+                android:orientation="horizontal">
+
+                <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                    android:layout_width="550px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:maxLines="1"
+                    android:tag="40"
+                    android:text="When"
+                    android:textColor="@color/text_dark"
+                    android:textSize="40px"
+                    android:textStyle="bold" />
+
+                <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                    android:layout_width="300px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:maxLines="1"
+                    android:tag="40"
+                    android:text="Time"
+                    android:textColor="@color/text_dark"
+                    android:textSize="40px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="550px"
+                    android:onClick="openPicker"
+                    android:layout_height="wrap_content">
+
+                    <com.apom.audienceapp.customViews.CustomFontTextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="550px"
+                        android:layout_height="100px"
+                        android:layout_margin="2px"
+                        android:background="@drawable/border"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="30px"
+                        android:tag="40"
+                        android:text="Wed - 18th September"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="48px"
+                        android:layout_height="48px"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20px"
+                        android:src="@drawable/icon_down" />
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="10px"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <RelativeLayout
+                    android:layout_width="290px"
+                    android:onClick="openPicker"
+                    android:layout_height="wrap_content">
+
+                    <com.apom.audienceapp.customViews.CustomFontTextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="300px"
+                        android:layout_height="100px"
+                        android:layout_margin="2px"
+                        android:background="@drawable/border"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:paddingLeft="30px"
+                        android:tag="40"
+                        android:text="11:00 am"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="48px"
+                        android:layout_height="48px"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20px"
+                        android:src="@drawable/icon_down" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20px"
+                android:maxLines="1"
+                android:tag="40"
+                android:text="Participents"
+                android:textColor="@color/text_dark"
+                android:textSize="40px"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="250px"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="250px"
+                    android:layout_height="250px"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.apom.audienceapp.customViews.CircleImageView
+                        android:id="@+id/profile_image_sender"
+                        android:layout_width="150px"
+                        android:layout_height="150px"
+                        android:layout_marginLeft="10px"
+                        android:layout_marginTop="0px"
+                        android:src="@drawable/dummy_pic" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/name_sender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="0px"
+                        android:maxLines="1"
+                        android:tag="40"
+                        android:text="Lipu Hossain"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="250px"
+                    android:layout_height="250px"
+                    android:layout_marginLeft="50px"
+
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.apom.audienceapp.customViews.CircleImageView
+                        android:id="@+id/profile_image_receiver"
+                        android:layout_width="150px"
+                        android:layout_height="150px"
+                        android:layout_marginLeft="0px"
+                        android:layout_marginTop="0px"
+                        android:src="@drawable/dummy_pic" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/name_receiver"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="0px"
+                        android:maxLines="1"
+                        android:tag="40"
+                        android:text="Lipu Hossain"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20px"
+                android:maxLines="1"
+                android:tag="40"
+                android:text="Expectation From the meeting"
+                android:textColor="@color/text_dark"
+                android:textSize="40px"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_expectation_one"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:background="@null"
+                android:hint="Expectation 1 (Optional)"
+                android:paddingLeft="0px"
+                android:tag="40"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="40px" />
+
+            <EditText
+                android:id="@+id/et_expectation_two"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:background="@null"
+                android:hint="Expectation 2 (Optional)"
+                android:paddingLeft="0px"
+                android:tag="40"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="40px" />
+
+            <EditText
+                android:id="@+id/et_expectation_three"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:background="@null"
+                android:hint="Expectation 3 (Optional)"
+                android:paddingLeft="0px"
+                android:tag="40"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="40px" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10px"
+                android:layout_marginTop="10px"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/check_agree_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/black"
+                    android:checked="false"
+                    android:tag="40"
+                    android:text="Agreed with the terms and conditions"
+                    android:textColor="@color/text_dark"
+                    android:textSize="40px" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/check_verification"
+                android:layout_width="match_parent"
+                android:layout_height="136px"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="50px"
+                android:background="@color/black"
+                android:tag="39"
+                android:onClick="afterClickConfirm"
+                android:text="Create Meeting"
+                android:textColor="@color/white"
+                android:textSize="39px" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

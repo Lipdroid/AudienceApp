@@ -78,6 +78,32 @@
                     android:textSize="50px"
                     android:textStyle="bold" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70px"
+                    android:layout_marginTop="10px"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="50px"
+                        android:layout_height="50px"
+                        android:layout_marginTop="10px"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/icon_phone" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="+8801673915175"
+                        android:tag="50"
+                        android:textColor="@color/black"
+                        android:textSize="50px" />
+                </LinearLayout>
 
                 <com.apom.audienceapp.customViews.CustomFontTextViewLight
                     android:id="@+id/designation"
@@ -217,17 +243,5 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/check_verification"
-        android:layout_width="744px"
-        android:layout_height="136px"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50px"
-        android:background="@drawable/selector_btn_rounded"
-        android:tag="39"
-        android:text="Apply FOr Appointment"
-        android:onClick="afterClickAppointment"
-        android:textColor="@color/white"
-        android:textSize="39px" />
+
 </RelativeLayout>
