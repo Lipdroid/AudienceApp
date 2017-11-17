@@ -91,12 +91,11 @@ public class GlobalUtils {
             sPdLoading = new CustomProgressDialog(context, R.style.CustomDialogTheme);
             sPdLoading.show();
             if (Build.VERSION.SDK_INT > 10) {
-                View loadingV = LayoutInflater.from(context).inflate(R.layout.layout_pd_loading, null);
+                LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View loadingV = inflator.inflate(R.layout.layout_pd_loading, null);
                 new MultipleScreen(context);
                 MultipleScreen.resizeAllView((ViewGroup) loadingV);
-                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(MultipleScreen.getValueAfterResize(340),
-                        MultipleScreen.getValueAfterResize(340));
-                sPdLoading.addContentView(loadingV, lp);
+                sPdLoading.setContentView(loadingV);
             } else {
                 String message = context.getResources().getString(R.string.common_loading);
             }

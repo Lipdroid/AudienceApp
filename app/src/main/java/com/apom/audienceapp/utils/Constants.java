@@ -49,6 +49,13 @@ public class Constants {
     public static final String USER_STATUS_ACTIVE = "1";
     public static final String USER_STATUS_DEACTIVE = "0";
 
+    public static final String USER_NOT_YET_ARROVED = "0";
+    public static final String USER_ARROVED = "1";
+    public static final String USER_REJECTED = "2";
+
+    public static final String NOT_CHANGED_TIME = "0";
+    public static final String NOT_CHANGED_VENUE = "1";
+
     public static final String USER_TYPE_CLIENT = "client";
     public static final String USER_TYPE_EXPERT = "expert";
     public static final String USER_TYPE_ADMIN = "admin";
@@ -60,7 +67,9 @@ public class Constants {
     public static final int REQUEST_GET_USER_BY_ID = 2;
     public static final int REQUEST_GET_ALL_USERS = 3;
     public static final int REQUEST_UPDATE_USER_BY_ID = 4;
+    public static final int REQUEST_ADD_MEETING = 5;
 
+    public static final String NOT_YET_REVIEWED = "Not yet reviewed";
 
 
     public static final String TAG_USER = "user";
@@ -71,5 +80,41 @@ public class Constants {
     public static final Object GET_ALL_USER_TAG = "get_all_users";
     public static final Object TAG_UPDATE_USER_STATUS = "verify_user";
     public static final Object TAG_GET_USER_EXPERT = "get_all_experts";
+
+    public static final Object MEETING_TAG = "add_meeting";
+    public static final String PARAM_EXPERT_ID = "expert_id";
+    public static final String PARAM_EXPERT_NAME = "expert_name";
+    public static final String PARAM_EXPERT_APPROVAL = "expert_approval";
+    public static final String PARAM_CLIENT_ID = "client_id";
+    public static final String PARAM_CLIENT_NAME = "client_name";
+    public static final String PARAM_CLIENT_APPROVAL = "client_approval";
+    public static final String PARAM_ADMIN_APPROVAL = "admin_approval";
+    public static final String PARAM_MEETING_TIME = "meeting_time";
+    public static final String PARAM_MEETING_VENUE = "meeting_venue";
+    public static final String PARAM_MEETING_PURPOSE = "meeting_purpose";
+    public static final String PARAM_MEETING_EXPECTATIO_ONE = "meeting_expectation_one";
+    public static final String PARAM_MEETING_EXPECTATIO_TWO = "meeting_expectation_two";
+    public static final String PARAM_MEETING_EXPECTATIO_THREE = "meeting_expectation_three";
+    public static final String PARAM_MEETING_TIME_CHANGED = "meeting_time_changed";
+    public static final String PARAM_MEETING_VENUE_CHANGED = "meeting_venue_changed";
+    public static final String PARAM_MEETING_REVIEW = "meeting_review";
+
+
+    public static final String TAG_EXPERT_ID = "expert_id";
+    public static final String TAG_EXPERT_NAME = "expert_name";
+    public static final String TAG_EXPERT_APPROVAL = "expert_approval";
+    public static final String TAG_CLIENT_ID = "client_id";
+    public static final String TAG_CLIENT_NAME = "client_name";
+    public static final String TAG_CLIENT_APPROVAL = "client_approval";
+    public static final String TAG_ADMIN_APPROVAL = "admin_approval";
+    public static final String TAG_MEETING_TIME = "meeting_time";
+    public static final String TAG_MEETING_VENUE = "meeting_venue";
+    public static final String TAG_MEETING_PURPOSE = "meeting_purpose";
+    public static final String TAG_MEETING_EXPECTATIO_ONE = "meeting_expectation_one";
+    public static final String TAG_MEETING_EXPECTATIO_TWO = "meeting_expectation_two";
+    public static final String TAG_MEETING_EXPECTATIO_THREE = "meeting_expectation_three";
+    public static final String TAG_MEETING_TIME_CHANGED = "meeting_time_changed";
+    public static final String TAG_MEETING_VENUE_CHANGED = "meeting_venue_changed";
+    public static final String TAG_MEETING_REVIEW = "meeting_review";
 
 }
