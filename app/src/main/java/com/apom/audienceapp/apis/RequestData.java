@@ -136,6 +136,16 @@ public class RequestData {
                         (String) parameters.get(Constants.PARAM_ID)));
 
                 break;
+
+            case Constants.REQUEST_GET_ALL_MEETINGS_BY_EXPERT_ID:
+                mRestType = Constants.REST_POST;
+                REQUEST_DATA_URL = UrlConstants.BASE_URL;
+
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TAG,
+                        (String) parameters.get(Constants.PARAM_TAG)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_ID,
+                        (String) parameters.get(Constants.PARAM_ID)));
+                break;
 //
 //            case Constants.REQUEST_UPDATE_PROFILE:
 //                mRestType = Constants.REST_POST;

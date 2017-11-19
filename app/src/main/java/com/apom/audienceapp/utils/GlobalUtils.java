@@ -25,6 +25,7 @@ import com.apom.audienceapp.customViews.CustomProgressDialog;
 import com.apom.audienceapp.interfaces.DialogCallback;
 import com.apom.audienceapp.interfaces.DialogForValueCallback;
 import com.apom.audienceapp.objects.JobObject;
+import com.apom.audienceapp.objects.MeetingObject;
 import com.apom.audienceapp.objects.UserObject;
 
 import org.json.JSONObject;
@@ -319,6 +320,155 @@ public class GlobalUtils {
         }
 
         return userObj;
+    }
+
+
+    public static MeetingObject parseMeeting(JSONObject src) {
+        MeetingObject meetingObj = new MeetingObject();
+        try {
+            if (((JSONObject) src).has(Constants.TAG_ID)) {
+                if (!((JSONObject) src).getString(Constants.TAG_ID).equals("null")) {
+                    meetingObj.setId(((JSONObject) src).getString(Constants.TAG_ID));
+                } else {
+                    meetingObj.setId("");
+                }
+
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_EXPERT_ID)) {
+                if (!((JSONObject) src).getString(Constants.TAG_EXPERT_ID).equals("null")) {
+                    meetingObj.setExpert_id(((JSONObject) src).getString(Constants.TAG_EXPERT_ID));
+                } else {
+                    meetingObj.setExpert_id("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_EXPERT_NAME)) {
+                if (!((JSONObject) src).getString(Constants.TAG_EXPERT_NAME).equals("null")) {
+                    meetingObj.setExpert_name(((JSONObject) src).getString(Constants.TAG_EXPERT_NAME));
+                } else {
+                    meetingObj.setExpert_name("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_EXPERT_APPROVAL)) {
+                if (!((JSONObject) src).getString(Constants.TAG_EXPERT_APPROVAL).equals("null")) {
+                    meetingObj.setExpert_approval(((JSONObject) src).getString(Constants.TAG_EXPERT_APPROVAL));
+                } else {
+                    meetingObj.setExpert_approval("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_CLIENT_ID)) {
+                if (!((JSONObject) src).getString(Constants.TAG_CLIENT_ID).equals("null")) {
+                    meetingObj.setClient_id(((JSONObject) src).getString(Constants.TAG_CLIENT_ID));
+                } else {
+                    meetingObj.setClient_id("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_CLIENT_NAME)) {
+                if (!((JSONObject) src).getString(Constants.TAG_CLIENT_NAME).equals("null")) {
+                    meetingObj.setClient_name(((JSONObject) src).getString(Constants.TAG_CLIENT_NAME));
+                } else {
+                    meetingObj.setClient_name("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_CLIENT_APPROVAL)) {
+                if (!((JSONObject) src).getString(Constants.TAG_CLIENT_APPROVAL).equals("null")) {
+                    meetingObj.setClient_approval(((JSONObject) src).getString(Constants.TAG_CLIENT_APPROVAL));
+                } else {
+                    meetingObj.setClient_approval("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_ADMIN_APPROVAL)) {
+                if (!((JSONObject) src).getString(Constants.TAG_ADMIN_APPROVAL).equals("null")) {
+                    meetingObj.setAdmin_approval(((JSONObject) src).getString(Constants.TAG_ADMIN_APPROVAL));
+                } else {
+                    meetingObj.setAdmin_approval("");
+                }
+            }
+
+
+            if (((JSONObject) src).has(Constants.TAG_MEETING_TIME)) {
+                if (!((JSONObject) src).getString(Constants.TAG_MEETING_TIME).equals("null")) {
+                    meetingObj.setMeeting_time(((JSONObject) src).getString(Constants.TAG_MEETING_TIME));
+                } else {
+                    meetingObj.setMeeting_time("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_MEETING_VENUE)) {
+                if (!((JSONObject) src).getString(Constants.TAG_MEETING_VENUE).equals("null")) {
+                    meetingObj.setMeeting_venue(((JSONObject) src).getString(Constants.TAG_MEETING_VENUE));
+                } else {
+                    meetingObj.setMeeting_venue("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_MEETING_PURPOSE)) {
+                if (!((JSONObject) src).getString(Constants.TAG_MEETING_PURPOSE).equals("null")) {
+                    meetingObj.setMeeting_purpose(((JSONObject) src).getString(Constants.TAG_MEETING_PURPOSE));
+                } else {
+                    meetingObj.setMeeting_purpose("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_MEETING_EXPECTATIO_ONE)) {
+                if (!((JSONObject) src).getString(Constants.TAG_MEETING_EXPECTATIO_ONE).equals("null")) {
+                    meetingObj.setMeeting_expectation_one(((JSONObject) src).getString(Constants.TAG_MEETING_EXPECTATIO_ONE));
+                } else {
+                    meetingObj.setMeeting_expectation_one("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_MEETING_EXPECTATIO_TWO)) {
+                if (!((JSONObject) src).getString(Constants.TAG_MEETING_EXPECTATIO_TWO).equals("null")) {
+                    meetingObj.setMeeting_expectation_two(((JSONObject) src).getString(Constants.TAG_MEETING_EXPECTATIO_TWO));
+                } else {
+                    meetingObj.setMeeting_expectation_two("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_MEETING_EXPECTATIO_THREE)) {
+                if (!((JSONObject) src).getString(Constants.TAG_MEETING_EXPECTATIO_THREE).equals("null")) {
+                    meetingObj.setMeeting_expectation_three(((JSONObject) src).getString(Constants.TAG_MEETING_EXPECTATIO_THREE));
+                } else {
+                    meetingObj.setMeeting_expectation_three("");
+                }
+            }
+            if (((JSONObject) src).has(Constants.TAG_MEETING_TIME_CHANGED)) {
+                if (!((JSONObject) src).getString(Constants.TAG_MEETING_TIME_CHANGED).equals("null")) {
+                    meetingObj.setMeeting_time_changed(((JSONObject) src).getString(Constants.TAG_MEETING_TIME_CHANGED));
+                } else {
+                    meetingObj.setMeeting_time_changed("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_MEETING_VENUE_CHANGED)) {
+                if (!((JSONObject) src).getString(Constants.TAG_MEETING_VENUE_CHANGED).equals("null")) {
+                    meetingObj.setMeeting_venue_changed(((JSONObject) src).getString(Constants.TAG_MEETING_VENUE_CHANGED));
+                } else {
+                    meetingObj.setMeeting_venue_changed("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_MEETING_REVIEW)) {
+                if (!((JSONObject) src).getString(Constants.TAG_MEETING_REVIEW).equals("null")) {
+                    meetingObj.setMeeting_review(((JSONObject) src).getString(Constants.TAG_MEETING_REVIEW));
+                } else {
+                    meetingObj.setMeeting_review("");
+                }
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return meetingObj;
     }
 
     // slide the view from below itself to the current position

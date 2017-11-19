@@ -68,6 +68,7 @@ public class Constants {
     public static final int REQUEST_GET_ALL_USERS = 3;
     public static final int REQUEST_UPDATE_USER_BY_ID = 4;
     public static final int REQUEST_ADD_MEETING = 5;
+    public static final int REQUEST_GET_ALL_MEETINGS_BY_EXPERT_ID = 6;
 
     public static final String NOT_YET_REVIEWED = "Not yet reviewed";
 
@@ -76,12 +77,14 @@ public class Constants {
     public static final String TAG_ERROR = "error";
     public static final String TAG_ERROR_MSG = "error_msg" ;
 
-    public static final Object TAG_GET_USER = "get_user_by_id";
-    public static final Object GET_ALL_USER_TAG = "get_all_users";
-    public static final Object TAG_UPDATE_USER_STATUS = "verify_user";
-    public static final Object TAG_GET_USER_EXPERT = "get_all_experts";
+    public static final String TAG_GET_USER = "get_user_by_id";
+    public static final String GET_ALL_USER_TAG = "get_all_users";
+    public static final String TAG_UPDATE_USER_STATUS = "verify_user";
+    public static final String TAG_GET_USER_EXPERT = "get_all_experts";
+    public static final String MEETING_TAG = "add_meeting";
+    public static final String TAG_GET_MEETINGS_EXPERT = "get_meeting_request_by_id";
 
-    public static final Object MEETING_TAG = "add_meeting";
+
     public static final String PARAM_EXPERT_ID = "expert_id";
     public static final String PARAM_EXPERT_NAME = "expert_name";
     public static final String PARAM_EXPERT_APPROVAL = "expert_approval";
@@ -117,4 +120,5 @@ public class Constants {
     public static final String TAG_MEETING_VENUE_CHANGED = "meeting_venue_changed";
     public static final String TAG_MEETING_REVIEW = "meeting_review";
 
+    public static final String TAG_MEETING = "meeting";
 }
