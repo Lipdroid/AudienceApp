@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="500px"
+        android:layout_margin="20px">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="320px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px">
+
+                <com.apom.audienceapp.customViews.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="150px"
+                    android:layout_height="150px"
+                    android:layout_marginTop="20px"
+                    android:src="@drawable/dummy_pic" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="30px"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/client_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:tag="45"
+                        android:text="Helen Tran"
+                        android:textColor="@color/black"
+                        android:textSize="45px"
+                        android:textStyle="bold" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/purpose"
+                        android:layout_width="match_parent"
+                        android:layout_height="170px"
+                        android:layout_marginLeft="20px"
+                        android:maxLines="3"
+                        android:tag="40"
+                        android:text="wants to meet with oyu for some meeting very iurgent and lorem ipsam,wants to meet with oyu for some meeting very iurgent and lorem ipsam"
+                        android:textColor="@color/text_dark"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <com.apom.audienceapp.customViews.CustomFontTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5px"
+                            android:layout_marginLeft="20px"
+                            android:tag="35"
+                            android:text="Venue:"
+                            android:textColor="@color/black"
+                            android:textSize="35px"
+                            android:textStyle="bold" />
+
+                        <com.apom.audienceapp.customViews.CustomFontTextView
+                            android:id="@+id/venue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20px"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:tag="40"
+                            android:text="relocation cofee shop"
+                            android:textColor="@color/orange"
+                            android:textSize="40px"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/common_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="#FAFAFC"
+                android:weightSum="4">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginLeft="20px"
+                        android:tag="40"
+                        android:text="Date"
+                        android:textColor="@color/text_dark"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextView
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:tag="40"
+                        android:text="Tue-11-september"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginLeft="20px"
+                        android:tag="40"
+                        android:text="Time"
+                        android:textColor="@color/text_dark"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextView
+                        android:id="@+id/time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:tag="40"
+                        android:text="11:00 am"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginLeft="20px"
+                        android:tag="40"
+                        android:text="Status"
+                        android:textColor="@color/text_dark"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextView
+                        android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:tag="40"
+                        android:text="Pending"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginLeft="20px"
+                        android:tag="40"
+                        android:text="Expextation"
+                        android:singleLine="true"
+                        android:textColor="@color/text_dark"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextView
+                        android:id="@+id/expectation_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:tag="40"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

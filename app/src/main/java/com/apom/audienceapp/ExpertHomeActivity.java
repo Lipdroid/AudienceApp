@@ -8,7 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 
+import com.apom.audienceapp.adapters.RequestAdapter;
+import com.apom.audienceapp.adapters.UserGridAdapter;
 import com.apom.audienceapp.apis.RequestAsyncTask;
 import com.apom.audienceapp.customViews.CircleImageView;
 import com.apom.audienceapp.interfaces.AsyncCallback;
@@ -40,6 +43,8 @@ public class ExpertHomeActivity extends AppCompatActivity {
     private PullToRefreshView mPullToRefreshView = null;
     private boolean is_pulled = false;
     private List<MeetingObject> mListMeeting = null;
+    private RequestAdapter adapter = null;
+    private ListView listView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,8 @@ public class ExpertHomeActivity extends AppCompatActivity {
         header = (View) findViewById(R.id.header);
         btn_profile = (CircleImageView) header.findViewById(R.id.btn_profile);
         mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
+        listView = (ListView) findViewById(R.id.req_list);
+
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -65,14 +72,21 @@ public class ExpertHomeActivity extends AppCompatActivity {
         mUserObj = GlobalUtils.getCurrentUserObj();
         mCorrectSize = CorrectSizeUtil.getInstance(this);
         mCorrectSize.correctSize();
-        setUserInfo();
         getAllMettings();
+        setUserInfo();
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 afterClickProfile();
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     private void afterClickLogout() {
@@ -86,6 +100,7 @@ public class ExpertHomeActivity extends AppCompatActivity {
 
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put(Constants.PARAM_TAG, Constants.TAG_GET_MEETINGS_EXPERT);
+        params.put(Constants.PARAM_TYPE, Constants.USER_TYPE_EXPERT);
         params.put(Constants.PARAM_ID, mUserObj.getLinked_in_id());
 
         mRequestAsync = new RequestAsyncTask(mContext, Constants.REQUEST_GET_ALL_MEETINGS_BY_EXPERT_ID, params, new AsyncCallback() {
@@ -114,7 +129,7 @@ public class ExpertHomeActivity extends AppCompatActivity {
 
 
                     }
-                    //populateList();
+                    populateList();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -153,12 +168,20 @@ public class ExpertHomeActivity extends AppCompatActivity {
 
     }
 
+    private void populateList() {
+        adapter = new RequestAdapter(this, mListMeeting);
+        listView.setAdapter(adapter);
+    }
+
     private void afterClickProfile() {
         goToProfile();
     }
 
     private void goToProfile() {
-        startActivity(new Intent(ExpertHomeActivity.this, ExpertProfileActivity.class));
+        UserObject user = GlobalUtils.getCurrentUserObj();
+        Intent intent = new Intent(ExpertHomeActivity.this, ExpertProfileActivity.class);
+        intent.putExtra(UserObject.class.toString(), user);
+        startActivity(intent);
         overridePendingTransition(R.anim.anim_slide_in_right,
                 R.anim.anim_slide_out_left);
     }

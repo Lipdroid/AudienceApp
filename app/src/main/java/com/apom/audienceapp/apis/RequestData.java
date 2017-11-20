@@ -145,7 +145,24 @@ public class RequestData {
                         (String) parameters.get(Constants.PARAM_TAG)));
                 nameValueParams.add(new BasicNameValuePair(Constants.PARAM_ID,
                         (String) parameters.get(Constants.PARAM_ID)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TYPE,
+                        (String) parameters.get(Constants.PARAM_TYPE)));
                 break;
+
+            case Constants.REQUEST_UPDATE_MEETING_BY_ID:
+                mRestType = Constants.REST_POST;
+                REQUEST_DATA_URL = UrlConstants.BASE_URL;
+
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TAG,
+                        (String) parameters.get(Constants.PARAM_TAG)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_ID,
+                        (String) parameters.get(Constants.PARAM_ID)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TYPE,
+                        (String) parameters.get(Constants.PARAM_TYPE)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_STATUS,
+                        (String) parameters.get(Constants.PARAM_STATUS)));
+                break;
+
 //
 //            case Constants.REQUEST_UPDATE_PROFILE:
 //                mRestType = Constants.REST_POST;

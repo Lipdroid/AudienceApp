@@ -13,19 +13,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
+
     <com.yalantis.phoenix.PullToRefreshView
         android:id="@+id/pull_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/header">
+        android:background="#E9E7ED"
+        android:layout_below="@+id/title_header">
 
         <ListView
-            android:id="@+id/gridview"
+            android:id="@+id/req_list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:divider="@null"
             android:scrollbars="none" />
 
     </com.yalantis.phoenix.PullToRefreshView>
+
+    <View
+        android:id="@+id/drop_shadowView"
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:layout_below="@+id/title_header"
+        android:background="@drawable/drop_shadow" />
+
+
+    <LinearLayout
+        android:id="@+id/title_header"
+        android:layout_below="@+id/header"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="100px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="40"
+            android:text="TimeLine"
+            android:textColor="@color/orange"
+            android:textSize="40px" />
+    </LinearLayout>
 
 </RelativeLayout>

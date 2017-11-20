@@ -20,7 +20,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="200px"
-                android:background="@color/black" />
+                android:background="@drawable/backgroud_gradient" />
 
             <TextView
                 android:layout_width="200px"

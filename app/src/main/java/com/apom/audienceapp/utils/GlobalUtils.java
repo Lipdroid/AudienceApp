@@ -44,6 +44,7 @@ public class GlobalUtils {
     public static Boolean addAditionalHeader = false;
     public static String additionalHeaderTag = null;
     public static String additionalHeaderValue = null;
+    public static boolean onClientPage = false;
 
     public static void computePakageHash(Context mContext) {
         try {

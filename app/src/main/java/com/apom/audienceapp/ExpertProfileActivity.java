@@ -34,8 +34,10 @@ public class ExpertProfileActivity extends AppCompatActivity {
 
         profile_image = (CircleImageView) findViewById(R.id.profile_image);
 
-        mUserObj = GlobalUtils.getCurrentUserObj();
-        setUpUser(mUserObj);
+        mUserObj = getIntent().getParcelableExtra(UserObject.class.toString());
+        if (mUserObj != null) {
+            setUpUser(mUserObj);
+        }
         mCorrectSize = CorrectSizeUtil.getInstance(this);
         mCorrectSize.correctSize();
     }

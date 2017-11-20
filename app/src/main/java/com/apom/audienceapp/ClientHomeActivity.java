@@ -37,7 +37,7 @@ import java.util.TimerTask;
 public class ClientHomeActivity extends AppCompatActivity {
     CorrectSizeUtil mCorrectSize = null;
     private CircleImageView btn_profile = null;
-    private View header = null;
+    //private View header = null;
     private Context mContext = null;
     private LinearLayout user_info = null;
 
@@ -63,8 +63,8 @@ public class ClientHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_home);
-        header = (View) findViewById(R.id.header);
-        btn_profile = (CircleImageView) header.findViewById(R.id.btn_profile);
+       // header = (View) findViewById(R.id.header);
+        btn_profile = (CircleImageView) findViewById(R.id.btn_profile_image);
         user_info = (LinearLayout) findViewById(R.id.user_info);
         profile_image = (CircleImageView) findViewById(R.id.profile_image);
         welcome_text = (CustomFontTextViewLight) findViewById(R.id.welcome_text);
@@ -180,7 +180,10 @@ public class ClientHomeActivity extends AppCompatActivity {
                 R.anim.anim_slide_out_right);
     }
     private void goToProfile() {
-        startActivity(new Intent(ClientHomeActivity.this, ClientProfileActivity.class));
+        UserObject user = GlobalUtils.getCurrentUserObj();
+        Intent intent = new Intent(ClientHomeActivity.this, ClientProfileActivity.class);
+        intent.putExtra(UserObject.class.toString(), user);
+        startActivity(intent);
         overridePendingTransition(R.anim.anim_slide_in_right,
                 R.anim.anim_slide_out_left);
     }

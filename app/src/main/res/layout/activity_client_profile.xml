@@ -1,9 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.apom.audienceapp.ClientProfileActivity">
+    tools:context="com.apom.audienceapp.UserDetailsActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200px"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="200px"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:tag="50"
+                android:text="Profile"
+                android:textColor="@color/white"
+                android:textSize="50px" />
+
+            <ImageView
+                android:id="@+id/btn_profile"
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30px"
+                android:onClick="afterClickBack"
+                android:padding="10px"
+                android:src="@drawable/left_arrow" />
+
+            <com.apom.audienceapp.customViews.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="200px"
+                android:layout_height="200px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100px"
+                android:src="@drawable/dummy_pic" />
+
+            <ImageView
+                android:id="@+id/verified_mark"
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:layout_marginLeft="400px"
+                android:layout_marginTop="100px"
+                android:src="@drawable/verified_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_image"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.apom.audienceapp.customViews.CustomFontTextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:maxLines="1"
+                    android:tag="50"
+                    android:text="Lipu Hossain"
+                    android:textColor="@color/black"
+                    android:textSize="50px"
+                    android:textStyle="bold" />
+
+
+                <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                    android:id="@+id/designation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100px"
+                    android:layout_marginLeft="10px"
+                    android:layout_marginRight="10px"
+                    android:layout_marginTop="0px"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:tag="40"
+                    android:text="Senior Android Ios developer at Oceanize"
+                    android:textColor="@color/black"
+                    android:textSize="40px"
+                    android:textStyle="bold" />
+
+                <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                    android:id="@+id/job_summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100px"
+                    android:layout_marginLeft="10px"
+                    android:layout_marginRight="10px"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:tag="30"
+                    android:text="Senior Android Ios developer at Oceanize"
+                    android:textColor="@color/black"
+                    android:textSize="30px"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150px"
+                    android:background="@color/common_gray"
+                    android:weightSum="3">
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2px"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="0 \nSuccess"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2px"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:maxLines="2"
+
+                        android:text="0 \nFailure"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2px"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="0 \nReffered"
+                        android:textColor="@color/black"
+                        android:textSize="40px"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <com.apom.audienceapp.customViews.CustomFontTextViewLight
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="10px"
+            android:background="@color/white"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="Reviews About this expert"
+            android:textColor="@color/black"
+            android:textSize="50px"
+            android:textStyle="bold" />
+
+        <com.yalantis.phoenix.PullToRefreshView
+            android:id="@+id/pull_to_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E9E7ED"
+            android:layout_below="@+id/search_bar">
+
+            <ListView
+                android:id="@+id/req_list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:divider="@null"
+                android:scrollbars="none" />
+
+        </com.yalantis.phoenix.PullToRefreshView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/no_result_ui"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="400px"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="196px"
+            android:layout_height="196px"
+            android:src="@drawable/caution_icon" />
+
+        <com.apom.audienceapp.customViews.CustomFontTextViewLight
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E9E7ED"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="10px"
+            android:gravity="center"
+            android:text="Currently meeting arranged"
+            android:textColor="@color/black"
+            android:textSize="50px"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</RelativeLayout>

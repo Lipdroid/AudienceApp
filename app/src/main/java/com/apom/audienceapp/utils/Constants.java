@@ -121,4 +121,6 @@ public class Constants {
     public static final String TAG_MEETING_REVIEW = "meeting_review";
 
     public static final String TAG_MEETING = "meeting";
+    public static final Object TAG_UPDATE_MEETING_STATUS = "status_update";
+    public static final int REQUEST_UPDATE_MEETING_BY_ID = 7;
 }

@@ -1,10 +1,13 @@
 package com.apom.audienceapp.objects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by lipuhossain on 11/18/17.
  */
 
-public class MeetingObject {
+public class MeetingObject implements Parcelable {
     private String id = null;
     private String expert_id = null;
     private String expert_name = null;
@@ -158,4 +161,71 @@ public class MeetingObject {
     public void setMeeting_review(String meeting_review) {
         this.meeting_review = meeting_review;
     }
+
+    public void readFromParcel(Parcel in) {
+        this.id = in.readString();
+        this.expert_id = in.readString();
+        this.expert_name = in.readString();
+        this.expert_approval = in.readString();
+        this.client_id = in.readString();
+        this.client_name = in.readString();
+        this.client_approval = in.readString();
+        this.admin_approval = in.readString();
+        this.meeting_time = in.readString();
+        this.meeting_venue = in.readString();
+        this.meeting_purpose = in.readString();
+        this.meeting_expectation_one = in.readString();
+        this.meeting_expectation_two = in.readString();
+        this.meeting_expectation_three = in.readString();
+        this.meeting_time_changed = in.readString();
+        this.meeting_venue_changed = in.readString();
+        this.meeting_review = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(id);
+        parcel.writeString(expert_id);
+        parcel.writeString(expert_name);
+        parcel.writeString(expert_approval);
+        parcel.writeString(client_id);
+        parcel.writeString(client_name);
+        parcel.writeString(client_approval);
+        parcel.writeString(admin_approval);
+        parcel.writeString(meeting_time);
+        parcel.writeString(meeting_venue);
+        parcel.writeString(meeting_purpose);
+        parcel.writeString(meeting_expectation_one);
+        parcel.writeString(meeting_expectation_two);
+        parcel.writeString(meeting_expectation_three);
+        parcel.writeString(meeting_time);
+        parcel.writeString(meeting_venue);
+        parcel.writeString(meeting_review);
+    }
+
+    public MeetingObject() {
+        super();
+    }
+
+    private MeetingObject(Parcel in) {
+        this();
+        readFromParcel(in);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MeetingObject> CREATOR = new Creator<MeetingObject>() {
+        @Override
+        public MeetingObject createFromParcel(Parcel parcel) {
+            return new MeetingObject(parcel);
+        }
+
+        @Override
+        public MeetingObject[] newArray(int i) {
+            return new MeetingObject[i];
+        }
+    };
 }

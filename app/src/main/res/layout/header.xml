@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="144px"
-        android:background="@color/colorAccent">
+        android:background="@drawable/backgroud_gradient">
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,4 +28,5 @@
             android:layout_marginRight="30px"
             android:padding="10px" />
     </RelativeLayout>
+
 </LinearLayout>
