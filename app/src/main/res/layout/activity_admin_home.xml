@@ -5,6 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.yalantis.phoenix.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_header">
+
+        <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/gridview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/btn_profile"
+            android:layout_below="@+id/search_bar"
+            android:gravity="center"
+            android:horizontalSpacing="10px"
+            android:numColumns="2"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10px" />
+    </com.yalantis.phoenix.PullToRefreshView>
+
     <View
         android:id="@+id/drop_shadowView"
         android:layout_width="match_parent"
@@ -27,33 +54,6 @@
             android:textColor="@color/orange"
             android:textSize="40px" />
     </LinearLayout>
-    <include
-        android:id="@+id/header"
-        layout="@layout/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <com.yalantis.phoenix.PullToRefreshView
-        android:id="@+id/pull_to_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/header">
-
-        <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/gridview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_above="@+id/btn_profile"
-            android:layout_below="@+id/search_bar"
-            android:gravity="center"
-            android:horizontalSpacing="10px"
-            android:numColumns="2"
-            android:scrollbars="none"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="10px" />
-    </com.yalantis.phoenix.PullToRefreshView>
-
-
     <LinearLayout
         android:id="@+id/user_info"
         android:layout_width="match_parent"
