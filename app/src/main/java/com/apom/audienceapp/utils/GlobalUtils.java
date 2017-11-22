@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -238,6 +239,7 @@ public class GlobalUtils {
         CustomFontTextView date_tv = (CustomFontTextView) infoDialog.findViewById(R.id.date);
         CustomFontTextView time = (CustomFontTextView) infoDialog.findViewById(R.id.time);
         CustomFontTextView place = (CustomFontTextView) infoDialog.findViewById(R.id.place);
+        ImageView cancel = (ImageView) infoDialog.findViewById(R.id.cancel);
         Button btnOK = (Button) infoDialog.findViewById(R.id.action);
 
 
@@ -334,6 +336,19 @@ public class GlobalUtils {
                 infoDialog.dismiss();
             }
         });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //your business logic
+                if (dialogCallback != null) {
+                    dialogCallback.onAction2();
+                }
+                infoDialog.dismiss();
+            }
+        });
+
 
         infoDialog.show();
     }

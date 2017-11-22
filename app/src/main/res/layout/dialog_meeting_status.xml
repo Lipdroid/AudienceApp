@@ -12,7 +12,15 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="@drawable/common_dialog_bg">
-
+            <ImageView
+                android:id="@+id/cancel"
+                android:layout_width="96px"
+                android:layout_height="96px"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="0px"
+                android:layout_marginTop="25px"
+                android:padding="25px"
+                android:src="@drawable/icon_cross" />
             <com.apom.audienceapp.customViews.CircleImageView
                 android:id="@+id/profile_image"
                 android:layout_width="200px"

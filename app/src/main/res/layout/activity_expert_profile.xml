@@ -9,9 +9,39 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="400px"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="196px"
+            android:layout_height="196px"
+            android:src="@drawable/caution_icon" />
+
+        <com.apom.audienceapp.customViews.CustomFontTextViewLight
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="10px"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="Currently no Reviews available to this  person"
+            android:textColor="@color/black"
+            android:textSize="50px"
+            android:tag="50"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -151,6 +181,7 @@
                         android:text="0 \nSuccess"
                         android:textColor="@color/black"
                         android:textSize="40px"
+                        android:tag="40"
                         android:textStyle="bold" />
 
                     <com.apom.audienceapp.customViews.CustomFontTextViewLight
@@ -161,7 +192,7 @@
                         android:background="@color/white"
                         android:gravity="center"
                         android:maxLines="2"
-
+                        android:tag="40"
                         android:text="0 \nFailure"
                         android:textColor="@color/black"
                         android:textSize="40px"
@@ -178,6 +209,7 @@
                         android:text="0 \nReffered"
                         android:textColor="@color/black"
                         android:textSize="40px"
+                        android:tag="40"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -195,6 +227,7 @@
             android:background="@color/white"
             android:gravity="center"
             android:maxLines="2"
+            android:tag="50"
             android:text="Reviews About this expert"
             android:textColor="@color/black"
             android:textSize="50px"
@@ -216,7 +249,6 @@
         </com.yalantis.phoenix.PullToRefreshView>
 
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -240,6 +272,7 @@
             android:text="Currently no Reviews available to this  person"
             android:textColor="@color/black"
             android:textSize="50px"
+            android:tag="50"
             android:textStyle="bold" />
     </LinearLayout>
 

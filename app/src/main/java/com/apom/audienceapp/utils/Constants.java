@@ -38,7 +38,6 @@ public class Constants {
     public static final String PARAM_STATUS = "status";
 
 
-
     public static final String TAG_ID = "id";
     public static final String TAG_NAME = "user_name";
     public static final String TAG_EMAIL = "user_email";
@@ -75,13 +74,17 @@ public class Constants {
     public static final int REQUEST_UPDATE_USER_BY_ID = 4;
     public static final int REQUEST_ADD_MEETING = 5;
     public static final int REQUEST_GET_ALL_MEETINGS_BY_EXPERT_ID = 6;
+    public static final int REQUEST_UPDATE_MEETING_BY_ID = 7;
+    public static final int REQUEST_GET_ALL_MEETINGS = 8;
+    public static final int REQUEST_UPDATE_REVIEW_MESSAGE = 9;
+    public static final int REQUEST_UPDATE_APPROVE_MESSAGE = 10;
 
     public static final String NOT_YET_REVIEWED = "Not yet reviewed";
 
 
     public static final String TAG_USER = "user";
     public static final String TAG_ERROR = "error";
-    public static final String TAG_ERROR_MSG = "error_msg" ;
+    public static final String TAG_ERROR_MSG = "error_msg";
 
     public static final String TAG_GET_USER = "get_user_by_id";
     public static final String GET_ALL_USER_TAG = "get_all_users";
@@ -89,6 +92,10 @@ public class Constants {
     public static final String TAG_GET_USER_EXPERT = "get_all_experts";
     public static final String MEETING_TAG = "add_meeting";
     public static final String TAG_GET_MEETINGS_EXPERT = "get_meeting_request_by_id";
+    public static final String TAG_UPDATE_MEETING_STATUS = "status_update";
+    public static final String TAG_GET_ALL_MEETINGS = "get_all_meetings";
+    public static final String TAG_UPDATE_REVIEW_MESSAGE = "update_review_message";
+    public static final String TAG_UPDATE_APPROVE_MESSAGE = "update_confirm_message";
 
 
     public static final String PARAM_EXPERT_ID = "expert_id";
@@ -133,14 +140,8 @@ public class Constants {
     public static final String TAG_APPROVE_MESSAGE = "approve_message";
 
     public static final String TAG_MEETING = "meeting";
-    public static final String TAG_UPDATE_MEETING_STATUS = "status_update";
-    public static final int REQUEST_UPDATE_MEETING_BY_ID = 7;
-    public static final String TAG_GET_ALL_MEETINGS = "get_all_meetings";
-    public static final int REQUEST_GET_ALL_MEETINGS = 8;
 
     public static final String DEFAULT_DATE_FORMAT = "EEE-dd-MMMM-yyyy";
     public static final String NOT_YET_MESSAGE = "No Message";
-
-    public static final int MEETING_FORM_RETURN = 100;
 
 }
