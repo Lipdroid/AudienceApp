@@ -218,7 +218,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/check_verification"
+        android:id="@+id/btnAction"
         android:layout_width="744px"
         android:layout_height="136px"
         android:layout_alignParentBottom="true"

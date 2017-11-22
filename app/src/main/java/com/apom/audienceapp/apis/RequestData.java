@@ -95,12 +95,16 @@ public class RequestData {
                         (String) parameters.get(Constants.PARAM_EXPERT_ID)));
                 nameValueParams.add(new BasicNameValuePair(Constants.PARAM_EXPERT_NAME,
                         (String) parameters.get(Constants.PARAM_EXPERT_NAME)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_EXPERT_IMAGE_URL,
+                        (String) parameters.get(Constants.PARAM_EXPERT_IMAGE_URL)));
                 nameValueParams.add(new BasicNameValuePair(Constants.PARAM_EXPERT_APPROVAL,
                         (String) parameters.get(Constants.PARAM_EXPERT_APPROVAL)));
                 nameValueParams.add(new BasicNameValuePair(Constants.PARAM_CLIENT_ID,
                         (String) parameters.get(Constants.PARAM_CLIENT_ID)));
                 nameValueParams.add(new BasicNameValuePair(Constants.PARAM_CLIENT_NAME,
                         (String) parameters.get(Constants.PARAM_CLIENT_NAME)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_CLIENT_IMAGE_URL,
+                        (String) parameters.get(Constants.PARAM_CLIENT_IMAGE_URL)));
                 nameValueParams.add(new BasicNameValuePair(Constants.PARAM_CLIENT_APPROVAL,
                         (String) parameters.get(Constants.PARAM_CLIENT_APPROVAL)));
                 nameValueParams.add(new BasicNameValuePair(Constants.PARAM_ADMIN_APPROVAL,
@@ -123,6 +127,8 @@ public class RequestData {
                         (String) parameters.get(Constants.PARAM_MEETING_VENUE_CHANGED)));
                 nameValueParams.add(new BasicNameValuePair(Constants.PARAM_MEETING_REVIEW,
                         (String) parameters.get(Constants.PARAM_MEETING_REVIEW)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_APPROVE_MESSAGE,
+                        (String) parameters.get(Constants.PARAM_APPROVE_MESSAGE)));
                 break;
 
 
@@ -147,6 +153,13 @@ public class RequestData {
                         (String) parameters.get(Constants.PARAM_ID)));
                 nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TYPE,
                         (String) parameters.get(Constants.PARAM_TYPE)));
+                break;
+            case Constants.REQUEST_GET_ALL_MEETINGS:
+                mRestType = Constants.REST_POST;
+                REQUEST_DATA_URL = UrlConstants.BASE_URL;
+
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TAG,
+                        (String) parameters.get(Constants.PARAM_TAG)));
                 break;
 
             case Constants.REQUEST_UPDATE_MEETING_BY_ID:

@@ -72,7 +72,6 @@ public class ExpertHomeActivity extends AppCompatActivity {
         mUserObj = GlobalUtils.getCurrentUserObj();
         mCorrectSize = CorrectSizeUtil.getInstance(this);
         mCorrectSize.correctSize();
-        getAllMettings();
         setUserInfo();
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +85,7 @@ public class ExpertHomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        getAllMettings();
 
     }
 

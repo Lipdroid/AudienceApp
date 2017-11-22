@@ -11,9 +11,11 @@ public class MeetingObject implements Parcelable {
     private String id = null;
     private String expert_id = null;
     private String expert_name = null;
+    private String expert_image_url = null;
     private String expert_approval = null;
     private String client_id = null;
     private String client_name = null;
+    private String client_image_url = null;
     private String client_approval = null;
     private String admin_approval = null;
     private String meeting_time = null;
@@ -25,6 +27,31 @@ public class MeetingObject implements Parcelable {
     private String meeting_time_changed = null;
     private String meeting_venue_changed = null;
     private String meeting_review = null;
+    private String approve_message = null;
+
+    public String getExpert_image_url() {
+        return expert_image_url;
+    }
+
+    public void setExpert_image_url(String expert_image_url) {
+        this.expert_image_url = expert_image_url;
+    }
+
+    public String getClient_image_url() {
+        return client_image_url;
+    }
+
+    public void setClient_image_url(String client_image_url) {
+        this.client_image_url = client_image_url;
+    }
+
+    public String getApprove_message() {
+        return approve_message;
+    }
+
+    public void setApprove_message(String approve_message) {
+        this.approve_message = approve_message;
+    }
 
     public String getId() {
         return id;
@@ -166,9 +193,11 @@ public class MeetingObject implements Parcelable {
         this.id = in.readString();
         this.expert_id = in.readString();
         this.expert_name = in.readString();
+        this.expert_image_url = in.readString();
         this.expert_approval = in.readString();
         this.client_id = in.readString();
         this.client_name = in.readString();
+        this.client_image_url = in.readString();
         this.client_approval = in.readString();
         this.admin_approval = in.readString();
         this.meeting_time = in.readString();
@@ -180,6 +209,7 @@ public class MeetingObject implements Parcelable {
         this.meeting_time_changed = in.readString();
         this.meeting_venue_changed = in.readString();
         this.meeting_review = in.readString();
+        this.approve_message = in.readString();
     }
 
     @Override
@@ -187,9 +217,11 @@ public class MeetingObject implements Parcelable {
         parcel.writeString(id);
         parcel.writeString(expert_id);
         parcel.writeString(expert_name);
+        parcel.writeString(expert_image_url);
         parcel.writeString(expert_approval);
         parcel.writeString(client_id);
         parcel.writeString(client_name);
+        parcel.writeString(client_image_url);
         parcel.writeString(client_approval);
         parcel.writeString(admin_approval);
         parcel.writeString(meeting_time);
@@ -201,6 +233,8 @@ public class MeetingObject implements Parcelable {
         parcel.writeString(meeting_time);
         parcel.writeString(meeting_venue);
         parcel.writeString(meeting_review);
+        parcel.writeString(approve_message);
+
     }
 
     public MeetingObject() {

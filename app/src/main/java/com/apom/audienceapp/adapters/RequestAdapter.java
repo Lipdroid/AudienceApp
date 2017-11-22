@@ -3,6 +3,7 @@ package com.apom.audienceapp.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.apom.audienceapp.customViews.CustomFontTextViewLight;
 import com.apom.audienceapp.holders.MeetingHolder;
 import com.apom.audienceapp.holders.UserHolder;
 import com.apom.audienceapp.interfaces.AsyncCallback;
+import com.apom.audienceapp.interfaces.DialogCallback;
 import com.apom.audienceapp.objects.MeetingObject;
 import com.apom.audienceapp.objects.UserObject;
 import com.apom.audienceapp.utils.Constants;
@@ -33,6 +35,7 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -100,20 +103,120 @@ public class RequestAdapter extends BaseAdapter {
         mHolder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (!GlobalUtils.onClientPage) {
-                    if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_EXPERT
+                    if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT
+                    )) {
+                        //status
+                        final MeetingObject meeting = mListData.get(position);
+                        GlobalUtils.showStatusDialog(mContext, meeting, new DialogCallback() {
+                            @Override
+                            public void onAction1() {
+                                GlobalUtils.addEventInCallender(mActivity,mListData.get(position));
+                            }
+
+                            @Override
+                            public void onAction2() {
+
+                            }
+
+                            @Override
+                            public void onAction3() {
+
+                            }
+
+                            @Override
+                            public void onAction4() {
+
+                            }
+                        });
+
+                    } else if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_EXPERT
                     )) {
                         MeetingObject meetingObj = mListData.get(position);
                         if (meetingObj.getExpert_approval().equals(Constants.USER_NOT_YET_ARROVED)) {
                             afterClickMain(position);
+                        } else {
+                            //status
+                            GlobalUtils.showStatusDialog(mContext, meetingObj, new DialogCallback() {
+                                @Override
+                                public void onAction1() {
+                                    GlobalUtils.addEventInCallender(mActivity,mListData.get(position));
+                                }
+
+                                @Override
+                                public void onAction2() {
+
+                                }
+
+                                @Override
+                                public void onAction3() {
+
+                                }
+
+                                @Override
+                                public void onAction4() {
+
+                                }
+                            });
                         }
+
                     } else if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_ADMIN
                     )) {
                         MeetingObject meetingObj = mListData.get(position);
                         if (meetingObj.getAdmin_approval().equals(Constants.USER_NOT_YET_ARROVED)) {
                             afterClickMain(position);
+                        } else {
+                            //status
+                            GlobalUtils.showStatusDialog(mContext, meetingObj, new DialogCallback() {
+                                @Override
+                                public void onAction1() {
+
+                                }
+
+                                @Override
+                                public void onAction2() {
+
+                                }
+
+                                @Override
+                                public void onAction3() {
+
+                                }
+
+                                @Override
+                                public void onAction4() {
+
+                                }
+                            });
                         }
                     }
+                } else {
+                    //open status pop up on for view
+                    final MeetingObject meetingObj = mListData.get(position);
+
+                    //status
+                    GlobalUtils.showStatusDialog(mContext, meetingObj, new DialogCallback() {
+                        @Override
+                        public void onAction1() {
+                            GlobalUtils.addEventInCallender(mActivity,mListData.get(position));
+                        }
+
+                        @Override
+                        public void onAction2() {
+
+                        }
+
+                        @Override
+                        public void onAction3() {
+
+                        }
+
+                        @Override
+                        public void onAction4() {
+
+                        }
+                    });
                 }
             }
         });
@@ -124,29 +227,70 @@ public class RequestAdapter extends BaseAdapter {
     }
 
     public void setViews(MeetingObject meetingObj) {
-        setImageByUserId(meetingObj.getClient_id());
+
+        Picasso.with(mActivity)
+                .load(meetingObj.getClient_image_url())
+                .into(mHolder.profile_image);
+
         mHolder.client_name.setText(meetingObj.getClient_name());
         mHolder.purpose.setText(meetingObj.getMeeting_purpose());
         mHolder.venue.setText(meetingObj.getMeeting_venue());
-        switch (meetingObj.getExpert_approval()) {
-            case Constants.USER_NOT_YET_ARROVED:
+
+        if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_ARROVED)
+                && !GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            mHolder.status.setTextColor(mContext.getResources().getColor(R.color.green1));
+            mHolder.status.setText("FINISH");
+
+        } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_ARROVED)
+                && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            mHolder.status.setTextColor(mContext.getResources().getColor(R.color.green1));
+            mHolder.status.setText("FIXED");
+            //can add to callender
+
+        } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_NOT_YET_ARROVED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_NOT_YET_ARROVED)
+                && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            mHolder.status.setTextColor(mContext.getResources().getColor(R.color.orange));
+            mHolder.status.setText("Pending");
+
+        } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_NOT_YET_ARROVED)
+                && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_EXPERT)) {
+                mHolder.status.setTextColor(mContext.getResources().getColor(R.color.green1));
+                mHolder.status.setText("Done");
+            } else {
                 mHolder.status.setTextColor(mContext.getResources().getColor(R.color.orange));
                 mHolder.status.setText("Pending");
-                break;
-            case Constants.USER_ARROVED:
-                mHolder.status.setTextColor(mContext.getResources().getColor(R.color.green1));
-                mHolder.status.setText("Completed");
-                break;
-            case Constants.USER_REJECTED:
-                mHolder.status.setTextColor(mContext.getResources().getColor(R.color.common_red));
-                mHolder.status.setText("Rejected");
-                break;
+            }
+
+        } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_REJECTED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_NOT_YET_ARROVED)
+                && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            mHolder.status.setTextColor(mContext.getResources().getColor(R.color.common_red));
+            mHolder.status.setText("Rejected");
+
+        } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_REJECTED)
+                && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            mHolder.status.setTextColor(mContext.getResources().getColor(R.color.common_red));
+            mHolder.status.setText("Rejected");
+
         }
+
 
         DateFormat dateFormat = new SimpleDateFormat("EEE-dd-MMMM");
         DateFormat timeFormat = new SimpleDateFormat("hh:mm a");
 
-        SimpleDateFormat dateFormatDefault = new SimpleDateFormat("EEE-dd-MMMM hh:mm a");
+        SimpleDateFormat dateFormatDefault = new SimpleDateFormat(Constants.DEFAULT_DATE_FORMAT + " hh:mm a");
         Date date = null;
         try {
             date = dateFormatDefault.parse(meetingObj.getMeeting_time());

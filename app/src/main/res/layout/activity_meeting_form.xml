@@ -55,17 +55,44 @@
                 android:textSize="40px"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/et_purpose"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="120px"
-                android:background="@null"
-                android:hint="Write down the purpose"
-                android:paddingLeft="0px"
-                android:tag="40"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="40px" />
+                android:layout_height="120px">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120px"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_purpose"
+                        android:layout_width="match_parent"
+                        android:layout_height="120px"
+                        android:background="@null"
+                        android:hint="Write down the purpose"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="40px"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_purpose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="40px"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+
+            </ScrollView>
+
 
             <com.apom.audienceapp.customViews.CustomFontTextViewLight
                 android:layout_width="wrap_content"
@@ -79,17 +106,41 @@
                 android:textSize="40px"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/et_venue"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="120px"
-                android:background="@null"
-                android:hint="Write down the venue you want to meet"
-                android:paddingLeft="0px"
-                android:tag="40"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="40px" />
+                android:layout_height="120px">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120px"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_venue"
+                        android:layout_width="match_parent"
+                        android:layout_height="120px"
+                        android:background="@null"
+                        android:hint="Write down the venue you want to meet"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="40px" />
+
+                    <TextView
+                        android:id="@+id/tv_venue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="40px"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+            </ScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -231,8 +282,7 @@
                             android:layout_width="150px"
                             android:layout_height="150px"
                             android:layout_marginLeft="10px"
-                            android:layout_marginTop="0px"
-                             />
+                            android:layout_marginTop="0px" />
                     </FrameLayout>
 
 
@@ -276,8 +326,7 @@
                             android:layout_width="150px"
                             android:layout_height="150px"
                             android:layout_marginLeft="0px"
-                            android:layout_marginTop="0px"
-                             />
+                            android:layout_marginTop="0px" />
                     </FrameLayout>
 
                     <com.apom.audienceapp.customViews.CustomFontTextViewLight
@@ -308,41 +357,117 @@
                 android:textSize="40px"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/et_expectation_one"
+            <ScrollView
+                android:id="@+id/scrollView_one"
                 android:layout_width="match_parent"
-                android:layout_height="100px"
-                android:background="@null"
-                android:hint="Expectation 1 (Optional)"
-                android:paddingLeft="0px"
-                android:tag="40"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="40px" />
+                android:layout_height="100px">
 
-            <EditText
-                android:id="@+id/et_expectation_two"
-                android:layout_width="match_parent"
-                android:layout_height="100px"
-                android:background="@null"
-                android:hint="Expectation 2 (Optional)"
-                android:paddingLeft="0px"
-                android:tag="40"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="40px" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/et_expectation_three"
+                    <EditText
+                        android:id="@+id/et_expectation_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        android:background="@null"
+                        android:hint="Expectation 1 (Optional)"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="40px" />
+
+                    <TextView
+                        android:id="@+id/tv_expectation_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="40px"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+            </ScrollView>
+
+            <ScrollView
+                android:id="@+id/scrollView_two"
                 android:layout_width="match_parent"
-                android:layout_height="100px"
-                android:background="@null"
-                android:hint="Expectation 3 (Optional)"
-                android:paddingLeft="0px"
-                android:tag="40"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="40px" />
+                android:layout_height="100px">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_expectation_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        android:background="@null"
+                        android:hint="Expectation 2 (Optional)"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="40px" />
+
+                    <TextView
+                        android:id="@+id/tv_expectation_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="40px"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+            </ScrollView>
+
+            <ScrollView
+                android:id="@+id/scrollView_three"
+                android:layout_width="match_parent"
+                android:layout_height="100px">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_expectation_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        android:background="@null"
+                        android:hint="Expectation 3 (Optional)"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="40px" />
+
+
+                    <TextView
+                        android:id="@+id/tv_expectation_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="40px"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+            </ScrollView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -399,9 +524,9 @@
                     android:layout_marginBottom="50px"
                     android:layout_weight="1"
                     android:background="@color/common_red"
+                    android:onClick="afterClickDecline"
                     android:tag="39"
                     android:text="Decline"
-                    android:onClick="afterClickDecline"
                     android:textColor="@color/white"
                     android:textSize="39px" />
 
@@ -413,8 +538,8 @@
                     android:layout_margin="10px"
                     android:layout_marginBottom="50px"
                     android:layout_weight="1"
-                    android:onClick="afterClickApprove"
                     android:background="@color/colorPrimary"
+                    android:onClick="afterClickApprove"
                     android:tag="39"
                     android:text="Approve"
                     android:textColor="@color/white"

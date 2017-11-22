@@ -1,12 +1,15 @@
 package com.apom.audienceapp.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.provider.CalendarContract;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,18 +23,27 @@ import android.widget.TextView;
 
 import com.apom.audienceapp.AudienceApplication;
 import com.apom.audienceapp.R;
+import com.apom.audienceapp.customViews.CircleImageView;
 import com.apom.audienceapp.customViews.CustomDialog;
+import com.apom.audienceapp.customViews.CustomFontTextView;
+import com.apom.audienceapp.customViews.CustomFontTextViewLight;
 import com.apom.audienceapp.customViews.CustomProgressDialog;
 import com.apom.audienceapp.interfaces.DialogCallback;
 import com.apom.audienceapp.interfaces.DialogForValueCallback;
 import com.apom.audienceapp.objects.JobObject;
 import com.apom.audienceapp.objects.MeetingObject;
 import com.apom.audienceapp.objects.UserObject;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
 import java.security.MessageDigest;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -194,6 +206,123 @@ public class GlobalUtils {
         if (action != null) {
             btnOK.setText(action);
         }
+        btnOK.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //your business logic
+                if (dialogCallback != null) {
+                    dialogCallback.onAction1();
+                }
+                infoDialog.dismiss();
+            }
+        });
+
+        infoDialog.show();
+    }
+
+    public static void showStatusDialog(Context mContext, MeetingObject meetingObj, final DialogCallback dialogCallback) {
+        final CustomDialog infoDialog = new CustomDialog(mContext, R.style.CustomDialogTheme);
+        LayoutInflater inflator = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.dialog_meeting_status, null);
+
+        new MultipleScreen(mContext);
+        MultipleScreen.resizeAllView((ViewGroup) v);
+
+        infoDialog.setContentView(v);
+
+        CircleImageView profile_image = (CircleImageView) infoDialog.findViewById(R.id.profile_image);
+        CustomFontTextView name = (CustomFontTextView) infoDialog.findViewById(R.id.name);
+        CustomFontTextViewLight response = (CustomFontTextViewLight) infoDialog.findViewById(R.id.response);
+        CustomFontTextViewLight status = (CustomFontTextViewLight) infoDialog.findViewById(R.id.status);
+        CustomFontTextView date_tv = (CustomFontTextView) infoDialog.findViewById(R.id.date);
+        CustomFontTextView time = (CustomFontTextView) infoDialog.findViewById(R.id.time);
+        CustomFontTextView place = (CustomFontTextView) infoDialog.findViewById(R.id.place);
+        Button btnOK = (Button) infoDialog.findViewById(R.id.action);
+
+
+        //Loading image from below url into imageView
+        Picasso.with(mContext)
+                .load(meetingObj.getExpert_image_url())
+                .into(profile_image);
+        name.setText(meetingObj.getExpert_name());
+        if (meetingObj.getApprove_message() == null || meetingObj.getApprove_message().equals("")) {
+            response.setVisibility(View.GONE);
+        } else {
+            response.setText("'" + meetingObj.getApprove_message() + "'");
+        }
+        DateFormat dateFormat = new SimpleDateFormat("EEE-dd-MMMM");
+        DateFormat timeFormat = new SimpleDateFormat("hh:mm a");
+
+        SimpleDateFormat dateFormatDefault = new SimpleDateFormat(Constants.DEFAULT_DATE_FORMAT + " hh:mm a");
+        Date date = null;
+        try {
+            date = dateFormatDefault.parse(meetingObj.getMeeting_time());
+            String date_str = dateFormat.format(date);
+            String time_str = timeFormat.format(date);
+
+            date_tv.setText(date_str);
+            time.setText(time_str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        place.setText(meetingObj.getMeeting_venue());
+
+        if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_ARROVED)
+                && !GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            status.setTextColor(mContext.getResources().getColor(R.color.green1));
+            status.setText("FINISH");
+
+        } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_ARROVED)
+                && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            status.setTextColor(mContext.getResources().getColor(R.color.green1));
+            status.setText("FIXED");
+            //can add to callender
+            if (!GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_ADMIN)) {
+                btnOK.setText("ADD TO CALLENDER");
+            }
+
+        } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_NOT_YET_ARROVED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_NOT_YET_ARROVED)
+                && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            status.setTextColor(mContext.getResources().getColor(R.color.orange));
+            status.setText("Pending");
+
+        } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_NOT_YET_ARROVED)
+                && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_EXPERT)) {
+                status.setTextColor(mContext.getResources().getColor(R.color.green1));
+                status.setText("Done");
+            } else {
+                status.setTextColor(mContext.getResources().getColor(R.color.orange));
+                status.setText("Pending");
+            }
+
+        } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_REJECTED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_NOT_YET_ARROVED)
+                && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            status.setTextColor(mContext.getResources().getColor(R.color.common_red));
+            status.setText("Rejected");
+
+        } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
+                && meetingObj.getAdmin_approval().equals(Constants.USER_REJECTED)
+                && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
+            status.setTextColor(mContext.getResources().getColor(R.color.common_red));
+            status.setText("Rejected");
+
+        }
+
+
         btnOK.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -465,6 +594,31 @@ public class GlobalUtils {
             }
 
 
+            if (((JSONObject) src).has(Constants.TAG_CLIENT_IMAGE_URL)) {
+                if (!((JSONObject) src).getString(Constants.TAG_CLIENT_IMAGE_URL).equals("null")) {
+                    meetingObj.setClient_image_url(((JSONObject) src).getString(Constants.TAG_CLIENT_IMAGE_URL));
+                } else {
+                    meetingObj.setClient_image_url("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_EXPERT_IMAGE_URL)) {
+                if (!((JSONObject) src).getString(Constants.TAG_EXPERT_IMAGE_URL).equals("null")) {
+                    meetingObj.setExpert_image_url(((JSONObject) src).getString(Constants.TAG_EXPERT_IMAGE_URL));
+                } else {
+                    meetingObj.setExpert_image_url("");
+                }
+            }
+
+            if (((JSONObject) src).has(Constants.TAG_APPROVE_MESSAGE)) {
+                if (!((JSONObject) src).getString(Constants.TAG_APPROVE_MESSAGE).equals("null")) {
+                    meetingObj.setApprove_message(((JSONObject) src).getString(Constants.TAG_APPROVE_MESSAGE));
+                } else {
+                    meetingObj.setApprove_message("");
+                }
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -496,4 +650,76 @@ public class GlobalUtils {
         animate.setFillAfter(true);
         view.startAnimation(animate);
     }
+
+    public static boolean isDateValid(String d1) {
+        try {
+            // If you already have date objects then skip 1
+
+            //1
+            // Create 2 dates starts
+            SimpleDateFormat sdf = new SimpleDateFormat(Constants.DEFAULT_DATE_FORMAT + " hh:mm a");
+            Date date1 = sdf.parse(d1);
+            Date date2 = new Date();
+
+            System.out.println("Date1" + sdf.format(date1));
+            System.out.println("Date2" + sdf.format(date2));
+            System.out.println();
+
+            // Create 2 dates ends
+            //1
+
+            // Date object is having 3 methods namely after,before and equals for comparing
+            // after() will return true if and only if date1 is after date 2
+            if (date1.after(date2)) {
+                System.out.println("Date1 is after Date2");
+                return true;
+            }
+            // before() will return true if and only if date1 is before date2
+            if (date1.before(date2)) {
+                System.out.println("Date1 is before Date2");
+                return false;
+            }
+
+            //equals() returns true if both the dates are equal
+            if (date1.equals(date2)) {
+                System.out.println("Date1 is equal Date2");
+                return true;
+            }
+
+            System.out.println();
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public static String formatDateString(String date) {
+        return date.substring(0, date.length() - 5);
+
+    }
+
+    public static void addEventInCallender(Activity mActivity, MeetingObject meeting) {
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setType("vnd.android.cursor.item/event");
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormatDefault = new SimpleDateFormat(Constants.DEFAULT_DATE_FORMAT + " hh:mm a");
+        try {
+            Date date = dateFormatDefault.parse(meeting.getMeeting_time());
+            cal.setTime(date);
+            long startTime = cal.getTimeInMillis();
+            long endTime = cal.getTimeInMillis();
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime);
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime);
+
+            intent.putExtra(CalendarContract.Events.TITLE, "Meeting with " + meeting.getExpert_name());
+            intent.putExtra(CalendarContract.Events.DESCRIPTION, "Meeting with " + meeting.getExpert_name());
+            intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "Location:" + meeting.getMeeting_venue());
+
+            mActivity.startActivity(intent);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

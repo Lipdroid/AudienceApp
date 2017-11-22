@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.apom.audienceapp.customViews.CircleImageView;
 import com.apom.audienceapp.customViews.CustomFontTextView;
 import com.apom.audienceapp.customViews.CustomFontTextViewLight;
 import com.apom.audienceapp.objects.UserObject;
+import com.apom.audienceapp.utils.Constants;
 import com.apom.audienceapp.utils.CorrectSizeUtil;
+import com.apom.audienceapp.utils.GlobalUtils;
 import com.squareup.picasso.Picasso;
 
 public class UserDetailsActivity extends AppCompatActivity {
@@ -18,7 +21,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private CustomFontTextView name = null;
     private CustomFontTextViewLight designation = null;
     private CircleImageView profile_image = null;
-
+    private Button btnAction = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +30,12 @@ public class UserDetailsActivity extends AppCompatActivity {
         name = (CustomFontTextView) findViewById(R.id.name);
         designation = (CustomFontTextViewLight) findViewById(R.id.designation);
         profile_image = (CircleImageView) findViewById(R.id.profile_image);
-
+        btnAction= (Button) findViewById(R.id.btnAction);
         mUserObj = getIntent().getParcelableExtra(UserObject.class.toString());
         setUpUser(mUserObj);
+        if(!GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT)){
+            btnAction.setVisibility(View.GONE);
+        }
         mCorrectSize = CorrectSizeUtil.getInstance(this);
         mCorrectSize.correctSize();
     }

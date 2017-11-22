@@ -5,6 +5,12 @@ package com.apom.audienceapp.utils;
  */
 
 public class Constants {
+    //for test purpose
+    public static final String USER_ID_ADMIN = "61q3KGilX0";
+    public static final String USER_ID_EXPERT = "61q3KGilX01";
+    public static final String USER_ID_CLIENT = "61q3KGilX012";
+
+
     public static final String ALREADY_LOGGED_IN = "loggedIn";
 
     public static final int REST_POST = 0;
@@ -87,9 +93,11 @@ public class Constants {
 
     public static final String PARAM_EXPERT_ID = "expert_id";
     public static final String PARAM_EXPERT_NAME = "expert_name";
+    public static final String PARAM_EXPERT_IMAGE_URL = "expert_image_url";
     public static final String PARAM_EXPERT_APPROVAL = "expert_approval";
     public static final String PARAM_CLIENT_ID = "client_id";
     public static final String PARAM_CLIENT_NAME = "client_name";
+    public static final String PARAM_CLIENT_IMAGE_URL = "client_image_url";
     public static final String PARAM_CLIENT_APPROVAL = "client_approval";
     public static final String PARAM_ADMIN_APPROVAL = "admin_approval";
     public static final String PARAM_MEETING_TIME = "meeting_time";
@@ -101,13 +109,16 @@ public class Constants {
     public static final String PARAM_MEETING_TIME_CHANGED = "meeting_time_changed";
     public static final String PARAM_MEETING_VENUE_CHANGED = "meeting_venue_changed";
     public static final String PARAM_MEETING_REVIEW = "meeting_review";
+    public static final String PARAM_APPROVE_MESSAGE = "approve_message";
 
 
     public static final String TAG_EXPERT_ID = "expert_id";
     public static final String TAG_EXPERT_NAME = "expert_name";
+    public static final String TAG_EXPERT_IMAGE_URL = "expert_image_url";
     public static final String TAG_EXPERT_APPROVAL = "expert_approval";
     public static final String TAG_CLIENT_ID = "client_id";
     public static final String TAG_CLIENT_NAME = "client_name";
+    public static final String TAG_CLIENT_IMAGE_URL = "client_image_url";
     public static final String TAG_CLIENT_APPROVAL = "client_approval";
     public static final String TAG_ADMIN_APPROVAL = "admin_approval";
     public static final String TAG_MEETING_TIME = "meeting_time";
@@ -119,8 +130,17 @@ public class Constants {
     public static final String TAG_MEETING_TIME_CHANGED = "meeting_time_changed";
     public static final String TAG_MEETING_VENUE_CHANGED = "meeting_venue_changed";
     public static final String TAG_MEETING_REVIEW = "meeting_review";
+    public static final String TAG_APPROVE_MESSAGE = "approve_message";
 
     public static final String TAG_MEETING = "meeting";
-    public static final Object TAG_UPDATE_MEETING_STATUS = "status_update";
+    public static final String TAG_UPDATE_MEETING_STATUS = "status_update";
     public static final int REQUEST_UPDATE_MEETING_BY_ID = 7;
+    public static final String TAG_GET_ALL_MEETINGS = "get_all_meetings";
+    public static final int REQUEST_GET_ALL_MEETINGS = 8;
+
+    public static final String DEFAULT_DATE_FORMAT = "EEE-dd-MMMM-yyyy";
+    public static final String NOT_YET_MESSAGE = "No Message";
+
+    public static final int MEETING_FORM_RETURN = 100;
+
 }

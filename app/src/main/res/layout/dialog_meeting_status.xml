@@ -1,0 +1,196 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/dialog_main"
+            android:layout_width="1037px"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/common_dialog_bg">
+
+            <com.apom.audienceapp.customViews.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="200px"
+                android:layout_height="200px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50px"
+                android:src="@drawable/dummy_pic" />
+
+            <com.apom.audienceapp.customViews.CustomFontTextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30px"
+                android:tag="50"
+                android:text="Lipu Hossain"
+                android:textColor="@color/black"
+                android:textSize="50px"
+                android:textStyle="bold" />
+
+            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                android:id="@+id/response"
+                android:layout_width="wrap_content"
+                android:layout_height="120px"
+                android:layout_below="@+id/name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:layout_marginTop="10px"
+                android:gravity="center"
+                android:maxLines="2"
+                android:tag="45"
+                android:text="OK lets dp tje ,eeting and i jappy pt sau jedmflkdfkkmdkfmkdmfkdmfdkmfkdmfdkmdk"
+                android:textColor="@color/black"
+                android:textSize="45px"
+                android:textStyle="bold" />
+
+            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/response"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5px"
+                android:layout_marginLeft="20px"
+                android:gravity="center"
+                android:singleLine="true"
+                android:tag="80"
+                android:text="Fixed"
+                android:textColor="@color/orange"
+                android:textSize="80px"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/status"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:gravity="center">
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginLeft="20px"
+                        android:tag="45"
+                        android:text="Date: "
+                        android:textColor="@color/text_dark"
+                        android:textSize="45px"
+                        android:textStyle="bold" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextView
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:tag="45"
+                        android:text="Tue-11-september"
+                        android:textColor="@color/black"
+                        android:textSize="45px"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120px"
+
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:gravity="center">
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/customFontTextViewLight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginLeft="20px"
+                        android:tag="45"
+                        android:text="Time:"
+                        android:textColor="@color/text_dark"
+                        android:textSize="45px"
+                        android:textStyle="bold" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextView
+                        android:id="@+id/time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:tag="45"
+                        android:text="11:30pm"
+                        android:textColor="@color/black"
+                        android:textSize="45px"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120px"
+android:layout_marginBottom="40px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:gravity="center">
+
+                    <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginLeft="20px"
+                        android:tag="45"
+                        android:text="Location:"
+                        android:textColor="@color/text_dark"
+                        android:textSize="45px"
+                        android:textStyle="bold" />
+
+                    <com.apom.audienceapp.customViews.CustomFontTextView
+                        android:id="@+id/place"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:tag="45"
+                        android:text="Starbucks"
+                        android:textColor="@color/black"
+                        android:textSize="45px"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/action"
+                    android:layout_width="744px"
+                    android:layout_height="136px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="100px"
+                    android:background="@drawable/selector_btn_rounded"
+                    android:onClick="afterClickAppointment"
+                    android:tag="39"
+                    android:text="OK"
+                    android:textColor="@color/white"
+                    android:textSize="39px" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
