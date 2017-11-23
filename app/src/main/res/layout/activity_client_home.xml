@@ -22,7 +22,7 @@
         android:background="@color/white">
 
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="110px"
             android:layout_marginLeft="130px"
@@ -30,8 +30,9 @@
             android:layout_marginTop="50px">
 
             <RelativeLayout
+                android:background="@drawable/rounded_corner_border"
                 android:layout_width="match_parent"
-                android:layout_height="120px"
+                android:layout_height="110px"
                 android:orientation="horizontal">
 
                 <EditText
@@ -44,7 +45,7 @@
                     android:hint="Search Experts"
                     android:paddingLeft="30px"
                     android:tag="50"
-                    android:textColorHint="@color/black"
+                    android:textColorHint="@color/common_gray"
                     android:textSize="50px" />
 
                 <View
@@ -52,11 +53,11 @@
                     android:layout_width="5px"
                     android:layout_height="match_parent"
                     android:layout_toLeftOf="@+id/btn_search"
-                    android:background="@color/black" />
+                    android:background="@color/common_gray" />
 
                 <ImageView
                     android:id="@+id/btn_search"
-                    android:layout_width="128px"
+                    android:layout_width="120px"
                     android:layout_height="128px"
                     android:layout_alignParentRight="true"
                     android:layout_centerHorizontal="true"
@@ -66,7 +67,7 @@
                     android:padding="10px"
                     android:src="@drawable/search_icon" />
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </LinearLayout>
 
         <com.apom.audienceapp.customViews.CircleImageView
             android:id="@+id/btn_profile_image"

@@ -115,6 +115,7 @@
                     android:weightSum="3">
 
                     <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/tv_success"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="2px"
@@ -122,13 +123,14 @@
                         android:background="@color/white"
                         android:gravity="center"
                         android:maxLines="2"
+                        android:tag="40"
                         android:text="0 \nSuccess"
                         android:textColor="@color/black"
                         android:textSize="40px"
-                        android:tag="40"
                         android:textStyle="bold" />
 
                     <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/tv_fail"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="2px"
@@ -143,6 +145,7 @@
                         android:textStyle="bold" />
 
                     <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/tv_reject"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="2px"
@@ -151,14 +154,13 @@
                         android:gravity="center"
                         android:maxLines="2"
                         android:tag="40"
-                        android:text="0 \nReffered"
+                        android:text="0 \nReject"
                         android:textColor="@color/black"
                         android:textSize="40px"
                         android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
-
 
         </RelativeLayout>
 
@@ -171,10 +173,10 @@
             android:background="@color/white"
             android:gravity="center"
             android:maxLines="2"
-            android:text="Reviews About this expert"
+            android:tag="50"
+            android:text="Feedbacks About this expert"
             android:textColor="@color/black"
             android:textSize="50px"
-            android:tag="50"
             android:textStyle="bold" />
 
         <com.yalantis.phoenix.PullToRefreshView
@@ -184,10 +186,11 @@
             android:layout_below="@+id/search_bar">
 
             <ListView
-                android:id="@+id/gridview"
+                android:id="@+id/list_feedback"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:divider="@null"
                 android:scrollbars="none" />
 
         </com.yalantis.phoenix.PullToRefreshView>
@@ -195,6 +198,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/no_review_ui"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -214,10 +218,10 @@
             android:layout_marginTop="10px"
             android:background="@color/white"
             android:gravity="center"
-            android:text="Currently no Reviews available to this  person"
+            android:tag="50"
+            android:text="Currently no feedback available to this  person"
             android:textColor="@color/black"
             android:textSize="50px"
-            android:tag="50"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -229,9 +233,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50px"
         android:background="@drawable/selector_btn_rounded"
+        android:onClick="afterClickAppointment"
         android:tag="39"
         android:text="Apply FOr Appointment"
-        android:onClick="afterClickAppointment"
         android:textColor="@color/white"
         android:textSize="39px" />
 </RelativeLayout>

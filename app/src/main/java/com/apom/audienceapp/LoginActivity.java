@@ -263,4 +263,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         overridePendingTransition(R.anim.anim_slide_in_right,
                 R.anim.anim_slide_out_left);
     }
+    @Override
+    public void onBackPressed(){
+        //nothing happens
+    }
 }

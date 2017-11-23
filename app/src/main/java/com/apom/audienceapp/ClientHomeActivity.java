@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,8 +34,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+
 
 public class ClientHomeActivity extends AppCompatActivity {
     CorrectSizeUtil mCorrectSize = null;
@@ -58,6 +63,7 @@ public class ClientHomeActivity extends AppCompatActivity {
     private UserGridAdapter adapter = null;
     private PullToRefreshView mPullToRefreshView = null;
     private boolean is_pulled = false;
+    private EditText et_search = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +143,31 @@ public class ClientHomeActivity extends AppCompatActivity {
                 });
             }
         }, entry_timeInterval);
+        // Locate the EditText in listview_main.xml
+        et_search = (EditText) findViewById(R.id.et_search);
 
+        // Capture Text in EditText
+        et_search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+                String text = et_search.getText().toString().toLowerCase(Locale.getDefault());
+                adapter.filter(text);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1,
+                                          int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                      int arg3) {
+                // TODO Auto-generated method stub
+            }
+        });
     }
 
     private void setUserInfo() {

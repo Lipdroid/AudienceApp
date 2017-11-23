@@ -162,6 +162,29 @@ public class RequestData {
                         (String) parameters.get(Constants.PARAM_TAG)));
                 break;
 
+
+            case Constants.REQUEST_UPDATE_APPROVE_MESSAGE:
+                mRestType = Constants.REST_POST;
+                REQUEST_DATA_URL = UrlConstants.BASE_URL;
+
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TAG,
+                        (String) parameters.get(Constants.PARAM_TAG)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_ID,
+                        (String) parameters.get(Constants.PARAM_ID)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_APPROVE_MESSAGE,
+                        (String) parameters.get(Constants.PARAM_APPROVE_MESSAGE)));
+                break;
+            case Constants.REQUEST_UPDATE_REVIEW_MESSAGE:
+                mRestType = Constants.REST_POST;
+                REQUEST_DATA_URL = UrlConstants.BASE_URL;
+
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_TAG,
+                        (String) parameters.get(Constants.PARAM_TAG)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_ID,
+                        (String) parameters.get(Constants.PARAM_ID)));
+                nameValueParams.add(new BasicNameValuePair(Constants.PARAM_MEETING_REVIEW,
+                        (String) parameters.get(Constants.PARAM_MEETING_REVIEW)));
+                break;
             case Constants.REQUEST_UPDATE_MEETING_BY_ID:
                 mRestType = Constants.REST_POST;
                 REQUEST_DATA_URL = UrlConstants.BASE_URL;

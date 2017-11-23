@@ -27,6 +27,7 @@ import com.apom.audienceapp.customViews.CustomFontTextViewLight;
 import com.apom.audienceapp.customViews.EditTextWithFont;
 import com.apom.audienceapp.interfaces.AsyncCallback;
 import com.apom.audienceapp.interfaces.DialogCallback;
+import com.apom.audienceapp.interfaces.InputDialogCallback;
 import com.apom.audienceapp.objects.MeetingObject;
 import com.apom.audienceapp.objects.UserObject;
 import com.apom.audienceapp.utils.Constants;
@@ -412,14 +413,14 @@ public class MeetingFormActivity extends AppCompatActivity {
                     if (mainJsonObj.getString("success").equals("1")) {
                         //parse the user
                         UserObject mUserObj = GlobalUtils.parseUser(mainJsonObj.getJSONObject(Constants.TAG_USER));
-                        if (!mUserObj.getCategory().equals(Constants.USER_TYPE_CLIENT) &&(GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT) || GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_ADMIN))) {
+                        if (!mUserObj.getCategory().equals(Constants.USER_TYPE_CLIENT) && (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT) || GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_ADMIN))) {
                             //go to expert Profile
                             UserObject user = mUserObj;
                             Intent intent = new Intent(MeetingFormActivity.this, ExpertProfileActivity.class);
                             intent.putExtra(UserObject.class.toString(), user);
                             startActivity(intent);
 
-                        }else if (!mUserObj.getCategory().equals(Constants.USER_TYPE_EXPERT) && (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_EXPERT) || GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_ADMIN))){
+                        } else if (!mUserObj.getCategory().equals(Constants.USER_TYPE_EXPERT) && (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_EXPERT) || GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_ADMIN))) {
                             //go to client Profile
                             UserObject user = mUserObj;
                             Intent intent = new Intent(MeetingFormActivity.this, ClientProfileActivity.class);
@@ -471,6 +472,65 @@ public class MeetingFormActivity extends AppCompatActivity {
 
 
         mRequestAsync = new RequestAsyncTask(mContext, Constants.REQUEST_UPDATE_MEETING_BY_ID, params, new AsyncCallback() {
+            @Override
+            public void done(String result) {
+                GlobalUtils.dismissLoadingProgress();
+                JSONObject mainJsonObj = null;
+                try {
+                    mainJsonObj = new JSONObject(result);
+                    if (mainJsonObj.getString("success").equals("1")) {
+                        if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_EXPERT)) {
+                                GlobalUtils.showInputDialog(mContext, meetingObj.getClient_image_url(), "You can give a response about this meeting to the client", "", null, new InputDialogCallback() {
+                                    @Override
+                                    public void onAction1(String response) {
+                                        updateApproveMessage(meetingObj,response);
+                                    }
+
+                                    @Override
+                                    public void onAction2() {
+                                        finish();
+                                    }
+                                });
+                        } else {
+                            finish();
+                        }
+                    } else {
+                        GlobalUtils.showInfoDialog(mContext, null, "Sorry,something went wrong please try again", null, null);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void progress() {
+                GlobalUtils.showLoadingProgress(mContext);
+            }
+
+            @Override
+            public void onInterrupted(Exception e) {
+                GlobalUtils.dismissLoadingProgress();
+            }
+
+            @Override
+            public void onException(Exception e) {
+                GlobalUtils.dismissLoadingProgress();
+            }
+        });
+
+        mRequestAsync.execute();
+    }
+
+    private void updateApproveMessage(MeetingObject meetingObj, String response) {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put(Constants.PARAM_TAG, Constants.TAG_UPDATE_APPROVE_MESSAGE);
+        params.put(Constants.PARAM_ID, meetingObj.getId());
+        params.put(Constants.PARAM_APPROVE_MESSAGE, response);
+
+
+        mRequestAsync = new RequestAsyncTask(mContext, Constants.REQUEST_UPDATE_APPROVE_MESSAGE, params, new AsyncCallback() {
             @Override
             public void done(String result) {
                 GlobalUtils.dismissLoadingProgress();

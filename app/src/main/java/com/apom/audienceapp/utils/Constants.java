@@ -79,7 +79,7 @@ public class Constants {
     public static final int REQUEST_UPDATE_REVIEW_MESSAGE = 9;
     public static final int REQUEST_UPDATE_APPROVE_MESSAGE = 10;
 
-    public static final String NOT_YET_REVIEWED = "Not yet reviewed";
+    public static final String NOT_YET_REVIEWED = "Not yet given any feedback";
 
 
     public static final String TAG_USER = "user";

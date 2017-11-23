@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="20px">
+
+        <com.apom.audienceapp.customViews.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_marginTop="20px"
+            android:src="@drawable/dummy_pic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20px"
+            android:layout_marginTop="30px"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/client_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:tag="40"
+                android:text="Helen Tran"
+                android:textColor="@color/black"
+                android:textSize="40px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:maxLines="3"
+                android:tag="45"
+                android:layout_marginBottom="50px"
+                android:text="wants to meet with oyu for some meeting very iurgent and lorem ipsam,wants to meet with oyu for some meeting very iurgent and lorem ipsam"
+                android:textColor="@color/text_dark"
+                android:textSize="45px"
+                android:textStyle="italic" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

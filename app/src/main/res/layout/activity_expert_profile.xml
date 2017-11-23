@@ -13,7 +13,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="400px"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
 
         <ImageView
             android:layout_width="196px"
@@ -81,6 +82,21 @@
                 android:layout_marginTop="100px"
                 android:src="@drawable/dummy_pic" />
 
+            <Button
+                android:id="@+id/sign_out_btn"
+                android:layout_width="250px"
+                android:layout_height="60px"
+                android:background="@drawable/selector_btn_rounded"
+                android:onClick="afterClickSignOut"
+                android:tag="29"
+                android:visibility="visible"
+                android:layout_toRightOf="@+id/profile_image"
+                android:layout_centerHorizontal="true"
+                android:text="Sign out"
+                android:layout_marginTop="220px"
+                android:textColor="@color/white"
+                android:textSize="29px" />
+
             <ImageView
                 android:id="@+id/verified_mark"
                 android:layout_width="100px"
@@ -109,6 +125,7 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
+                    android:id="@+id/phone_ui"
                     android:layout_width="match_parent"
                     android:layout_height="70px"
                     android:layout_marginTop="10px"
@@ -171,6 +188,7 @@
                     android:weightSum="3">
 
                     <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/tv_success"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="2px"
@@ -185,6 +203,7 @@
                         android:textStyle="bold" />
 
                     <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/tv_fail"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="2px"
@@ -199,6 +218,7 @@
                         android:textStyle="bold" />
 
                     <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                        android:id="@+id/tv_reject"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="2px"
@@ -206,7 +226,7 @@
                         android:background="@color/white"
                         android:gravity="center"
                         android:maxLines="2"
-                        android:text="0 \nReffered"
+                        android:text="0 \nReject"
                         android:textColor="@color/black"
                         android:textSize="40px"
                         android:tag="40"
@@ -228,7 +248,7 @@
             android:gravity="center"
             android:maxLines="2"
             android:tag="50"
-            android:text="Reviews About this expert"
+            android:text="Feedback About this expert"
             android:textColor="@color/black"
             android:textSize="50px"
             android:textStyle="bold" />
@@ -240,22 +260,25 @@
             android:layout_below="@+id/search_bar">
 
             <ListView
-                android:id="@+id/gridview"
+                android:id="@+id/list_feedback"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:divider="@null"
                 android:scrollbars="none" />
 
         </com.yalantis.phoenix.PullToRefreshView>
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/no_review_ui"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="400px"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignTop="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <ImageView
             android:layout_width="196px"
@@ -269,7 +292,7 @@
             android:layout_marginTop="10px"
             android:background="@color/white"
             android:gravity="center"
-            android:text="Currently no Reviews available to this  person"
+            android:text="Currently no feedback available to this  person"
             android:textColor="@color/black"
             android:textSize="50px"
             android:tag="50"

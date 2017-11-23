@@ -14,20 +14,20 @@
         android:layout_height="wrap_content" />
 
 
-
     <com.yalantis.phoenix.PullToRefreshView
         android:id="@+id/pull_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E9E7ED"
-        android:layout_below="@+id/title_header">
+        android:layout_below="@+id/title_header"
+        android:background="#E9E7ED">
 
         <ListView
             android:id="@+id/req_list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:divider="@null"
+            android:gravity="center"
+            android:layout_marginTop="20px"
             android:scrollbars="none" />
 
     </com.yalantis.phoenix.PullToRefreshView>
@@ -42,11 +42,11 @@
 
     <LinearLayout
         android:id="@+id/title_header"
-        android:layout_below="@+id/header"
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:layout_height="100px"
+        android:layout_below="@+id/header"
         android:gravity="center"
-        android:layout_height="100px">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,4 +57,17 @@
             android:textSize="40px" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/sign_out_btn"
+        android:layout_width="250px"
+        android:layout_height="60px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220px"
+        android:background="@drawable/selector_btn_rounded"
+        android:onClick="afterClickSignOut"
+        android:tag="29"
+        android:text="Sign out"
+        android:textColor="@color/white"
+        android:textSize="29px"
+        android:visibility="visible" />
 </RelativeLayout>

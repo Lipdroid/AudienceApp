@@ -9,15 +9,14 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg" />
-    <com.apom.audienceapp.customViews.CircleImageView
+        android:scaleType="centerCrop" />
+    <ImageView
         android:id="@+id/profile_image"
         android:layout_width="250px"
         android:layout_height="250px"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100px"
-        android:src="@drawable/caution_icon"
+        android:src="@drawable/app_logo"
         android:layout_marginTop="200px" />
 
     <com.apom.audienceapp.customViews.CustomFontTextView
@@ -29,7 +28,7 @@
         android:gravity="center"
         android:lineSpacingExtra="20px"
         android:tag="100"
-        android:text="Welcome \nAudience App"
+        android:text=" \nAudience App"
         android:textSize="100px" />
 
     <com.apom.audienceapp.customViews.CustomFontTextView
@@ -43,7 +42,7 @@
         android:gravity="center"
         android:tag="40"
         android:text="Meet with people and make a difference"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/darker_gray"
         android:textSize="40px" />
     <Button
         android:id="@+id/btn_linkedin"

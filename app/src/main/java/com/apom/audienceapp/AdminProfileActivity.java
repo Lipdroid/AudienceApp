@@ -1,10 +1,12 @@
 package com.apom.audienceapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.apom.audienceapp.adapters.RequestAdapter;
@@ -16,6 +18,7 @@ import com.apom.audienceapp.objects.UserObject;
 import com.apom.audienceapp.utils.Constants;
 import com.apom.audienceapp.utils.CorrectSizeUtil;
 import com.apom.audienceapp.utils.GlobalUtils;
+import com.apom.audienceapp.utils.SharedPreferencesUtils;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import org.json.JSONArray;
@@ -23,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,6 +43,7 @@ public class AdminProfileActivity extends AppCompatActivity {
     private List<MeetingObject> mListMeeting = null;
     private RequestAdapter adapter = null;
     private ListView listView = null;
+    private Button sign_out_btn = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,8 @@ public class AdminProfileActivity extends AppCompatActivity {
         btn_profile.setVisibility(View.GONE);
         mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
         listView = (ListView) findViewById(R.id.req_list);
+        sign_out_btn = (Button) findViewById(R.id.sign_out_btn);
+
 
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
@@ -149,7 +156,25 @@ public class AdminProfileActivity extends AppCompatActivity {
     }
 
     private void populateList() {
+        Collections.reverse(mListMeeting);
         adapter = new RequestAdapter(this, mListMeeting);
         listView.setAdapter(adapter);
+    }
+
+    public void afterClickSignOut(View view) {
+        afterClickLogout();
+    }
+
+    private void afterClickLogout() {
+        SharedPreferencesUtils.removeComponent(mContext, Constants.ALREADY_LOGGED_IN);
+        SharedPreferencesUtils.removeComponent(mContext, Constants.ID);
+        GlobalUtils.setCurrentUserObj(null);
+        goToLoginPage();
+        finish();
+    }
+    private void goToLoginPage() {
+        startActivity(new Intent(AdminProfileActivity.this, LoginActivity.class));
+        overridePendingTransition(R.anim.anim_slide_in_left,
+                R.anim.anim_slide_out_right);
     }
 }

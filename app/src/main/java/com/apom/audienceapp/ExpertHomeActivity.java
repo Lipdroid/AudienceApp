@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -169,6 +170,7 @@ public class ExpertHomeActivity extends AppCompatActivity {
     }
 
     private void populateList() {
+        Collections.reverse(mListMeeting);
         adapter = new RequestAdapter(this, mListMeeting);
         listView.setAdapter(adapter);
     }

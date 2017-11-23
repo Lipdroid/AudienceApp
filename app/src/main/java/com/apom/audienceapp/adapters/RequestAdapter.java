@@ -21,6 +21,7 @@ import com.apom.audienceapp.holders.MeetingHolder;
 import com.apom.audienceapp.holders.UserHolder;
 import com.apom.audienceapp.interfaces.AsyncCallback;
 import com.apom.audienceapp.interfaces.DialogCallback;
+import com.apom.audienceapp.interfaces.InputDialogCallback;
 import com.apom.audienceapp.objects.MeetingObject;
 import com.apom.audienceapp.objects.UserObject;
 import com.apom.audienceapp.utils.Constants;
@@ -39,6 +40,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by mdmunirhossain on 11/20/17.
@@ -122,6 +124,16 @@ public class RequestAdapter extends BaseAdapter {
 
                             @Override
                             public void onAction3() {
+                                GlobalUtils.showInputDialog(mContext, meeting.getExpert_image_url(), "Please give a feedback about this meeting", "", null, new InputDialogCallback() {
+                                    @Override
+                                    public void onAction1(String response) {
+                                        updateFeedbackMessage(meeting,response);
+                                    }
+
+                                    @Override
+                                    public void onAction2() {
+                                    }
+                                });
 
                             }
 
@@ -209,7 +221,16 @@ public class RequestAdapter extends BaseAdapter {
 
                         @Override
                         public void onAction3() {
+                            GlobalUtils.showInputDialog(mContext, meeting.getExpert_image_url(), "Please give a feedback about this meeting", "", null, new InputDialogCallback() {
+                                @Override
+                                public void onAction1(String response) {
+                                    updateFeedbackMessage(meeting,response);
+                                }
 
+                                @Override
+                                public void onAction2() {
+                                }
+                            });
                         }
 
                         @Override
@@ -224,6 +245,50 @@ public class RequestAdapter extends BaseAdapter {
         setViews(meeting);
 
         return convertView;
+    }
+
+    private void updateFeedbackMessage(MeetingObject meeting, String response) {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put(Constants.PARAM_TAG, Constants.TAG_UPDATE_REVIEW_MESSAGE);
+        params.put(Constants.PARAM_ID, meeting.getId());
+        params.put(Constants.PARAM_MEETING_REVIEW, response);
+
+
+        mRequestAsync = new RequestAsyncTask(mContext, Constants.REQUEST_UPDATE_REVIEW_MESSAGE, params, new AsyncCallback() {
+            @Override
+            public void done(String result) {
+                GlobalUtils.dismissLoadingProgress();
+                JSONObject mainJsonObj = null;
+                try {
+                    mainJsonObj = new JSONObject(result);
+                    if (mainJsonObj.getString("success").equals("1")) {
+                    } else {
+                        GlobalUtils.showInfoDialog(mContext, null, "Sorry,something went wrong please try again", null, null);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void progress() {
+                GlobalUtils.showLoadingProgress(mContext);
+            }
+
+            @Override
+            public void onInterrupted(Exception e) {
+                GlobalUtils.dismissLoadingProgress();
+            }
+
+            @Override
+            public void onException(Exception e) {
+                GlobalUtils.dismissLoadingProgress();
+            }
+        });
+
+        mRequestAsync.execute();
     }
 
     public void setViews(MeetingObject meetingObj) {
@@ -371,5 +436,7 @@ public class RequestAdapter extends BaseAdapter {
         mRequestAsync.execute();
 
     }
+
+
 
 }

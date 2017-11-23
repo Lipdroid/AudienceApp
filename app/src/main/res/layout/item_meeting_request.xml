@@ -14,8 +14,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@color/white"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <LinearLayout
@@ -89,7 +89,7 @@
                             android:singleLine="true"
                             android:tag="40"
                             android:text="relocation cofee shop"
-                            android:textColor="@color/orange"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="40px"
                             android:textStyle="bold" />
 
@@ -108,8 +108,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:background="#FAFAFC"
+                android:gravity="center"
                 android:weightSum="4">
 
                 <LinearLayout
@@ -223,9 +223,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5px"
                         android:layout_marginLeft="20px"
+                        android:singleLine="true"
                         android:tag="40"
                         android:text="Expextation"
-                        android:singleLine="true"
                         android:textColor="@color/text_dark"
                         android:textSize="40px"
                         android:textStyle="bold" />

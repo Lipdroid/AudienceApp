@@ -22,6 +22,7 @@ import com.apom.audienceapp.customViews.CustomFontTextView;
 import com.apom.audienceapp.customViews.CustomFontTextViewLight;
 import com.apom.audienceapp.holders.UserHolder;
 import com.apom.audienceapp.interfaces.AsyncCallback;
+import com.apom.audienceapp.objects.MeetingObject;
 import com.apom.audienceapp.objects.UserObject;
 import com.apom.audienceapp.utils.Constants;
 import com.apom.audienceapp.utils.GlobalUtils;
@@ -32,8 +33,10 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by mdmunirhossain on 11/9/17.
@@ -47,6 +50,7 @@ public class UserGridAdapter extends BaseAdapter {
     private RequestAsyncTask mRequestAsync = null;
 
     private UserObject mUserObj = null;
+    private List<UserObject> mListData_filter = null;
 
     @Override
     public int getCount() {
@@ -58,6 +62,8 @@ public class UserGridAdapter extends BaseAdapter {
         mActivity = (Activity) mContext;
         this.mListData = mListData;
         mUserObj = GlobalUtils.getCurrentUserObj();
+        mListData_filter = new ArrayList<>();
+        mListData_filter.addAll(mListData);
 
     }
 
@@ -220,5 +226,25 @@ public class UserGridAdapter extends BaseAdapter {
                 break;
         }
 
+    }
+
+    // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        mListData.clear();
+        if (charText.length() == 0) {
+            mListData.addAll(mListData_filter);
+        }
+        else
+        {
+            for (UserObject userObject : mListData_filter)
+            {
+                if (userObject.getFirstName().toLowerCase(Locale.getDefault()).contains(charText) || userObject.getJobsList().get(0).getJob_title().toLowerCase(Locale.getDefault()).contains(charText) || userObject.getJobsList().get(0).getCompany_name().toLowerCase(Locale.getDefault()).contains(charText))
+                {
+                    mListData.add(userObject);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

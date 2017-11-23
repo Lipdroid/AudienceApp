@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="@drawable/common_dialog_bg">
+
             <ImageView
                 android:id="@+id/cancel"
                 android:layout_width="96px"
@@ -21,6 +22,7 @@
                 android:layout_marginTop="25px"
                 android:padding="25px"
                 android:src="@drawable/icon_cross" />
+
             <com.apom.audienceapp.customViews.CircleImageView
                 android:id="@+id/profile_image"
                 android:layout_width="200px"
@@ -28,6 +30,21 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50px"
                 android:src="@drawable/dummy_pic" />
+
+            <Button
+                android:id="@+id/feedback_btn"
+                android:layout_width="250px"
+                android:layout_height="60px"
+                android:background="@drawable/selector_btn_rounded"
+                android:onClick="afterClickAppointment"
+                android:tag="29"
+                android:visibility="gone"
+                android:layout_toRightOf="@+id/profile_image"
+                android:layout_centerHorizontal="true"
+                android:text="Give feedback"
+                android:layout_marginTop="200px"
+                android:textColor="@color/white"
+                android:textSize="29px" />
 
             <com.apom.audienceapp.customViews.CustomFontTextView
                 android:id="@+id/name"
@@ -152,7 +169,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="120px"
-android:layout_marginBottom="40px"
+                    android:layout_marginBottom="40px"
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
                     android:gravity="center">

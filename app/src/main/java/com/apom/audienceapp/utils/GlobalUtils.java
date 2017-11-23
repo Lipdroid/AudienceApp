@@ -1,5 +1,7 @@
 package com.apom.audienceapp.utils;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,10 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apom.audienceapp.AudienceApplication;
 import com.apom.audienceapp.R;
@@ -31,6 +35,7 @@ import com.apom.audienceapp.customViews.CustomFontTextViewLight;
 import com.apom.audienceapp.customViews.CustomProgressDialog;
 import com.apom.audienceapp.interfaces.DialogCallback;
 import com.apom.audienceapp.interfaces.DialogForValueCallback;
+import com.apom.audienceapp.interfaces.InputDialogCallback;
 import com.apom.audienceapp.objects.JobObject;
 import com.apom.audienceapp.objects.MeetingObject;
 import com.apom.audienceapp.objects.UserObject;
@@ -222,6 +227,72 @@ public class GlobalUtils {
         infoDialog.show();
     }
 
+    public static void showInputDialog(final Context context, String image, String title, String body, String action, final InputDialogCallback dialogCallback) {
+        final CustomDialog infoDialog = new CustomDialog(context, R.style.CustomDialogTheme);
+        LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.dialog_feedback, null);
+
+        new MultipleScreen(context);
+        MultipleScreen.resizeAllView((ViewGroup) v);
+
+        infoDialog.setContentView(v);
+
+        Button btnOK = (Button) infoDialog.findViewById(R.id.dialog_btn_positive);
+        TextView tvTitle = (TextView) infoDialog.findViewById(R.id.dialog_tv_title);
+        final EditText tvBody = (EditText) infoDialog.findViewById(R.id.dialog_tv_body);
+        ImageView cancel = (ImageView) infoDialog.findViewById(R.id.cancel);
+        CircleImageView profile_image = (CircleImageView) infoDialog.findViewById(R.id.profile_image);
+
+        //Loading image from below url into imageView
+        Picasso.with(context)
+                .load(image)
+                .into(profile_image);
+        if (title == null) {
+            tvTitle.setVisibility(View.GONE);
+        } else {
+            tvTitle.setText(title);
+        }
+
+//        if (body == null) {
+//            tvBody.setVisibility(View.GONE);
+//        } else {
+//            tvBody.setText(body);
+//        }
+
+        if (action != null) {
+            btnOK.setText(action);
+        }
+
+        btnOK.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //your business logic
+                if (dialogCallback != null) {
+                    if (tvBody.getText().toString().isEmpty()) {
+                        Toast.makeText(context, "Please fill the comments area", Toast.LENGTH_LONG).show();
+                    } else {
+                        dialogCallback.onAction1(tvBody.getText().toString());
+                        infoDialog.dismiss();
+                    }
+                }
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (dialogCallback != null) {
+                    dialogCallback.onAction2();
+                }
+                infoDialog.dismiss();
+            }
+        });
+
+        infoDialog.show();
+    }
+
     public static void showStatusDialog(Context mContext, MeetingObject meetingObj, final DialogCallback dialogCallback) {
         final CustomDialog infoDialog = new CustomDialog(mContext, R.style.CustomDialogTheme);
         LayoutInflater inflator = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -240,7 +311,8 @@ public class GlobalUtils {
         CustomFontTextView time = (CustomFontTextView) infoDialog.findViewById(R.id.time);
         CustomFontTextView place = (CustomFontTextView) infoDialog.findViewById(R.id.place);
         ImageView cancel = (ImageView) infoDialog.findViewById(R.id.cancel);
-        Button btnOK = (Button) infoDialog.findViewById(R.id.action);
+        final Button btnOK = (Button) infoDialog.findViewById(R.id.action);
+        final Button feedback_btn = (Button) infoDialog.findViewById(R.id.feedback_btn);
 
 
         //Loading image from below url into imageView
@@ -251,7 +323,7 @@ public class GlobalUtils {
         if (meetingObj.getApprove_message() == null || meetingObj.getApprove_message().equals("")) {
             response.setVisibility(View.GONE);
         } else {
-            response.setText("'" + meetingObj.getApprove_message() + "'");
+            response.setText("\"" + meetingObj.getApprove_message() + "\"");
         }
         DateFormat dateFormat = new SimpleDateFormat("EEE-dd-MMMM");
         DateFormat timeFormat = new SimpleDateFormat("hh:mm a");
@@ -277,6 +349,18 @@ public class GlobalUtils {
                 && !GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
             status.setTextColor(mContext.getResources().getColor(R.color.green1));
             status.setText("FINISH");
+            if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT) && meetingObj.getMeeting_review().equals(Constants.NOT_YET_REVIEWED)) {
+                feedback_btn.setVisibility(View.VISIBLE);
+                ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(feedback_btn, "scaleX", 0f, 1f);
+                ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(feedback_btn, "scaleY", 0f, 1f);
+                ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(feedback_btn, "alpha", 0f, 1f);
+                final AnimatorSet animatorSet = new AnimatorSet();
+                animatorSet.playTogether(scaleXAnimator, scaleYAnimator, alphaAnimator);
+                animatorSet.setDuration(1500);
+                animatorSet.setInterpolator(new CustomBounceInterpolator(0.2, 20));
+                animatorSet.start();
+            }
+            response.setVisibility(View.VISIBLE);
 
         } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
                 && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
@@ -288,14 +372,16 @@ public class GlobalUtils {
             if (!GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_ADMIN)) {
                 btnOK.setText("ADD TO CALLENDER");
             }
-
+            response.setVisibility(View.VISIBLE);
         } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
                 && meetingObj.getExpert_approval().equals(Constants.USER_NOT_YET_ARROVED)
                 && meetingObj.getAdmin_approval().equals(Constants.USER_NOT_YET_ARROVED)
                 && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
             status.setTextColor(mContext.getResources().getColor(R.color.orange));
             status.setText("Pending");
-
+            if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT)) {
+                response.setVisibility(View.GONE);
+            }
         } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
                 && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
                 && meetingObj.getAdmin_approval().equals(Constants.USER_NOT_YET_ARROVED)
@@ -307,6 +393,9 @@ public class GlobalUtils {
                 status.setTextColor(mContext.getResources().getColor(R.color.orange));
                 status.setText("Pending");
             }
+            if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT)) {
+                response.setVisibility(View.GONE);
+            }
 
         } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
                 && meetingObj.getExpert_approval().equals(Constants.USER_REJECTED)
@@ -314,14 +403,18 @@ public class GlobalUtils {
                 && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
             status.setTextColor(mContext.getResources().getColor(R.color.common_red));
             status.setText("Rejected");
-
+            if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT)) {
+                response.setVisibility(View.GONE);
+            }
         } else if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
                 && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
                 && meetingObj.getAdmin_approval().equals(Constants.USER_REJECTED)
                 && GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
             status.setTextColor(mContext.getResources().getColor(R.color.common_red));
             status.setText("Rejected");
-
+            if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT)) {
+                response.setVisibility(View.GONE);
+            }
         }
 
 
@@ -331,7 +424,8 @@ public class GlobalUtils {
             public void onClick(View v) {
                 //your business logic
                 if (dialogCallback != null) {
-                    dialogCallback.onAction1();
+                    if (!btnOK.getText().toString().equals("OK"))
+                        dialogCallback.onAction1();
                 }
                 infoDialog.dismiss();
             }
@@ -344,6 +438,18 @@ public class GlobalUtils {
                 //your business logic
                 if (dialogCallback != null) {
                     dialogCallback.onAction2();
+                }
+                infoDialog.dismiss();
+            }
+        });
+
+        feedback_btn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //your business logic
+                if (dialogCallback != null) {
+                    dialogCallback.onAction3();
                 }
                 infoDialog.dismiss();
             }
@@ -734,6 +840,21 @@ public class GlobalUtils {
             mActivity.startActivity(intent);
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static class CustomBounceInterpolator implements android.view.animation.Interpolator {
+        private double mAmplitude = 1;
+        private double mFrequency = 10;
+
+        public CustomBounceInterpolator(double amplitude, double frequency) {
+            mAmplitude = amplitude;
+            mFrequency = frequency;
+        }
+
+        public float getInterpolation(float time) {
+            return (float) (-1 * Math.pow(Math.E, -time / mAmplitude) *
+                    Math.cos(mFrequency * time) + 1);
         }
     }
 

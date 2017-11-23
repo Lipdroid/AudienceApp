@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@color/white"
     tools:context="com.apom.audienceapp.PhoneActivity">
 
 
@@ -73,7 +73,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50px"
         android:text="Continue"
-        android:textColor="@android:color/darker_gray" />
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white" />
 
     <com.apom.audienceapp.customViews.CustomFontTextView
         android:id="@+id/termsinfo_text"
