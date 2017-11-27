@@ -34,6 +34,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        GlobalUtils.computePakageHash(this);
         mContext = this;
 //        SharedPreferencesUtils.putString(mContext, Constants.ID, Constants.USER_ID_CLIENT);
 //        SharedPreferencesUtils.putBoolean(mContext, Constants.ALREADY_LOGGED_IN, true);
