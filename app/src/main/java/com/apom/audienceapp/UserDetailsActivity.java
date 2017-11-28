@@ -65,7 +65,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         name = (CustomFontTextView) findViewById(R.id.name);
         designation = (CustomFontTextViewLight) findViewById(R.id.designation);
         profile_image = (CircleImageView) findViewById(R.id.profile_image);
-        btnAction= (Button) findViewById(R.id.btnAction);
+        btnAction = (Button) findViewById(R.id.btnAction);
         no_review_ui = (LinearLayout) findViewById(R.id.no_review_ui);
         mUserObj = getIntent().getParcelableExtra(UserObject.class.toString());
         tv_success = (CustomFontTextViewLight) findViewById(R.id.tv_success);
@@ -89,7 +89,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         });
         mContext = this;
         setUpUser(mUserObj);
-        if(!GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT)){
+        if (!GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT)) {
             btnAction.setVisibility(View.GONE);
         }
         getAllMettings();
@@ -116,9 +116,13 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     private void openAppointmentPopup() {
-        Intent intent = new Intent(this, MeetingFormActivity.class);
-        intent.putExtra(UserObject.class.toString(), mUserObj);
-        startActivity(intent);
+        if (btnAction.getText().toString().equals("Apply For Appointment")) {
+            Intent intent = new Intent(this, MeetingFormActivity.class);
+            intent.putExtra(UserObject.class.toString(), mUserObj);
+            startActivity(intent);
+        }else{
+            GlobalUtils.showInfoDialog(mContext,"Info","You have already fixed a meeting with this expert,you can get another appointment after finishing that",null,null);
+        }
     }
 
     public void getAllMettings() {
@@ -220,9 +224,9 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     private void populateList() {
-        tv_fail.setText(count_fail+" \nFailure");
-        tv_success.setText(count_success+" \nSuccess");
-        tv_reject.setText(count_reject+" \nReject");
+        tv_fail.setText(count_fail + " \nFailure");
+        tv_success.setText(count_success + " \nSuccess");
+        tv_reject.setText(count_reject + " \nReject");
 
         if (mListMeeting.size() > 0) {
             Collections.reverse(mListMeeting);
@@ -232,5 +236,17 @@ public class UserDetailsActivity extends AppCompatActivity {
         }
         adapter = new FeedbackAdapter(this, mListMeeting);
         listView.setAdapter(adapter);
+
+        for (MeetingObject meeting : GlobalUtils.booked_meetings
+                ) {
+            if (mUserObj.getLinked_in_id().equals(meeting.getExpert_id()) && meeting.getClient_approval().equals(Constants.USER_ARROVED)
+                    && meeting.getExpert_approval().equals(Constants.USER_ARROVED)
+                    && meeting.getAdmin_approval().equals(Constants.USER_ARROVED)
+                    && GlobalUtils.isDateValid(meeting.getMeeting_time())) {
+                btnAction.setText("BOOKED");
+                return;
+            }
+
+        }
     }
 }

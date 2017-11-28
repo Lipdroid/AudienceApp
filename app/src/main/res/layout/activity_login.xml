@@ -10,13 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
-    <ImageView
+    <com.apom.audienceapp.customViews.CircleImageView
         android:id="@+id/profile_image"
         android:layout_width="250px"
         android:layout_height="250px"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100px"
-        android:src="@drawable/app_logo"
+        android:src="@drawable/apom"
         android:layout_marginTop="200px" />
 
     <com.apom.audienceapp.customViews.CustomFontTextView
@@ -28,7 +28,7 @@
         android:gravity="center"
         android:lineSpacingExtra="20px"
         android:tag="100"
-        android:text=" \nAudience App"
+        android:text="@string/app_name"
         android:textSize="100px" />
 
     <com.apom.audienceapp.customViews.CustomFontTextView

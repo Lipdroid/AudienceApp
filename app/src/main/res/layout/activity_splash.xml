@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
 
-    <ImageView
+    <com.apom.audienceapp.customViews.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="250px"
-        android:layout_height="250px"
+        android:layout_width="350px"
+        android:layout_height="350px"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100px"
-        android:src="@drawable/app_logo"
+        android:src="@drawable/apom"
         android:layout_marginTop="200px" />
 
     <com.apom.audienceapp.customViews.CustomFontTextView

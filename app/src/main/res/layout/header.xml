@@ -15,7 +15,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:tag="50"
-            android:text="Audience App"
+            android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="50px" />
 

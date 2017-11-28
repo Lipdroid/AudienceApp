@@ -237,6 +237,7 @@ public class ClientProfileActivity extends AppCompatActivity {
         }
         adapter = new RequestAdapter(this, mListMeeting);
         listView.setAdapter(adapter);
+
     }
 
     public void afterClickSignOut(View view) {

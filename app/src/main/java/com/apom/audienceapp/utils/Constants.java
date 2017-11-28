@@ -6,7 +6,7 @@ package com.apom.audienceapp.utils;
 
 public class Constants {
     //for test purpose
-    public static final String USER_ID_ADMIN = "61q3KGilX0";
+    public static final String USER_ID_ADMIN = "8WBj9oond4";
     public static final String USER_ID_EXPERT = "61q3KGilX01";
     public static final String USER_ID_CLIENT = "61q3KGilX012";
 

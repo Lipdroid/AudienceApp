@@ -77,7 +77,6 @@
             android:layout_marginLeft="20px"
             android:layout_marginRight="30px"
             android:layout_marginTop="60px"
-            android:background="@drawable/dummy_pic"
             android:padding="10px" />
 
         <com.apom.audienceapp.customViews.CustomFontTextView
@@ -87,7 +86,7 @@
             android:layout_marginBottom="20px"
             android:gravity="center"
             android:tag="40"
-            android:text="Experts you can fix a meeting with"
+            android:text="Expert Appointment Booking"
             android:textColor="@color/orange"
             android:textSize="40px" />
 
@@ -147,8 +146,7 @@
                 android:layout_width="250px"
                 android:layout_height="250px"
                 android:layout_marginLeft="10px"
-                android:layout_marginTop="20px"
-                android:src="@drawable/dummy_pic" />
+                android:layout_marginTop="20px"/>
 
             <com.apom.audienceapp.customViews.CustomFontTextViewLight
                 android:id="@+id/welcome_text"

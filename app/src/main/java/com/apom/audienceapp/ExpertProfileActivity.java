@@ -168,7 +168,6 @@ public class ExpertProfileActivity extends AppCompatActivity {
                                     && meetingObj.getExpert_approval().equals(Constants.USER_ARROVED)
                                     && meetingObj.getAdmin_approval().equals(Constants.USER_ARROVED)
                                     && !GlobalUtils.isDateValid(meetingObj.getMeeting_time())) {
-                                mListMeeting.add(meetingObj);
                                 count_success++;
                             }
                             if (meetingObj.getClient_approval().equals(Constants.USER_ARROVED)
@@ -187,6 +186,7 @@ public class ExpertProfileActivity extends AppCompatActivity {
 
 
                             }
+                            mListMeeting.add(meetingObj);
 
                         }
 
@@ -245,6 +245,7 @@ public class ExpertProfileActivity extends AppCompatActivity {
         }
         adapter = new FeedbackAdapter(this, mListMeeting);
         listView.setAdapter(adapter);
+
     }
 
     public void afterClickSignOut(View view) {

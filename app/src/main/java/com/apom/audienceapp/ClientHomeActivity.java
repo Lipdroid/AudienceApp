@@ -19,6 +19,7 @@ import com.apom.audienceapp.apis.RequestAsyncTask;
 import com.apom.audienceapp.customViews.CircleImageView;
 import com.apom.audienceapp.customViews.CustomFontTextViewLight;
 import com.apom.audienceapp.interfaces.AsyncCallback;
+import com.apom.audienceapp.objects.MeetingObject;
 import com.apom.audienceapp.objects.UserObject;
 import com.apom.audienceapp.utils.Constants;
 import com.apom.audienceapp.utils.CorrectSizeUtil;
@@ -86,6 +87,7 @@ public class ClientHomeActivity extends AppCompatActivity {
                         // mPullToRefreshView.setRefreshing(false);
                         is_pulled = true;
                         getAllUsersExpert();
+                        getAllMettings();
                     }
                 }, 1000);
             }
@@ -115,6 +117,7 @@ public class ClientHomeActivity extends AppCompatActivity {
         });
 
         getAllUsersExpert();
+        getAllMettings();
 
         isDown = false;
 
@@ -291,5 +294,78 @@ public class ClientHomeActivity extends AppCompatActivity {
     private void populateList() {
         adapter = new UserGridAdapter(this, mListUser);
         gridview.setAdapter(adapter);
+    }
+
+    public void getAllMettings() {
+
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put(Constants.PARAM_TAG, Constants.TAG_GET_MEETINGS_EXPERT);
+        params.put(Constants.PARAM_ID, mUserObj.getLinked_in_id());
+        params.put(Constants.PARAM_TYPE, mUserObj.getCategory());
+
+        mRequestAsync = new RequestAsyncTask(mContext, Constants.REQUEST_GET_ALL_MEETINGS_BY_EXPERT_ID, params, new AsyncCallback() {
+            @Override
+            public void done(String result) {
+                Log.e(TAG, result);
+
+                if (is_pulled) {
+                    mPullToRefreshView.setRefreshing(false);
+                    is_pulled = !is_pulled;
+                } else {
+                    GlobalUtils.dismissLoadingProgress();
+                }
+
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    if (jsonObject.has(Constants.TAG_MEETING)) {
+                        GlobalUtils.booked_meetings = new ArrayList<>();
+                        JSONArray jsonArray = jsonObject.getJSONArray(Constants.TAG_MEETING);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObjectItem = jsonArray.getJSONObject(i);
+                            MeetingObject meetingObj = new MeetingObject();
+                            meetingObj = GlobalUtils.parseMeeting(jsonObjectItem);
+
+                            GlobalUtils.booked_meetings.add(meetingObj);
+                        }
+
+
+                    }
+                    populateList();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void progress() {
+                if (!is_pulled)
+                    GlobalUtils.showLoadingProgress(mContext);
+            }
+
+            @Override
+            public void onInterrupted(Exception e) {
+                if (is_pulled) {
+                    mPullToRefreshView.setRefreshing(false);
+                    is_pulled = !is_pulled;
+                } else {
+                    GlobalUtils.dismissLoadingProgress();
+                }
+            }
+
+            @Override
+            public void onException(Exception e) {
+                if (is_pulled) {
+                    mPullToRefreshView.setRefreshing(false);
+                    is_pulled = !is_pulled;
+                } else {
+                    GlobalUtils.dismissLoadingProgress();
+                }
+            }
+        });
+
+        mRequestAsync.execute();
+
     }
 }

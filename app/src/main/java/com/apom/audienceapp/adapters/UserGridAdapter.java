@@ -128,9 +128,22 @@ public class UserGridAdapter extends BaseAdapter {
         if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_ADMIN) && user.getStatus().equals(Constants.USER_STATUS_DEACTIVE)) {
             requestStatusChange(user);
         } else if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_CLIENT) && GlobalUtils.getCurrentUserObj().getStatus().equals(Constants.USER_STATUS_ACTIVE)) {
+
+            for (MeetingObject meeting : GlobalUtils.booked_meetings
+                    ) {
+                if (user.getLinked_in_id().equals(meeting.getExpert_id()) && meeting.getClient_approval().equals(Constants.USER_ARROVED)
+                        && meeting.getExpert_approval().equals(Constants.USER_ARROVED)
+                        && meeting.getAdmin_approval().equals(Constants.USER_ARROVED)
+                        && GlobalUtils.isDateValid(meeting.getMeeting_time())) {
+                    GlobalUtils.showInfoDialog(mContext,"Info","You have already fixed a meeting with this expert,you can get another appointment after finishing that",null,null);
+                    return;
+                }
+
+            }
             Intent intent = new Intent(mContext, MeetingFormActivity.class);
             intent.putExtra(UserObject.class.toString(), user);
             mContext.startActivity(intent);
+
         }
 
     }
@@ -199,6 +212,17 @@ public class UserGridAdapter extends BaseAdapter {
 
                 break;
             case Constants.USER_TYPE_CLIENT:
+                for (MeetingObject meeting : GlobalUtils.booked_meetings
+                        ) {
+                    if (user.getLinked_in_id().equals(meeting.getExpert_id()) && meeting.getClient_approval().equals(Constants.USER_ARROVED)
+                            && meeting.getExpert_approval().equals(Constants.USER_ARROVED)
+                            && meeting.getAdmin_approval().equals(Constants.USER_ARROVED)
+                            && GlobalUtils.isDateValid(meeting.getMeeting_time())) {
+                        mHolder.btn_action.setText("BOOKED");
+                        return;
+                    }
+
+                }
                 mHolder.btn_action.setText("GET APPOINTMENT");
                 break;
             case Constants.USER_TYPE_ADMIN:
@@ -234,13 +258,9 @@ public class UserGridAdapter extends BaseAdapter {
         mListData.clear();
         if (charText.length() == 0) {
             mListData.addAll(mListData_filter);
-        }
-        else
-        {
-            for (UserObject userObject : mListData_filter)
-            {
-                if (userObject.getFirstName().toLowerCase(Locale.getDefault()).contains(charText) || userObject.getJobsList().get(0).getJob_title().toLowerCase(Locale.getDefault()).contains(charText) || userObject.getJobsList().get(0).getCompany_name().toLowerCase(Locale.getDefault()).contains(charText))
-                {
+        } else {
+            for (UserObject userObject : mListData_filter) {
+                if (userObject.getFirstName().toLowerCase(Locale.getDefault()).contains(charText) || userObject.getJobsList().get(0).getJob_title().toLowerCase(Locale.getDefault()).contains(charText) || userObject.getJobsList().get(0).getCompany_name().toLowerCase(Locale.getDefault()).contains(charText)) {
                     mListData.add(userObject);
                 }
             }

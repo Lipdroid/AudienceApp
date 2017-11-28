@@ -43,7 +43,7 @@
             android:layout_below="@+id/title"
             android:orientation="vertical">
 
-            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+            <com.apom.audienceapp.customViews.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -51,7 +51,7 @@
                 android:maxLines="1"
                 android:tag="40"
                 android:text="Purpose"
-                android:textColor="@color/text_dark"
+                android:textColor="@color/black"
                 android:textSize="40px"
                 android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                         android:paddingLeft="0px"
                         android:tag="40"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/black"
+                        android:textColorHint="@color/text_dark"
                         android:textSize="40px"
                         android:visibility="visible" />
 
@@ -94,7 +94,7 @@
             </ScrollView>
 
 
-            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+            <com.apom.audienceapp.customViews.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -102,7 +102,7 @@
                 android:maxLines="1"
                 android:tag="40"
                 android:text="Venue"
-                android:textColor="@color/text_dark"
+                android:textColor="@color/black"
                 android:textSize="40px"
                 android:textStyle="bold" />
 
@@ -124,7 +124,7 @@
                         android:paddingLeft="0px"
                         android:tag="40"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/black"
+                        android:textColorHint="@color/text_dark"
                         android:textSize="40px" />
 
                     <TextView
@@ -148,25 +148,25 @@
                 android:layout_marginBottom="10px"
                 android:orientation="horizontal">
 
-                <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                <com.apom.audienceapp.customViews.CustomFontTextView
                     android:layout_width="550px"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:maxLines="1"
                     android:tag="40"
                     android:text="When"
-                    android:textColor="@color/text_dark"
+                    android:textColor="@color/black"
                     android:textSize="40px"
                     android:textStyle="bold" />
 
-                <com.apom.audienceapp.customViews.CustomFontTextViewLight
+                <com.apom.audienceapp.customViews.CustomFontTextView
                     android:layout_width="300px"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:maxLines="1"
                     android:tag="40"
                     android:text="Time"
-                    android:textColor="@color/text_dark"
+                    android:textColor="@color/black"
                     android:textSize="40px"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -191,7 +191,7 @@
                         android:paddingLeft="30px"
                         android:tag="40"
                         android:text="Wed - 18th September"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_dark"
                         android:textSize="40px"
                         android:textStyle="bold" />
 
@@ -226,7 +226,7 @@
                         android:paddingLeft="30px"
                         android:tag="40"
                         android:text="11:00 am"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_dark"
                         android:textSize="40px"
                         android:textStyle="bold" />
 
@@ -242,7 +242,7 @@
 
             </LinearLayout>
 
-            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+            <com.apom.audienceapp.customViews.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -250,7 +250,7 @@
                 android:maxLines="1"
                 android:tag="40"
                 android:text="Participents"
-                android:textColor="@color/text_dark"
+                android:textColor="@color/black"
                 android:textSize="40px"
                 android:textStyle="bold" />
 
@@ -345,7 +345,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <com.apom.audienceapp.customViews.CustomFontTextViewLight
+            <com.apom.audienceapp.customViews.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -353,7 +353,7 @@
                 android:maxLines="1"
                 android:tag="40"
                 android:text="Expectation From the meeting"
-                android:textColor="@color/text_dark"
+                android:textColor="@color/black"
                 android:textSize="40px"
                 android:textStyle="bold" />
 
@@ -376,7 +376,7 @@
                         android:paddingLeft="0px"
                         android:tag="40"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/black"
+                        android:textColorHint="@color/text_dark"
                         android:textSize="40px" />
 
                     <TextView
@@ -404,18 +404,6 @@
                     android:layout_height="100px"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/et_expectation_two"
-                        android:layout_width="match_parent"
-                        android:layout_height="100px"
-                        android:background="@null"
-                        android:hint="Expectation 2 (Optional)"
-                        android:paddingLeft="0px"
-                        android:tag="40"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="40px" />
-
                     <TextView
                         android:id="@+id/tv_expectation_two"
                         android:layout_width="match_parent"
@@ -427,6 +415,18 @@
                         android:textColorHint="@color/black"
                         android:textSize="40px"
                         android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/et_expectation_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        android:background="@null"
+                        android:hint="Expectation 2 (Optional)"
+                        android:paddingLeft="0px"
+                        android:tag="40"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/text_dark"
+                        android:textSize="40px" />
                 </LinearLayout>
 
             </ScrollView>
@@ -450,7 +450,7 @@
                         android:paddingLeft="0px"
                         android:tag="40"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/black"
+                        android:textColorHint="@color/text_dark"
                         android:textSize="40px" />
 
 
@@ -484,7 +484,7 @@
                     android:checked="false"
                     android:tag="40"
                     android:text="Agreed with the terms and conditions"
-                    android:textColor="@color/text_dark"
+                    android:textColor="@color/black"
                     android:textSize="40px" />
 
 

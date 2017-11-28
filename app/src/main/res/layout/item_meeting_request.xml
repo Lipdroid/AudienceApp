@@ -28,8 +28,7 @@
                     android:id="@+id/profile_image"
                     android:layout_width="150px"
                     android:layout_height="150px"
-                    android:layout_marginTop="20px"
-                    android:src="@drawable/dummy_pic" />
+                    android:layout_marginTop="20px" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -46,7 +45,7 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:tag="45"
-                        android:text="Helen Tran"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="45px"
                         android:textStyle="bold" />
@@ -58,7 +57,7 @@
                         android:layout_marginLeft="20px"
                         android:maxLines="3"
                         android:tag="40"
-                        android:text="wants to meet with oyu for some meeting very iurgent and lorem ipsam,wants to meet with oyu for some meeting very iurgent and lorem ipsam"
+                        android:text=""
                         android:textColor="@color/text_dark"
                         android:textSize="40px"
                         android:textStyle="bold" />
@@ -88,7 +87,7 @@
                             android:gravity="center_vertical"
                             android:singleLine="true"
                             android:tag="40"
-                            android:text="relocation cofee shop"
+                            android:text=""
                             android:textColor="@color/colorPrimary"
                             android:textSize="40px"
                             android:textStyle="bold" />
@@ -138,7 +137,7 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:tag="40"
-                        android:text="Tue-11-september"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="40px"
                         android:textStyle="bold" />
@@ -171,7 +170,7 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:tag="40"
-                        android:text="11:00 am"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="40px"
                         android:textStyle="bold" />
@@ -204,7 +203,7 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:tag="40"
-                        android:text="Pending"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="40px"
                         android:textStyle="bold" />
@@ -238,7 +237,7 @@
                         android:gravity="center"
                         android:singleLine="true"
                         android:tag="40"
-                        android:text="0"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="40px"
                         android:textStyle="bold" />

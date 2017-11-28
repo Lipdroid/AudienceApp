@@ -28,8 +28,7 @@
                 android:layout_width="200px"
                 android:layout_height="200px"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50px"
-                android:src="@drawable/dummy_pic" />
+                android:layout_marginTop="50px" />
 
             <Button
                 android:id="@+id/feedback_btn"
@@ -54,7 +53,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30px"
                 android:tag="50"
-                android:text="Lipu Hossain"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="50px"
                 android:textStyle="bold" />
@@ -71,7 +70,7 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:tag="45"
-                android:text="OK lets dp tje ,eeting and i jappy pt sau jedmflkdfkkmdkfmkdmfkdmfdkmfkdmfdkmdk"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="45px"
                 android:textStyle="bold" />
@@ -87,7 +86,7 @@
                 android:gravity="center"
                 android:singleLine="true"
                 android:tag="80"
-                android:text="Fixed"
+                android:text=""
                 android:textColor="@color/orange"
                 android:textSize="80px"
                 android:textStyle="bold" />
@@ -125,7 +124,7 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:tag="45"
-                        android:text="Tue-11-september"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="45px"
                         android:textStyle="bold" />
@@ -159,7 +158,7 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:tag="45"
-                        android:text="11:30pm"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="45px"
                         android:textStyle="bold" />
@@ -193,7 +192,7 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:tag="45"
-                        android:text="Starbucks"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="45px"
                         android:textStyle="bold" />

@@ -63,6 +63,7 @@ public class GlobalUtils {
     public static String additionalHeaderTag = null;
     public static String additionalHeaderValue = null;
     public static boolean onClientPage = false;
+    public static List<MeetingObject> booked_meetings = new ArrayList<>();
 
     public static void computePakageHash(Context mContext) {
         try {

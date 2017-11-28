@@ -79,8 +79,7 @@
                 android:layout_width="200px"
                 android:layout_height="200px"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="100px"
-                android:src="@drawable/dummy_pic" />
+                android:layout_marginTop="100px" />
 
             <Button
                 android:id="@+id/sign_out_btn"
@@ -119,7 +118,7 @@
                     android:layout_marginTop="10px"
                     android:maxLines="1"
                     android:tag="50"
-                    android:text="Lipu Hossain"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="50px"
                     android:textStyle="bold" />
@@ -146,7 +145,7 @@
                         android:layout_marginLeft="10px"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:text="+8801673915175"
+                        android:text=""
                         android:tag="50"
                         android:textColor="@color/black"
                         android:textSize="50px" />
@@ -162,7 +161,7 @@
                     android:gravity="center"
                     android:maxLines="2"
                     android:tag="40"
-                    android:text="Senior Android Ios developer at Oceanize"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="40px"
                     android:textStyle="bold" />
@@ -176,7 +175,7 @@
                     android:gravity="center"
                     android:maxLines="2"
                     android:tag="30"
-                    android:text="Senior Android Ios developer at Oceanize"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="30px"
                     android:textStyle="bold" />
