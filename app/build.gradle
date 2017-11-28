@@ -1,6 +1,28 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            keyAlias 'audienceAlias'
+            keyPassword 'audienceAppUpwork2017'
+            storeFile file('/Users/mdmunirhossain/Documents/AndroidProjects/Audienceapp/audienceAppKey.jks')
+            storePassword 'audienceAppUpwork2017'
+        }
+
+        release {
+            storeFile file('/Users/mdmunirhossain/Documents/AndroidProjects/Audienceapp/audienceAppKey.jks')
+            keyAlias 'audienceAlias'
+            keyPassword 'audienceAppUpwork2017'
+            storePassword 'audienceAppUpwork2017'
+        }
+
+        staging {
+            storeFile file('/Users/mdmunirhossain/Documents/AndroidProjects/Audienceapp/audienceAppKey.jks')
+            keyAlias 'audienceAlias'
+            keyPassword 'audienceAppUpwork2017'
+            storePassword 'audienceAppUpwork2017'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
