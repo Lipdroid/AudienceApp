@@ -76,9 +76,15 @@ public class FeedbackAdapter extends BaseAdapter {
             mHolder = (FeedbackHolder) convertView.getTag();
         }
         final MeetingObject meetingObj = mListData.get(position);
-        Picasso.with(mActivity)
-                .load(meetingObj.getClient_image_url())
-                .into(mHolder.profile_image);
+        if(!meetingObj.getClient_image_url().equals("")) {
+            try {
+                Picasso.with(mActivity)
+                        .load(meetingObj.getClient_image_url())
+                        .into(mHolder.profile_image);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
 
         mHolder.client_name.setText(meetingObj.getClient_name());
         mHolder.feedback.setText(meetingObj.getMeeting_review());

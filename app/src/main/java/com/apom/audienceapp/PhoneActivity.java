@@ -55,10 +55,16 @@ public class PhoneActivity extends AppCompatActivity {
         et_phone = (EditTextWithFont) findViewById(R.id.et_phone);
 
         if (mUserObj != null) {
-            //Loading image from below url into imageView
-            Picasso.with(this)
-                    .load(mUserObj.getProfile_image_url())
-                    .into(profile_image);
+            try {
+                //Loading image from below url into imageView
+                if (!mUserObj.getProfile_image_url().equals("")) {
+                    Picasso.with(this)
+                            .load(mUserObj.getProfile_image_url())
+                            .into(profile_image);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             welcome_text.setText("Welcome \n" + mUserObj.getFullName());
 
         }

@@ -123,10 +123,16 @@ public class ExpertProfileActivity extends AppCompatActivity {
         phone.setText(mUserObj.getMobile());
         job_summary.setText(mUserObj.getJobsList().get(0).getJob_summary());
         designation.setText(mUserObj.getJobsList().get(0).getJob_title() + " at " + mUserObj.getJobsList().get(0).getCompany_name());
-        //Loading image from below url into imageView
-        Picasso.with(this)
-                .load(mUserObj.getProfile_image_url())
-                .into(profile_image);
+        try {
+            if (!mUserObj.getProfile_image_url().equals("")) {
+                //Loading image from below url into imageView
+                Picasso.with(this)
+                        .load(mUserObj.getProfile_image_url())
+                        .into(profile_image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void afterClickBack(View view) {

@@ -160,12 +160,24 @@ public class AdminHomeActivity extends AppCompatActivity {
     private void setUserInfo() {
         welcome_text.setText("Welcome " + mUserObj.getFirstName() + ",These are the people you can verify as an expert.");
         //Loading image from below url into imageView
-        Picasso.with(mContext)
-                .load(mUserObj.getProfile_image_url())
-                .into(profile_image);
-        Picasso.with(mContext)
-                .load(mUserObj.getProfile_image_url())
-                .into(btn_profile);
+        try {
+            if (!mUserObj.getProfile_image_url().equals("")) {
+                Picasso.with(mContext)
+                        .load(mUserObj.getProfile_image_url())
+                        .into(profile_image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (!mUserObj.getProfile_image_url().equals("")) {
+                Picasso.with(mContext)
+                        .load(mUserObj.getProfile_image_url())
+                        .into(btn_profile);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void afterClickProfile() {

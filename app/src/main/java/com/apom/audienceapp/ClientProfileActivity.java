@@ -114,10 +114,16 @@ public class ClientProfileActivity extends AppCompatActivity {
     private void setUpUser(UserObject mUserObj) {
         name.setText(mUserObj.getFirstName());
         designation.setText(mUserObj.getJobsList().get(0).getJob_title() + " at " + mUserObj.getJobsList().get(0).getCompany_name());
-        //Loading image from below url into imageView
-        Picasso.with(this)
-                .load(mUserObj.getProfile_image_url())
-                .into(profile_image);
+        try {
+            if (!mUserObj.getProfile_image_url().equals("")) {
+                //Loading image from below url into imageView
+                Picasso.with(this)
+                        .load(mUserObj.getProfile_image_url())
+                        .into(profile_image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void afterClickBack(View view) {

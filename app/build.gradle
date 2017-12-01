@@ -5,19 +5,19 @@ android {
         debug {
             keyAlias 'audienceAlias'
             keyPassword 'audienceAppUpwork2017'
-            storeFile file('/Users/mdmunirhossain/Documents/AndroidProjects/Audienceapp/audienceAppKey.jks')
+            storeFile file('/Users/lipuhossain/Documents/AndroidProjects/Audienceapp/audienceAppKey.jks')
             storePassword 'audienceAppUpwork2017'
         }
 
         release {
-            storeFile file('/Users/mdmunirhossain/Documents/AndroidProjects/Audienceapp/audienceAppKey.jks')
+            storeFile file('/Users/lipuhossain/Documents/AndroidProjects/Audienceapp/audienceAppKey.jks')
             keyAlias 'audienceAlias'
             keyPassword 'audienceAppUpwork2017'
             storePassword 'audienceAppUpwork2017'
         }
 
         staging {
-            storeFile file('/Users/mdmunirhossain/Documents/AndroidProjects/Audienceapp/audienceAppKey.jks')
+            storeFile file('/Users/lipuhossain/Documents/AndroidProjects/Audienceapp/audienceAppKey.jks')
             keyAlias 'audienceAlias'
             keyPassword 'audienceAppUpwork2017'
             storePassword 'audienceAppUpwork2017'
@@ -29,8 +29,8 @@ android {
         applicationId "com.apom.audienceapp"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -52,10 +52,6 @@ dependencies {
     compile files('libs/scmodule-universal-image-loader-1.9.3.jar')
     compile files('libs/scmodule-apache-mime4j-0.6.jar')
     compile files('libs/scmodule-httpmime-4.0.1.jar')
-
-
-
-
 
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile 'com.android.support:appcompat-v7:25.3.1'

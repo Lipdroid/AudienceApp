@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/lipuhossain/Documents/AndroidProjects/AudienceApp/linkedin-sdk/build/intermediates/res/merged/release/drawable-xxhdpi-v4/ic_launcher.png",
+        "source": "/Users/lipuhossain/Documents/AndroidProjects/AudienceApp/linkedin-sdk/src/main/res/drawable-xxhdpi/ic_launcher.png"
+    },
+    {
         "merged": "/Users/mdmunirhossain/Documents/AndroidProjects/Audienceapp/linkedin-sdk/build/intermediates/res/merged/release/drawable-xxhdpi-v4/ic_launcher.png",
         "source": "/Users/mdmunirhossain/Documents/AndroidProjects/Audienceapp/linkedin-sdk/src/main/res/drawable-xxhdpi/ic_launcher.png"
     }

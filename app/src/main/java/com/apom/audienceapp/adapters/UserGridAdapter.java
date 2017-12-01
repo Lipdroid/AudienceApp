@@ -202,11 +202,16 @@ public class UserGridAdapter extends BaseAdapter {
         mHolder.name.setText(user.getFirstName());
         mHolder.designation.setText(user.getJobsList().get(0).getJob_title() + " at " + user.getJobsList().get(0).getCompany_name());
         mHolder.location.setText(user.getJobsList().get(0).getLocation());
-        //Loading image from below url into imageView
-        Picasso.with(mActivity)
-                .load(user.getProfile_image_url())
-                .into(mHolder.profile_image);
-
+        if (!user.getProfile_image_url().equals("")) {
+            //Loading image from below url into imageView
+            try {
+                Picasso.with(mActivity)
+                        .load(user.getProfile_image_url())
+                        .into(mHolder.profile_image);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         switch (mUserObj.getCategory()) {
             case Constants.USER_TYPE_EXPERT:
 
