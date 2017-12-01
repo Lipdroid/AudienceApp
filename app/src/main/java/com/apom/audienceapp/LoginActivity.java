@@ -103,30 +103,79 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 try {
                     JSONObject jsonObject = apiResponse.getResponseDataAsJson();
                     Log.e("response", jsonObject + "");
-                    String firstName = jsonObject.getString("firstName");
-                    String lastName = jsonObject.getString("lastName");
-                    String pictureUrl = jsonObject.getString("pictureUrl");
-                    String emailAddress = jsonObject.getString("emailAddress");
-                    String id = jsonObject.getString("id");
-                    String industry = jsonObject.getString("industry");
+                    String firstName = "";
+                    String lastName = "";
+                    String pictureUrl = "";
+                    String emailAddress = "";
+                    String id = "";
+                    String industry = "";
 
-                    JSONObject positionsJson = jsonObject.getJSONObject("positions");
-                    JSONArray positionArray = positionsJson.getJSONArray("values");
-                    List<JobObject> jobsList = new ArrayList<JobObject>();
-                    for (int i = 0; i < positionArray.length(); i++) {
-                        JSONObject jobJson = positionArray.getJSONObject(i);
-                        String title = jobJson.getString("title");
-                        String summary = jobJson.getString("summary");
-                        String company = jobJson.getJSONObject("company").getString("name");
-                        String location = jobJson.getJSONObject("location").getString("name");
-
-                        JobObject job = new JobObject();
-                        job.setCompany_name(company);
-                        job.setJob_title(title);
-                        job.setJob_summary(summary);
-                        job.setLocation(location);
-                        jobsList.add(job);
+                    if (jsonObject.has("firstName") && jsonObject.getString("firstName") != null) {
+                        firstName = jsonObject.getString("firstName");
                     }
+                    if (jsonObject.has("lastName") && jsonObject.getString("lastName") != null) {
+                        lastName = jsonObject.getString("lastName");
+                    }
+                    if (jsonObject.has("pictureUrl") && jsonObject.getString("pictureUrl") != null) {
+                        pictureUrl = jsonObject.getString("pictureUrl");
+                    }
+                    if (jsonObject.has("emailAddress") && jsonObject.getString("emailAddress") != null) {
+                        emailAddress = jsonObject.getString("emailAddress");
+                    }
+                    if (jsonObject.has("id") && jsonObject.getString("id") != null) {
+                        id = jsonObject.getString("id");
+                    }
+                    if (jsonObject.has("industry") && jsonObject.getString("industry") != null) {
+                        industry = jsonObject.getString("industry");
+                    }
+                    List<JobObject> jobsList = new ArrayList<JobObject>();
+
+                    if (jsonObject.has("positions")) {
+                        JSONObject positionsJson = jsonObject.getJSONObject("positions");
+                        if (positionsJson.has("values")) {
+                            JSONArray positionArray = positionsJson.getJSONArray("values");
+
+                            jobsList = new ArrayList<JobObject>();
+                            for (int i = 0; i < positionArray.length(); i++) {
+                                JSONObject jobJson = positionArray.getJSONObject(i);
+                                String title = "";
+                                String summary = "";
+                                String company = "";
+                                String location = "";
+
+
+                                if (jobJson.has("title") && jobJson.getString("title") != null) {
+                                    title = jobJson.getString("title");
+                                }
+                                if (jobJson.has("summary") && jobJson.getString("summary") != null) {
+                                    summary = jobJson.getString("summary");
+                                }
+
+                                if (jobJson.has("company")) {
+                                    JSONObject companyJson = jobJson.getJSONObject("company");
+                                    if (companyJson.has("name") && companyJson.getString("name") != null) {
+                                        company = companyJson.getString("name");
+                                    }
+                                }
+
+                                if (jobJson.has("location")) {
+                                    JSONObject locationJson = jobJson.getJSONObject("location");
+                                    if (locationJson.has("name") && locationJson.getString("name") != null) {
+                                        location = locationJson.getString("name");
+                                    }
+                                }
+
+                                JobObject job = new JobObject();
+                                job.setCompany_name(company);
+                                job.setJob_title(title);
+                                job.setJob_summary(summary);
+                                job.setLocation(location);
+                                jobsList.add(job);
+                            }
+                        }
+
+                    }
+
                     UserObject mUserObject = new UserObject();
                     mUserObject.setEmail(emailAddress);
                     mUserObject.setFirstName(firstName);
@@ -263,8 +312,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         overridePendingTransition(R.anim.anim_slide_in_right,
                 R.anim.anim_slide_out_left);
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         //nothing happens
     }
 }
