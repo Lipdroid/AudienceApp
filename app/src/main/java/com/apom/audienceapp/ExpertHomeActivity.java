@@ -190,9 +190,15 @@ public class ExpertHomeActivity extends AppCompatActivity {
 
 
     private void setUserInfo() {
-        Picasso.with(mContext)
-                .load(mUserObj.getProfile_image_url())
-                .into(btn_profile);
+        try {
+            if (!mUserObj.getProfile_image_url().equals("")) {
+                Picasso.with(mContext)
+                        .load(mUserObj.getProfile_image_url())
+                        .into(btn_profile);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void goToLoginPage() {

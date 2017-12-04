@@ -244,10 +244,16 @@ public class GlobalUtils {
         ImageView cancel = (ImageView) infoDialog.findViewById(R.id.cancel);
         CircleImageView profile_image = (CircleImageView) infoDialog.findViewById(R.id.profile_image);
 
-        //Loading image from below url into imageView
-        Picasso.with(context)
-                .load(image)
-                .into(profile_image);
+        try {
+            if (!image.equals("")) {
+                //Loading image from below url into imageView
+                Picasso.with(context)
+                        .load(image)
+                        .into(profile_image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (title == null) {
             tvTitle.setVisibility(View.GONE);
         } else {
@@ -315,11 +321,17 @@ public class GlobalUtils {
         final Button btnOK = (Button) infoDialog.findViewById(R.id.action);
         final Button feedback_btn = (Button) infoDialog.findViewById(R.id.feedback_btn);
 
+        try {
+            if (!meetingObj.getExpert_image_url().equals("")) {
+                //Loading image from below url into imageView
+                Picasso.with(mContext)
+                        .load(meetingObj.getExpert_image_url())
+                        .into(profile_image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        //Loading image from below url into imageView
-        Picasso.with(mContext)
-                .load(meetingObj.getExpert_image_url())
-                .into(profile_image);
         name.setText(meetingObj.getExpert_name());
         if (meetingObj.getApprove_message() == null || meetingObj.getApprove_message().equals("")) {
             response.setVisibility(View.GONE);

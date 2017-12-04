@@ -75,9 +75,9 @@ public class ClientProfileActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.req_list);
         sign_out_btn = (Button) findViewById(R.id.sign_out_btn);
 
-        if(GlobalUtils.getCurrentUserObj().getCategory().equals(mUserObj.getCategory())){
+        if (GlobalUtils.getCurrentUserObj().getCategory().equals(mUserObj.getCategory())) {
             sign_out_btn.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             sign_out_btn.setVisibility(View.GONE);
         }
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -97,6 +97,7 @@ public class ClientProfileActivity extends AppCompatActivity {
         mCorrectSize = CorrectSizeUtil.getInstance(this);
         mCorrectSize.correctSize();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -114,10 +115,16 @@ public class ClientProfileActivity extends AppCompatActivity {
     private void setUpUser(UserObject mUserObj) {
         name.setText(mUserObj.getFirstName());
         designation.setText(mUserObj.getJobsList().get(0).getJob_title() + " at " + mUserObj.getJobsList().get(0).getCompany_name());
-        //Loading image from below url into imageView
-        Picasso.with(this)
-                .load(mUserObj.getProfile_image_url())
-                .into(profile_image);
+        try {
+            if (!mUserObj.getProfile_image_url().equals("")) {
+                //Loading image from below url into imageView
+                Picasso.with(this)
+                        .load(mUserObj.getProfile_image_url())
+                        .into(profile_image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void afterClickBack(View view) {
@@ -224,9 +231,9 @@ public class ClientProfileActivity extends AppCompatActivity {
     }
 
     private void populateList() {
-        tv_fail.setText(count_fail+" \nFailure");
-        tv_success.setText(count_success+" \nSuccess");
-        tv_reject.setText(count_reject+" \nReject");
+        tv_fail.setText(count_fail + " \nFailure");
+        tv_success.setText(count_success + " \nSuccess");
+        tv_reject.setText(count_reject + " \nReject");
 
 
         if (mListMeeting.size() > 0) {
@@ -251,6 +258,7 @@ public class ClientProfileActivity extends AppCompatActivity {
         goToLoginPage();
         finish();
     }
+
     private void goToLoginPage() {
         startActivity(new Intent(ClientProfileActivity.this, LoginActivity.class));
         overridePendingTransition(R.anim.anim_slide_in_left,

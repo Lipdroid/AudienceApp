@@ -36,8 +36,8 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         GlobalUtils.computePakageHash(this);
         mContext = this;
-        SharedPreferencesUtils.putString(mContext, Constants.ID, Constants.USER_ID_ADMIN);
-        SharedPreferencesUtils.putBoolean(mContext, Constants.ALREADY_LOGGED_IN, true);
+//        SharedPreferencesUtils.putString(mContext, Constants.ID, Constants.USER_ID_ADMIN);
+//        SharedPreferencesUtils.putBoolean(mContext, Constants.ALREADY_LOGGED_IN, true);
         mCorrectSize = CorrectSizeUtil.getInstance(this);
         mCorrectSize.correctSize();
     }

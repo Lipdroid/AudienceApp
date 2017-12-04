@@ -135,7 +135,7 @@ public class UserGridAdapter extends BaseAdapter {
                         && meeting.getExpert_approval().equals(Constants.USER_ARROVED)
                         && meeting.getAdmin_approval().equals(Constants.USER_ARROVED)
                         && GlobalUtils.isDateValid(meeting.getMeeting_time())) {
-                    GlobalUtils.showInfoDialog(mContext,"Info","You have already fixed a meeting with this expert,you can get another appointment after finishing that",null,null);
+                    GlobalUtils.showInfoDialog(mContext, "Info", "You have already fixed a meeting with this expert,you can get another appointment after finishing that", null, null);
                     return;
                 }
 
@@ -202,10 +202,16 @@ public class UserGridAdapter extends BaseAdapter {
         mHolder.name.setText(user.getFirstName());
         mHolder.designation.setText(user.getJobsList().get(0).getJob_title() + " at " + user.getJobsList().get(0).getCompany_name());
         mHolder.location.setText(user.getJobsList().get(0).getLocation());
-        //Loading image from below url into imageView
-        Picasso.with(mActivity)
-                .load(user.getProfile_image_url())
-                .into(mHolder.profile_image);
+        try {
+            if (!user.getProfile_image_url().equals("")) {
+                //Loading image from below url into imageView
+                Picasso.with(mActivity)
+                        .load(user.getProfile_image_url())
+                        .into(mHolder.profile_image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         switch (mUserObj.getCategory()) {
             case Constants.USER_TYPE_EXPERT:

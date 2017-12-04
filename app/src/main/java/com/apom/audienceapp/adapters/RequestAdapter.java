@@ -114,7 +114,7 @@ public class RequestAdapter extends BaseAdapter {
                         GlobalUtils.showStatusDialog(mContext, meeting, new DialogCallback() {
                             @Override
                             public void onAction1() {
-                                GlobalUtils.addEventInCallender(mActivity,mListData.get(position));
+                                GlobalUtils.addEventInCallender(mActivity, mListData.get(position));
                             }
 
                             @Override
@@ -127,7 +127,7 @@ public class RequestAdapter extends BaseAdapter {
                                 GlobalUtils.showInputDialog(mContext, meeting.getExpert_image_url(), "Please give a feedback about this meeting", "", null, new InputDialogCallback() {
                                     @Override
                                     public void onAction1(String response) {
-                                        updateFeedbackMessage(meeting,response);
+                                        updateFeedbackMessage(meeting, response);
                                     }
 
                                     @Override
@@ -153,7 +153,7 @@ public class RequestAdapter extends BaseAdapter {
                             GlobalUtils.showStatusDialog(mContext, meetingObj, new DialogCallback() {
                                 @Override
                                 public void onAction1() {
-                                    GlobalUtils.addEventInCallender(mActivity,mListData.get(position));
+                                    GlobalUtils.addEventInCallender(mActivity, mListData.get(position));
                                 }
 
                                 @Override
@@ -211,7 +211,7 @@ public class RequestAdapter extends BaseAdapter {
                     GlobalUtils.showStatusDialog(mContext, meetingObj, new DialogCallback() {
                         @Override
                         public void onAction1() {
-                            GlobalUtils.addEventInCallender(mActivity,mListData.get(position));
+                            GlobalUtils.addEventInCallender(mActivity, mListData.get(position));
                         }
 
                         @Override
@@ -224,7 +224,7 @@ public class RequestAdapter extends BaseAdapter {
                             GlobalUtils.showInputDialog(mContext, meeting.getExpert_image_url(), "Please give a feedback about this meeting", "", null, new InputDialogCallback() {
                                 @Override
                                 public void onAction1(String response) {
-                                    updateFeedbackMessage(meeting,response);
+                                    updateFeedbackMessage(meeting, response);
                                 }
 
                                 @Override
@@ -293,9 +293,15 @@ public class RequestAdapter extends BaseAdapter {
 
     public void setViews(MeetingObject meetingObj) {
 
-        Picasso.with(mActivity)
-                .load(meetingObj.getClient_image_url())
-                .into(mHolder.profile_image);
+        try {
+            if (!meetingObj.getClient_image_url().equals("")) {
+                Picasso.with(mActivity)
+                        .load(meetingObj.getClient_image_url())
+                        .into(mHolder.profile_image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         mHolder.client_name.setText(meetingObj.getClient_name());
         mHolder.purpose.setText(meetingObj.getMeeting_purpose());
@@ -408,10 +414,17 @@ public class RequestAdapter extends BaseAdapter {
                     if (mainJsonObj.getString("success").equals("1")) {
                         //parse the user
                         UserObject mUserObj = GlobalUtils.parseUser(mainJsonObj.getJSONObject(Constants.TAG_USER));
-                        //Loading image from below url into imageView
-                        Picasso.with(mActivity)
-                                .load(mUserObj.getProfile_image_url())
-                                .into(mHolder.profile_image);
+
+                        try {
+                            if (!mUserObj.getProfile_image_url().equals("")) {
+                                //Loading image from below url into imageView
+                                Picasso.with(mActivity)
+                                        .load(mUserObj.getProfile_image_url())
+                                        .into(mHolder.profile_image);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -436,7 +449,6 @@ public class RequestAdapter extends BaseAdapter {
         mRequestAsync.execute();
 
     }
-
 
 
 }

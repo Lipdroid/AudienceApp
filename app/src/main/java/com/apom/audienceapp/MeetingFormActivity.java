@@ -223,14 +223,26 @@ public class MeetingFormActivity extends AppCompatActivity {
         name_receiver.setText(meetingObj.getExpert_name());
         name_sender.setText(meetingObj.getClient_name());
 
-        //Loading image from below url into imageView
-        Picasso.with(MeetingFormActivity.this)
-                .load(meetingObj.getClient_image_url())
-                .into(profile_image_sender);
-        //Loading image from below url into imageView
-        Picasso.with(MeetingFormActivity.this)
-                .load(meetingObj.getExpert_image_url())
-                .into(profile_image_receiver);
+        try {
+            if (!meetingObj.getClient_image_url().equals("")) {
+                //Loading image from below url into imageView
+                Picasso.with(MeetingFormActivity.this)
+                        .load(meetingObj.getClient_image_url())
+                        .into(profile_image_sender);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (!meetingObj.getExpert_image_url().equals("")) {
+                //Loading image from below url into imageView
+                Picasso.with(MeetingFormActivity.this)
+                        .load(meetingObj.getExpert_image_url())
+                        .into(profile_image_receiver);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -246,12 +258,24 @@ public class MeetingFormActivity extends AppCompatActivity {
         tv_time.setText(time_str);
         name_receiver.setText(mUserObj_receiver.getFirstName());
         name_sender.setText(mUserObj_sender.getFirstName());
-        Picasso.with(this)
-                .load(mUserObj_sender.getProfile_image_url())
-                .into(profile_image_sender);
-        Picasso.with(this)
-                .load(mUserObj_receiver.getProfile_image_url())
-                .into(profile_image_receiver);
+        try {
+            if (!mUserObj_sender.getProfile_image_url().equals("")) {
+                Picasso.with(this)
+                        .load(mUserObj_sender.getProfile_image_url())
+                        .into(profile_image_sender);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (!mUserObj_receiver.getProfile_image_url().equals("")) {
+                Picasso.with(this)
+                        .load(mUserObj_receiver.getProfile_image_url())
+                        .into(profile_image_receiver);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         date_str_api = new SimpleDateFormat(Constants.DEFAULT_DATE_FORMAT).format(Calendar.getInstance().getTime());
     }
@@ -480,17 +504,17 @@ public class MeetingFormActivity extends AppCompatActivity {
                     mainJsonObj = new JSONObject(result);
                     if (mainJsonObj.getString("success").equals("1")) {
                         if (GlobalUtils.getCurrentUserObj().getCategory().equals(Constants.USER_TYPE_EXPERT)) {
-                                GlobalUtils.showInputDialog(mContext, meetingObj.getClient_image_url(), "You can give a response about this meeting to the client", "", null, new InputDialogCallback() {
-                                    @Override
-                                    public void onAction1(String response) {
-                                        updateApproveMessage(meetingObj,response);
-                                    }
+                            GlobalUtils.showInputDialog(mContext, meetingObj.getClient_image_url(), "You can give a response about this meeting to the client", "", null, new InputDialogCallback() {
+                                @Override
+                                public void onAction1(String response) {
+                                    updateApproveMessage(meetingObj, response);
+                                }
 
-                                    @Override
-                                    public void onAction2() {
-                                        finish();
-                                    }
-                                });
+                                @Override
+                                public void onAction2() {
+                                    finish();
+                                }
+                            });
                         } else {
                             finish();
                         }

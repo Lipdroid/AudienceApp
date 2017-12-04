@@ -109,7 +109,7 @@ public class AdminProfileActivity extends AppCompatActivity {
                             JSONObject jsonObjectItem = jsonArray.getJSONObject(i);
                             MeetingObject meeting = new MeetingObject();
                             meeting = GlobalUtils.parseMeeting(jsonObjectItem);
-                            if(meeting.getClient_approval().equals(Constants.USER_ARROVED) && meeting.getExpert_approval().equals(Constants.USER_ARROVED)){
+                            if(meeting.getClient_approval().equals(Constants.USER_ARROVED)){
                                 mListMeeting.add(meeting);
                             }
                         }
